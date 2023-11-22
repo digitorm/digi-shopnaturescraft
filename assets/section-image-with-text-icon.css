@@ -1,0 +1,54 @@
+.image-with-text__media {
+    min-height: 0;
+}
+.icon__list__container img {
+    padding: 0 10px 10px 0;
+    filter: drop-shadow(0px 14px 19px rgba(0,0,0,.25));
+    width: 100px;
+}
+.grid__item__image {
+    width: calc(52% - 10px);
+}
+.grid__item__text {
+    width: calc(48% - 10px);
+}
+
+.image-with-text.page-width.color-scheme-accent-2.image-with-text-icon {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+.text-icon .image-with-text__text p {
+    font-family: 'BWMODELICA-MEDIUM';
+}
+.banner-with-text-icon {
+    padding: 0px;
+  margin: 0 auto;
+}
+.text-icon {
+    padding: 7rem 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.image-with-text__content .icon__list__container {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+
+
+
+@media screen and (min-width: 990px){
+.image-with-text__content {
+    padding: 1.5rem;
+}
+}
+@media only screen and (max-width: 767px){
+
+.grid__item__text, .grid__item__image {
+    width: 100%;
+}
+}

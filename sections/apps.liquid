@@ -1,0 +1,46 @@
+<!--AZEXO_sections/apps.liquid_Section--><div class="{% if section.settings.include_margins %}page-width{% endif %}">
+  <div class="title-wrapper-with-link text-center">
+     {% if section.settings.title != blank %} 
+    <h2>{{ section.settings.title | escape }}</h2>
+
+    
+    {%- endif -%}
+      
+    </div>
+  
+  {%- for block in section.blocks -%}
+    {% render block %}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.apps.name",
+  "tag": "section",
+  "class": "instagram-sec",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "include_margins",
+      "default": true,
+      "label": "t:sections.apps.settings.include_margins.label"
+    },
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.apps.presets.name"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/apps.liquid_Section-->

@@ -1,0 +1,37 @@
+/*
+ * You can add custom styles for your customer portal to this file. By default it tries
+ * to adjust fonts to your theme settings.
+ *
+ * If you'd like to override the entire stylesheet, you can disable the built-in one
+ * by removing `&use_built_in_stylesheets=1` from the `paywhirl-customer-portal-frame.liquid` snippet
+ */
+
+ 
+ 
+
+ @font-face {
+  font-family: Assistant;
+  font-weight: 400;
+  font-style: normal;
+  src: url("//shopnaturescraft.com/cdn/fonts/assistant/assistant_n4.bcd3d09dcb631dec5544b8fb7b154ff234a44630.woff2?h1=c2hvcG5hdHVyZXNjcmFmdC5jb20&h2=c2hvcG5hdHVyZXNjcmFmdC5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=1bb93ed327af5f4c1a43d9c93ba7ca9a0cc1c197ecfa588eb60442ee9d5b98ce") format("woff2"),
+       url("//shopnaturescraft.com/cdn/fonts/assistant/assistant_n4.a2d012304becc2a26f1ded1acc136fcab85c9afd.woff?h1=c2hvcG5hdHVyZXNjcmFmdC5jb20&h2=c2hvcG5hdHVyZXNjcmFmdC5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=2ec7fd9d840cb6976ce31c30c8f08656a88266f373a064098c4f748bf38ddc54") format("woff");
+}
+
+ 
+
+ 
+ 
+ 
+
+ :root {
+   --font-weight-body--bold: 700;
+   --font-weight-body--bolder: 700;
+
+   --font-stack-header: Assistant, sans-serif;
+   --font-style-header: normal;
+   --font-weight-header: 400;
+
+   --font-stack-body: sans-serif;
+   --font-style-body: normal;
+   --font-weight-body: normal;
+ }

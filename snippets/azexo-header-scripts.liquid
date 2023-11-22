@@ -1,0 +1,45 @@
+<script>
+        var azh = {
+            shop: 'shopnaturescraft.myshopify.com',
+            device_prefixes: {"lg":{"label":"Large device","width":false,"height":false,"container":1170,"min":1200},"md":{"label":"Medium device","width":992,"height":false,"container":970,"max":1199,"min":992},"sm":{"label":"Small device","width":768,"height":1150,"container":750,"max":991,"min":768},"xs":{"label":"Extra small device","width":320,"height":750,"max":767}},
+        };
+        var azexo = {
+          purchase_extension: 'Purchase extension',
+          strings: {
+            addToCart: {{ 'products.product.add_to_cart' | t | json }},
+            soldOut: {{ 'products.product.sold_out' | t | json }},
+            unavailable: {{ 'products.product.unavailable' | t | json }},
+            regularPrice: {{ 'products.product.regular_price' | t | json }},
+            sale: {{ 'products.product.on_sale' | t | json }},
+            quantityMinimumMessage: {{ 'products.product.quantity_minimum_message' | t | json }},
+            unitPrice: {{ 'products.product.unit_price_label' | t | json }},
+            unitPriceSeparator: {{ 'general.accessibility.unit_price_separator' | t | json }},
+            oneCartCount: {{ 'cart.popup.cart_count' | t: count: 1 | json }},
+            otherCartCount: {{ 'cart.popup.cart_count' | t: count: '[count]' | json }},
+            quantityLabel: {{ 'cart.popup.quantity_label' | t: quantity_count: '[count]' | json }}
+          },
+          moneyFormat: {{ shop.money_format | json }}
+        }
+        </script><style>.az-container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+@media (min-width: 768px) {
+                    .az-container {
+                        max-width: 750px;
+                    }
+                }
+@media (min-width: 992px) {
+                    .az-container {
+                        max-width: 970px;
+                    }
+                }
+@media (min-width: 1200px) {
+                    .az-container {
+                        max-width: 1170px;
+                    }
+                }
+</style><script>azexo.extensions = [''];</script>

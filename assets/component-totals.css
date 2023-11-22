@@ -1,0 +1,119 @@
+.cart-promo >.js-contentsss >.totals {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 45px;
+}
+.totals > * {
+  margin: 0;
+}
+.totals>h3 {
+    font-size: 20px;
+    color: #fff;
+    font-family: 'BWMODELICA BOLD';
+}
+
+.totals * {
+    line-height: 1;
+    font-family: 'BWMODELICA-MEDIUM';
+}
+
+.totals > * + * {
+ font-size: 20px;
+    color: #fff;
+}
+
+.totals__subtotal-value {
+}
+
+.cart__ctas + .totals {
+  margin-top: 2rem;
+}
+div#cart-errors {
+    display: none;
+}
+body input#dcodeInput::placeholder {
+    color: #fff;
+}
+div#dcodeInnerWrapper {
+    justify-content: space-between;
+    display: flex;
+}
+button#dcodeSubmit {
+    width: 173px;
+    background: #fff;
+    color: #4CAF50;
+    font-size: 20px;
+    font-family: 'BWMODELICA BOLD';
+}
+body input#dcodeInput {
+    min-width: 100px;
+    border: 2.5px solid #F4F4f4;
+    background: transparent;
+    width: calc(100% - 200px);
+    color: #fff;
+    font-size: 16px;
+    font-family: 'BWMODELICA BOLD';
+    text-align: left;
+    padding: 0px 35px;
+}
+div#dcodeInfo {
+    /*border-bottom: 1.5px solid #FFFFFF;
+    margin-bottom: 46px;
+    padding-bottom: 14px;*/
+}
+body .dcDiscountBox {
+    background-color: rgba(113, 113, 113, 0.11);
+    display: inline-block;
+    padding: 7px 12px 7px 12px;
+    margin-bottom: 0;
+    color: #fff;
+}
+body div#dcodeInfo {
+    /*border-bottom: 1.5px solid #fff;
+    margin-bottom: 46px;
+    padding-bottom: 36px;*/
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+.js-contentsss {
+    border-top: 1.5px solid #fff;
+    padding-top: 16px;
+    margin-top: 46px;
+}
+/*#dcodeButtonLabel {
+    opacity: 1 !important;
+}*/
+div#dcodeLoading {
+    display: block!important;
+    border-color: #000 !important;
+}
+span.calcNotice {
+    color: #fff;
+    margin-left: 10px;
+}
+button#checkout {
+    max-width: 100%;
+    font-size: 24px;
+    font-family: 'BWMODELICA BOLD';
+    font-weight: normal;
+    background: #F26B27;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.title-wrapper-with-link h2 {
+    font-size: 46px;
+    text-align: center;
+}
+.card-inner .card-information__wrapper {
+    text-align: center;
+}
+.card-information__wrapper .price {
+    justify-content: center;
+}
+
+@media all and (min-width: 750px) {
+ 
+}

@@ -1,0 +1,636 @@
+
+      
+   
+  <modal-dialog id="PopupModal-retailer_popup" class="product-popup-modal" {{ block.shopify_attributes }}>
+    <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+    <div class="modal_cotainer login_form">
+      <button id="ModalClose-retailer_popup" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+       
+      {% comment %}
+      {{ settings.retailer_popup }}
+      {% endcomment %}
+      <div class="start_modal_content">
+        <h5>Log In</h5>
+
+        {% form 'customer_login', novalidate: 'novalidate' %}
+
+       
+        <div class="login_form_errors" style="color:red;display:none;text-align: left;margin-bottom: 5px;">Email or Password is incorrect</div>
+        <div class="input_and_label">
+          <label for="CustomerEmail">Email Address</label>
+          <input type="email" name="customer[email]" id="CustomerEmail" autocomplete="email" autocorrect="off" autocapitalize="off" class="round">
+        </div>
+
+
+        <div class="input_and_label">
+          <label for="CustomerPassword">Password</label>
+          <input type="password" value="" name="customer[password]" id="CustomerPassword" class="round">
+        </div>
+
+
+
+        <div class="text-center">
+          <input type="submit" class="btn form_btn" value="Log In">
+        </div>
+
+        {% endform %}
+      </div>
+      </div>
+    </div>
+ </modal-dialog>
+  
+   <modal-dialog id="PopupModal-healthcare_pro_popup" class="product-popup-modal" {{ block.shopify_attributes }}>
+   <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+  
+    <div class="modal_cotainer healthcare_pro_form">
+      <button id="ModalClose-healthcare_pro_popup" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+       
+    
+      {% comment %}
+      {{settings.healthcare_popup}}
+      {% endcomment %}
+
+      <div class="start_modal_content">
+        <h5>New Account Application Form</h5>
+
+        {%- assign formId = 'ContactFormwholesaleHealthcare' -%}
+        {% form 'contact', id: formId %}
+
+        {% include 'form-status', form: form, form_id: formId %}
+
+
+        <div class="grid__item medium-up--one-whole">
+          <p class="text-left header_p_form"><b>Contact Information</b></p>
+        </div>
+        <div class="grid big_grid_rows">
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="AccountName">Account Name</label>
+            <input type="text" id="AccountName" name="contact[Account Name]" value="">
+          </div>
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="TypeOfaccount">Type of Account</label>
+
+            <div class="grid">
+              <div class="grid__item medium-up--three-tenths input_and_label grid_checkbox">
+                <input type="checkbox" name="contact[typeRetailer]" value="" id="typeRetailer">
+                <label for="typeRetailer">Retailer</label>
+              </div>
+              <div class="grid__item medium-up--seven-tenths input_and_label grid_checkbox">
+                <input type="checkbox" name="contact[typephysicial]" value="" id="Physician/Practitioner">
+                <label for="Physician/Practitioner">Physician/Practitioner</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="StorefrontName">Storefront Name / Name of Practice</label>
+            <input type="text" id="StorefrontName" name="contact[Storefront Name]" value="">
+          </div>
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="Companywebsite">Company Website</label>
+            <input id="Companywebsite" name="contact[Company Website]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="billingaddress">Billing Address</label>
+            <input type="text" id="billingaddress" name="contact[Billing Address]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="billingCity">City</label>
+            <input id="billingCity" name="contact[Billing City]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="billingState">State</label>
+            <input id="billingState" name="contact[Billing State]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="billingzipcode">Zip Code</label>
+            <input id="billingzipcode" type="number" name="contact[Billing Zip Code]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="shippingaddress">Shipping Address</label>
+            <input type="text" id="shippingaddress" name="contact[Shipping Address]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="shippingCity">City</label>
+            <input id="shippingCity" name="contact[Shipping City]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="shippingState">State</label>
+            <input id="shippingState" name="contact[Shipping State]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="shippingzipcode">Zip Code</label>
+            <input id="shippingzipcode" type="number" name="contact[Shipping Zip Code]" value="">
+          </div>
+
+          <div class="grid__item medium-up--one-third input_and_label">
+            <label for="contactpersontitle">Contact Person and Title / Role</label>
+            <input type="text" id="contactpersontitle" name="contact[Contact Person and Title Role]" value="">
+          </div>
+          <div class="grid__item medium-up--one-third input_and_label">
+            <label for="ContactForm-phone">Contact Telephone Number</label>
+            <input type="tel" id="ContactForm-phone" name="contact[Phone Number]" pattern="[0-9\-]*" value="">
+          </div>
+
+          <div class="grid__item medium-up--one-third input_and_label">
+            <label for="ContactForm-email">Email</label>
+            <input type="email" id="ContactForm-email" name="contact[email]" autocorrect="off" autocapitalize="off" value="" aria-required="true" required="">
+          </div>
+
+          <div class="grid__item medium-up--one-whole input_and_label">
+            <label for="partnership_proprietorship">Is this a Sole Proprietorship, Partnership or Corporation? </label>
+            <input type="text" id="partnership_proprietorship" name="contact[Is this a Sole Proprietorship, Partnership or Corporation?]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="payabledepartment">Account Payable Department Contact Information (if applicable)</label>
+            <input type="text" id="payabledepartment" name="contact[Account Payable Department Contact Information]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="telephoneNumber">Telephone Number</label>
+            <input type="number" id="telephoneNumber" name="contact[Telephone Number]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="Affiliatesitename">Affiliate Sites and Names</label>
+            <input type="text" id="Affiliatesitename" name="contact[Affiliate Sites and Names]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="Affiliatesiteemail">Email</label>
+            <input type="email" id="Affiliatesitename" name="contact[Affiliatesite Email]" value="">
+          </div>
+
+          <div class="grid__item medium-up--one-whole">
+            <p class="text-left" style="margin-bottom: 20px;">We require a copy of your Federal EIN Certificate and your Resale Certificate if required in your State or City. Practitioners are asked to supply a copy of their license. Please be sure to include a copy of relevant licenses.</p>
+            <hr style="border-bottom: 1px solid;    margin: 30px 0;">
+
+            <p class="text-left">Please provide photographs of the store front and of current product sections and set including refrigeration if ordering cold stronge items.</p>
+            <p class="text-left" style="margin-bottom: 15px;">Please list three vitamin/mineral supplement companies you are currently carrying.</p>
+          </div>
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="name1">Name</label>
+            <input type="text" id="name1" name="contact[Name 1]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="contactinfo1">Contact information</label>
+            <input type="text" id="contactinfo1" name="contact[Contact information 1]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="name2">Name</label>
+            <input type="text" id="name2" name="contact[Name 2]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="contactinfo2">Contact information</label>
+            <input type="text" id="contactinfo2" name="contact[Contact information 2]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="name3">Name</label>
+            <input type="text" id="name3" name="contact[Name 3]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="contactinfo3">Contact information</label>
+            <input type="text" id="contactinfo3" name="contact[Contact information 3]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="dedicatedvalue">How many dedicated shelves will be committed to Nature Craft?</label>
+            <input type="text" id="dedicatedvalue" name="contact[How many dedicated shelves will be committed to Nature Craft]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="locationsname">How many locations?</label>
+            <input type="text" id="locationsname" name="contact[How many locations]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="dedicatedvalue">Please select size of store</label>
+
+            <div class="grid">
+              <div class="grid__item medium-up--one-third input_and_label grid_checkbox">
+                <input type="checkbox" name="contact[Small 10K sqft]" value="" id="small10k">
+                <label for="small10k">Small &lt;10K sqft.</label>
+              </div>
+              <div class="grid__item medium-up--one-third input_and_label grid_checkbox grid_medium_chh">
+                <input type="checkbox" name="contact[Medium 10 - 15K sqft]" value="" id="medium10k15k">
+                <label for="medium10k15k">Medium 10 - 15K sqft.</label>
+              </div>
+
+              <div class="grid__item medium-up--one-third input_and_label grid_checkbox">
+                <input type="checkbox" name="contact[Large 15K sqft]" value="" id="large15k">
+                <label for="large15k">Large &gt;15K sqft.</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="locationsname">Will we be shipping direct to the store of Distribution Center?</label>
+            <input type="text" id="locationsname" name="contact[Will we be shipping direct to the store of Distribution Center]" value="">
+          </div>
+
+          <div class="grid__item medium-up--one-whole">
+            <p class="text-left" style="margin-bottom: 10px;"><b>The undesigned individual or officer declares the above information to be true and correct and will be considered the responsible party of this account.</b></p>
+          </div>
+          <div class="grid__item medium-up--one-whole input_and_label grid_checkbox">
+            <input type="checkbox" name="contact[I have received and will abide by your Internet Marketplace Policy]" value="" id="internetpolicy">
+            <label for="internetpolicy">I have received and will abide by your Internet Marketplace Policy.</label>
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="name4">Name</label>
+            <input type="text" id="name4" name="contact[Name 4]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="orderdate">Date</label>
+            <input type="date" id="orderdate" name="contact[Date]" value="">
+          </div>
+
+        </div>
+        <input type="submit" class="btn form_btn" value="Apply">
+
+        {% endform %}
+      </div>
+
+    </div>
+  </div>
+</modal-dialog>
+  
+   <modal-dialog id="PopupModal-online_retailerfirst_popup" class="product-popup-modal" {{ block.shopify_attributes }}>
+     <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+  <div class="modal_cotainer healthcare_pro_form">
+     
+      <button id="ModalClose-online_retailerfirst_popup" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+       
+      {% comment %}
+      {{settings.healthcare_popup}}
+      {% endcomment %}
+
+      <div class="start_modal_content">
+        <h5>New Account Application Form</h5>
+
+        {%- assign formId = 'ContactFormwholesaleRetailer' -%}
+        {% form 'contact', id: formId %}
+
+        {% include 'form-status', form: form, form_id: formId %}
+
+
+        <div class="grid__item medium-up--one-whole">
+          <p class="text-left header_p_form"><b>Contact Information</b></p>
+        </div>
+        <div class="grid big_grid_rows">
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="AccountNameRetailer">Account Name</label>
+            <input type="text" id="AccountNameRetailer" name="contact[Account Name]" value="">
+          </div>
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="TypeOfaccount">Type of Account</label>
+
+            <div class="grid">
+              <div class="grid__item medium-up--three-tenths input_and_label grid_checkbox">
+                <input type="checkbox" name="contact[typeRetailer]" value="" id="typeRetailerFrom">
+                <label for="typeRetailerFrom">Retailer</label>
+              </div>
+              <div class="grid__item medium-up--seven-tenths input_and_label grid_checkbox">
+                <input type="checkbox" name="contact[typephysicial]" value="" id="Physician/Practitionerretailer">
+                <label for="Physician/Practitionerretailer">Physician/Practitioner</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="StorefrontNameRetailer">Storefront Name / Name of Practice</label>
+            <input type="text" id="StorefrontNameRetailer" name="contact[Storefront Name]" value="">
+          </div>
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="CompanywebsiteRetailer">Company Website</label>
+            <input id="CompanywebsiteRetailer" name="contact[Company Website]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="billingaddressRetailer">Billing Address</label>
+            <input type="text" id="billingaddressRetailer" name="contact[Billing Address]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="billingCityRetailer">City</label>
+            <input id="billingCityRetailer" name="contact[Billing City]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="billingStateRetailer">State</label>
+            <input id="billingStateRetailer" name="contact[Billing State]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="billingzipcodeRetailer">Zip Code</label>
+            <input id="billingzipcodeRetailer" type="number" name="contact[Billing Zip Code]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="shippingaddressretailer">Shipping Address</label>
+            <input type="text" id="shippingaddressretailer" name="contact[Shipping Address]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="shippingCityretailer">City</label>
+            <input id="shippingCityretailer" name="contact[Shipping City]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="shippingStateretailer">State</label>
+            <input id="shippingStateretailer" name="contact[Shipping State]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="shippingzipcoderetailer">Zip Code</label>
+            <input id="shippingzipcoderetailer" type="number" name="contact[Shipping Zip Code]" value="">
+          </div>
+
+          <div class="grid__item medium-up--one-third input_and_label">
+            <label for="contactpersontitleretailer">Contact Person and Title / Role</label>
+            <input type="text" id="contactpersontitleretailer" name="contact[Contact Person and Title / Role]" value="">
+          </div>
+          <div class="grid__item medium-up--one-third input_and_label">
+            <label for="ContactForm-phoneretailer">Contact Telephone Number</label>
+            <input type="tel" id="ContactForm-phoneretailer" name="contact[Phone Number]" pattern="[0-9\-]*" value="">
+          </div>
+
+          <div class="grid__item medium-up--one-third input_and_label">
+            <label for="ContactForm-emailretailer">Email</label>
+            <input type="email" id="ContactForm-emailretailer" name="contact[email]" autocorrect="off" autocapitalize="off" value="" aria-required="true" required="">
+          </div>
+
+          <div class="grid__item medium-up--one-whole input_and_label">
+            <label for="partnership_proprietorshipretailer">Is this a Sole Proprietorship, Partnership or Corporation? </label>
+            <input type="text" id="partnership_proprietorshipretailer" name="contact[Is this a Sole Proprietorship, Partnership or Corporation?]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="payabledepartmentretailer">Account Payable Department Contact Information (if applicable)</label>
+            <input type="text" id="payabledepartmentretailer" name="contact[Account Payable Department Contact Information]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="telephoneNumberretailer">Telephone Number</label>
+            <input type="number" id="telephoneNumberretailer" name="contact[Telephone Number]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="Affiliatesitenameretailer">Affiliate Sites and Names</label>
+            <input type="text" id="Affiliatesitenameretailer" name="contact[Affiliate Sites and Names]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="Affiliatesiteemailretailer">Email</label>
+            <input type="email" id="Affiliatesiteemailretailer" name="contact[Affiliatesite Email]" value="">
+          </div>
+
+          <div class="grid__item medium-up--one-whole">
+            <p class="text-left" style="margin-bottom: 20px;">We require a copy of your Federal EIN Certificate and your Resale Certificate if required in your State or City. Practitioners are asked to supply a copy of their license. Please be sure to include a copy of relevant licenses.</p>
+            <hr style="border-bottom: 1px solid;    margin: 30px 0;">
+
+            <p class="text-left">Please provide photographs of the store front and of current product sections and set including refrigeration if ordering cold stronge items.</p>
+            <p class="text-left" style="margin-bottom: 15px;">Please list three vitamin/mineral supplement companies you are currently carrying.</p>
+          </div>
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="name1retailer">Name</label>
+            <input type="text" id="name1retailer" name="contact[Name 1]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="contactinfo1retailer">Contact information</label>
+            <input type="text" id="contactinfo1retailer" name="contact[Contact information 1]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="name2retailer">Name</label>
+            <input type="text" id="name2retailer" name="contact[Name 2]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="contactinfo2retailer">Contact information</label>
+            <input type="text" id="contactinfo2retailer" name="contact[Contact information 2]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="name3retaiiler">Name</label>
+            <input type="text" id="name3retaiiler" name="contact[Name 3]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="contactinfo3retailer">Contact information</label>
+            <input type="text" id="contactinfo3retailer" name="contact[Contact information 3]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="dedicatedvalueretailer">How many dedicated shelves will be committed to Nature Craft?</label>
+            <input type="text" id="dedicatedvalueretailer" name="contact[How many dedicated shelves will be committed to Nature Craft?]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="locationsnameretailer">How many locations?</label>
+            <input type="text" id="locationsnameretailer" name="contact[How many locations?]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="dedicatedvalue">Please select size of store</label>
+
+            <div class="grid">
+              <div class="grid__item medium-up--one-third input_and_label grid_checkbox">
+                <input type="checkbox" name="contact[Small 10K sqft.]" value="" id="small10kretailer">
+                <label for="small10kretailer">Small &lt;10K sqft.</label>
+              </div>
+              <div class="grid__item medium-up--one-third input_and_label grid_checkbox grid_medium_chh">
+                <input type="checkbox" name="contact[Medium 10 - 15K sqft.]" value="" id="medium10k/15kretailer">
+                <label for="medium10k/15kretailer">Medium 10 - 15K sqft.</label>
+              </div>
+
+              <div class="grid__item medium-up--one-third input_and_label grid_checkbox">
+                <input type="checkbox" name="contact[Large 15K sqft.]" value="" id="large_15kretailer">
+                <label for="large_15kretailer">Large &gt;15K sqft.</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="locationsnameretailer">Will we be shipping direct to the store of Distribution Center?</label>
+            <input type="text" id="locationsnameretailer" name="contact[Will we be shipping direct to the store of Distribution Center?]" value="">
+          </div>
+
+          <div class="grid__item medium-up--one-whole">
+            <p class="text-left" style="margin-bottom: 10px;"><b>The undesigned individual or officer declares the above information to be true and correct and will be considered the responsible party of this account.</b></p>
+          </div>
+          <div class="grid__item medium-up--one-whole input_and_label grid_checkbox">
+            <input type="checkbox" name="contact[I have received and will abide by your Internet Marketplace Policy]" value="" id="internetpolicyretailer">
+            <label for="internetpolicyretailer">I have received and will abide by your Internet Marketplace Policy.</label>
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="name4retailer">Name</label>
+            <input type="text" id="name4retailer" name="contact[Name 4]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="orderdateretailer">Date</label>
+            <input type="date" id="orderdateretailer" name="contact[Date]" value="">
+          </div>
+
+        </div>
+        <input type="submit" class="btn form_btn" value="Apply">
+
+        {% endform %}
+      </div>
+
+    </div>
+  </div>
+     </modal-dialog>
+     
+     
+ <modal-dialog id="PopupModal-online_retailer_popup" class="product-popup-modal" {{ block.shopify_attributes }}>
+    <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+   <div class="modal_cotainer online_retailer_form">
+       <button id="ModalClose-online_retailer_popup" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+       
+      {% comment %}
+      {{settings.online_popup }}
+      {% endcomment %}
+      <div class="start_modal_content">
+        <h5>Online Retailer - Account Application Form</h5>
+
+        <p class="text-left">Thank you for choosing to partner with Natures Craft.  To establish a relationship with us we require that you:</p>
+
+        <ol class="text-left">
+          <li> Have an established health-related website with a fully functioning Shopping Cart</li>
+          <li>Provide the following:
+            <ul>
+              <li> Resale License</li>
+              <li>Business License / Federal Tax Identification Number</li>
+            </ul>
+          </li>
+
+          <li> Meet Nature Craft’s minimum order requirement of $300</li>
+        </ol>
+        <p class="text-left" style="margin-top:30px;margin-bottom:0;"><b>Contact Information</b></p><br>
+
+        {%- assign formId = 'ContactFormwholesaleOnline' -%}
+        {% form 'contact', id: formId %}
+
+        {% include 'form-status', form: form, form_id: formId %}
+
+        <div class="grid big_grid_rows">
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="BusinessName">Business Name</label>
+            <input type="text" id="BusinessName" name="contact[Business Name]" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="BusinesscontactName">Contact name/Title </label>
+            <input type="text" id="BusinesscontactName" name="contact[Contact name/Title ]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="ContactFormwholesale-phone">Phone</label>
+            <input type="tel" id="ContactFormwholesale-phone" name="contact[Phone Number]" pattern="[0-9\-]*" value="">
+          </div>
+
+          <div class="grid__item medium-up--three-eighths input_and_label">
+            <label for="ContactFormwholesale-email">Email</label>
+            <input type="email" id="ContactFormwholesale-email" name="contact[email]" autocorrect="off" autocapitalize="off" value="" aria-required="true" required="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="MailingAddress">Mailing Address</label>
+            <input id="MailingAddress" name="contact[Mailing Address]" value="">
+          </div>
+
+
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="mailingCity">City</label>
+            <input id="mailingCity" name="contact[Mailing City]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="mailingState">State</label>
+            <input id="mailingState" name="contact[Mailing State]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="mailingzipcode">Zip Code</label>
+            <input id="mailingzipcode" type="Number" name="contact[Mailing Zip Code]" value="">
+          </div>
+
+          <div class="grid__item medium-up--five-eighths input_and_label">
+            <label for="shippingaddress">Shipping Address (if different from above)</label>
+            <input type="text" id="shippingaddress" name="contact[Shipping Address]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="shippingCity">City</label>
+            <input id="shippingCity" name="contact[Shipping City]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="shippingState">State</label>
+            <input id="shippingState" name="contact[Shipping State]" value="">
+          </div>
+          <div class="grid__item medium-up--one-eighth input_and_label">
+            <label for="shippingzipcode">Zip Code</label>
+            <input id="shippingzipcode" type="number" name="contact[Shipping Zip Code]" value="">
+          </div>
+          <div class="grid__item medium-up--one-whole">
+            <p class="text-left header_p_form"><b>Business Information</b></p>
+          </div>
+          <div class="grid__item medium-up--one-whole input_and_label">
+            <label for="websiteurl">Website URL (Required)</label>
+            <input id="websiteurl" type="text" name="contact[Website URL]" value="" required="">
+          </div>
+
+          <div class="grid__item medium-up--seven-tenths input_and_label">
+            <label for="distributeamazon">Will product be distributed online via Amazon, E-bay or any other shared online marketplace? Yes / No?</label>
+          </div>
+
+          <div class="grid__item medium-up--three-tenths input_and_label">
+            <input type="text" id="distributeamazon" name="contact[Amazon Ebay]" value="">
+          </div>
+
+          <div class="grid__item medium-up--six-tenths input_and_label">
+            <label for="affiliatename">Please provide the URL and/or affiliate name(s):</label>
+            <input type="text" id="affiliatename" name="contact[Affiliate name]" value="">
+          </div>
+          <div class="grid__item medium-up--four-tenths input_and_label">
+            <label for="affiliatephone">Phone</label>
+            <input type="number" id="affiliatephone" name="contact[Phone]" value="">
+          </div>
+
+          <div class="grid__item medium-up--six-tenths input_and_label">
+            <input type="text" id="" name="contact[Affiliate name 1]" value="">
+          </div>
+          <div class="grid__item medium-up--four-tenths input_and_label">
+            <input type="number" id="" name="contact[Phone 1]" value="">
+          </div>
+
+          <div class="grid__item medium-up--one-whole">
+            <p class="text-left header_p_form"><b>Method of Payment</b></p>
+
+            <p class="text-left" style="margin-bottom: 20px;">All order processed through Natures Craft will be billed via credit card.</p>
+          </div>
+
+          <div class="grid__item medium-up--six-tenths input_and_label">
+            <label for="ownerofficer">Owner/Partner Officer</label>
+            <input type="text" id="ownerofficer" name="contact[Owner/Partner Officer]" value="">
+          </div>
+          <div class="grid__item medium-up--four-tenths input_and_label">
+            <label for="date">Date</label>
+            <input type="Date" id="date" name="contact[Date]" value="">
+          </div>
+
+        </div>
+        <input type="submit" class="btn form_btn" value="Apply">
+
+        {% endform %}
+      </div>
+
+    </div>
+  </div>
+   </modal-dialog>

@@ -1,0 +1,218 @@
+<!--AZEXO_sections/icon-slider.liquid_Section--><style>
+.icon-slider  .icon-inner {
+    display: inline-block;
+    padding-left: 15px;
+    width: 20%;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+.icon-slider.slick-slider {
+    /*margin-left: 0;*/
+}
+.icon-slider {
+    margin-left: -15px;
+    padding-top: 4rem;
+}
+h1.icon-heading {
+    width: 100%;
+    margin: 0 0 14px;
+}
+a.button[href="javascript:void(0)"] {
+    cursor: default;
+    pointer-events: none;
+}
+.icon-slider  a.button {
+    width: 100%;
+}
+  .icon-slider.slick-slider .slick-arrow:before {
+    content: none;
+}
+  .icon-slider.slick-slider .slick-prev.slick-arrow {
+    top: -30px;
+    left: 49%;
+    right: auto;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 10px;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%);
+}
+    .icon-slider.slick-slider .slick-next.slick-arrow {
+    top: -30px;
+    left: 51%;
+    right: auto;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 10px;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%);
+}
+.icon-inner a.button {
+    background: #4CAF50;
+    border-radius: 10px;
+    line-height: normal;
+    height: 81px;
+    padding: 0 10px;
+    color: #fff;
+    letter-spacing: .25px;
+    font-weight: normal;
+    font-family: 'BWMODELICA BOLD';
+    box-shadow: none !important;
+}
+  .icon-inner a.button:hover {
+    background: #f26b27;
+}
+.icon-inner a.button img {
+    margin-right: 10px;
+    height: 40px;
+}
+  
+  
+@media screen and (min-width: 768px){ 
+.icon-inner a.button {
+    font-size: 1.8rem;
+}
+}
+</style>
+
+
+<div class="page-width">
+  <div class="text-center title-wrapper-with-link ">
+    <h1 class="icon-heading ">{{ section.settings.title | escape }}</h1>
+{% if section.settings.text != blank %} 
+     <div class="rich-text__text rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </div>
+
+  
+<div class="icon-slider">
+      {%- for block in section.blocks -%}
+  <div class="icon-inner">
+    <a class="button" href="{% if block.settings.url != blank %}{{block.settings.url  | remove: '/es' }}{%else%}javascript:void(0){%endif%}">
+         
+          {% if block.settings.image != blank %}
+     		<img src="{{block.settings.image | img_url : '100x'}}">
+          {% endif %}
+           {% if block.settings.title != blank %}
+          <span>{{block.settings.title }}</span>
+          {% endif %}
+    </a>
+  		</div>
+      {%- endfor -%}
+  </div>
+ 
+  
+</div>
+<script type="text/javascript">
+$(document).on('ready', function() {
+
+
+$(".icon-slider").slick({
+ dots: false,
+  autoplay: false,
+  arrows: true,
+  infinite: true,
+  speed: 300,
+  adaptiveHeight: true,
+  slidesToShow: 5,
+  slidesToScroll: 1, 
+  responsive: [
+    {
+      breakpoint: 1450,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 769,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ],
+  prevArrow: '<div class="slick-prev"><svg width="11" height="16" viewBox="0 0 11 16" fill="none"><path d="M9 1.32422L3 8.05339L9 14.7826" stroke="black" stroke-width="3"/></svg></div>',
+  nextArrow: '<div class="slick-next"><svg width="11" height="16" viewBox="0 0 11 16" fill="none"><path d="M2 14.7812L8 8.05208L2 1.32292" stroke="black" stroke-width="3"/></svg></div>'
+});
+ 
+  
+ 
+});
+</script>
+{% schema %}
+{
+  "name": "Icon Slider",
+  "tag": "section",
+  "class": "spaced-section icon-slider-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.collection-list.settings.title.label"
+    }, 
+	{
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor est arcu urna vel nisi a scelerisque. Ornare lectus nisi amet,</p>",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_block",
+      "name": "Icon Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon"
+        },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+		{
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon Slider"
+      
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/icon-slider.liquid_Section-->

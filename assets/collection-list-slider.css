@@ -1,0 +1,9 @@
+.collection-list-slider ul.slick-dots {
+  text-align: center;
+}
+h2.collection_list__slider {
+  text-align: center;
+  position: absolute;
+  top: 20px;
+  width: 100%;
+}

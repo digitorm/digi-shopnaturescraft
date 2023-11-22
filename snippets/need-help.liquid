@@ -1,0 +1,171 @@
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+  /* Common styles for both desktop and mobile */
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .form-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: white;
+  }
+  .input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  .input-group.inline {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .input-group.inline input,
+  .input-group.inline textarea,
+  .input-group.inline select {
+    flex: 1;
+  }
+  .input-group textarea {
+    resize: vertical;
+    background-color: #EDF6ED;
+  }
+  .attach-file-group {
+    display: flex;
+    align-items: center;
+    background-color: #EDF6ED;
+    border-radius: 0px 0px 5px 5px;
+    gap: 0px;
+    padding: 10px;
+  }
+  .attach-file-link {
+    text-decoration: underline;
+    color: #F26B27;
+    cursor: pointer;
+    font-family: 'Bw Modelica';
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  select {
+    padding: 20px;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    font-size: 14px;
+    font-family: 'Bw Modelica';
+    font-weight: 400;
+    background-color: #EDF6ED;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  .submit-button {
+    display: block;
+    width: 15%;
+    padding: 15px 10px 15px 10px;
+    background-color: #F26B27;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: 'Bw Modelica';
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  /* Styles for mobile screens */
+  @media screen and (max-width: 600px) {
+    .input-group,
+    .input-group.inline {
+      flex-direction: column;
+    }
+    .input-group.inline input,
+    .input-group.inline textarea,
+    .input-group.inline select {
+      width: 100%;
+    }
+    .submit-button {
+      width: 100%;
+    }
+  }
+</style>
+
+<div id="shopify-form-wrapper">
+  {% form 'contact', id: 'custom-support-form' %}
+  {{ form.errors | default_errors }}
+    <div class="input-group inline">
+      <input type="text" id="full-name" name="full-name" placeholder="Full Name" required>
+      <input type="email" id="email" name="email" placeholder="Email Address" required>
+    </div>
+    <div class="input-group">
+      <select id="subject" name="subject" required>
+        <option value="" disabled selected>Select a Subject</option>
+        <option value="Returns">Returns</option>
+        <option value="Refunds">Refunds</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="input-group inline">
+      <input type="number" id="phone-number" name="phone-number" placeholder="Phone Number" required>
+      <input type="number" id="order-number" name="order-number" placeholder="Order Number" required>
+    </div>
+    <div class="input-group">
+      <textarea id="message" name="message" rows="6" placeholder="Message:"></textarea>
+      <div class="attach-file-group">
+        <span class="attach-file-icon">📎</span>
+        <label for="attachment" class="attach-file-link">Attach File</label>
+        <input type="file" id="attachment" name="attachment">
+      </div>
+    </div>
+  
+    <div class="submit-button">
+    <input class="submit-button" type="submit" value="Create" />
+  </div>
+
+  {% endform %}
+
+  <div id="success-message" style="display: none;">
+    <p>Thank you for your inquiry! Expect to hear from us within 1 business day.</p>
+  </div>
+	
+
+</div>
+ 
+<script>
+  $(document).ready(function() {
+    $('#shopify-form-wrapper').on('submit', 'form', function(e) {
+      e.preventDefault(); // Prevent the default form submission
+
+      var formData = new FormData(this);
+
+      // Use AJAX to send the form data to the server
+      $.ajax({
+        url: $(this).attr('action'), // Use the form's action attribute as the URL
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          // Hide the form and display the success message
+          $('#custom-support-form').hide();
+          $('#success-message').show();
+        },
+        error: function(response) {
+          alert('An error occurred. Please try again.');
+        }
+      });
+    });
+  });
+</script>
+

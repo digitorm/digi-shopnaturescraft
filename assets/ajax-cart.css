@@ -1,0 +1,267 @@
+.ajax-cart__modal {
+	 position: fixed;
+	 top: 50%;
+	 left: 50%;
+	 transform: translate(-50%, -50%);
+	 z-index: 40;
+	 max-width: 575px;
+	 background: #f4f4f4;
+	 border: 1px solid #e9e9e9;
+	 padding: 50px 65px;
+	 opacity: 0;
+	 visibility: hidden;
+	 will-change: opacity, visibility;
+   box-shadow: 0px 14px 19px rgba(0, 0, 0, 0.25);
+}
+span.ajax-cart-suv.null {
+    display: none;
+}
+.product-option> span + span:before {
+    content: "|";
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.ajax-cart__modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    background: #fff;
+  z-index: 41;
+}
+svg.icon.icon-close {
+    width: 20px;
+}
+ .ajax-cart__overlay {
+	 position: fixed;
+	 z-index: 30;
+	 top: 0;
+	 bottom: 0;
+	 left: 0;
+	 right: 0;
+	 background-color: getColor('black-40', 'variations');
+	 opacity: 0;
+	 visibility: hidden;
+	 will-change: opacity, visibility;
+}
+.ajax-cart__overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+}
+.itm > span:not(.poin1) + b:after {
+    content: "s";
+}
+.itm > span.poin0 + b:after{
+    content: none;
+}
+.ajax-cart__drawer {
+    transition: .5s;
+    position: fixed;
+    z-index: 40;
+    right: -500px;
+    top: 0;
+    width: calc(100% - 50px);
+    height: 100%;
+    background: #f4f4f4;
+    will-change: transform;
+    border-left: 0 solid #e9e9e9;
+    max-width: 500px;
+    padding: 30px 30px 0;
+    box-shadow: 0 14px 19px rgba(0,0,0,.25);
+}
+.inline-title h2 {
+    display: inline-block;
+    margin: 0;
+}
+
+.inline-title {
+    display: inline-flex;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.inline-title .itm {
+    margin-bottom: 4px;
+    margin-left: 10px;
+}
+
+.itm * {
+    font-size: 16px;
+    font-family: 'BWMODELICA REGULAR';
+    font-weight: normal;
+    color: #000000;
+    letter-spacing: .25px;
+}
+ .ajax-cart__drawer.is-open {
+	 transform: translateX(-100%);
+}
+ .ajax-cart-modal {
+	 position: relative;
+}
+ .ajax-cart-modal__close {
+	 position: absolute;
+	 right: -20px;
+	 top: -20px;
+}
+ .ajax-cart-modal__content {
+	 padding: 20px;
+}
+ .ajax-cart-drawer {
+	 position: relative;
+	 height: 100%;
+}
+.ajax-cart-drawer__close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+}
+.ajax-cart-drawer__close:hover svg circle {
+    fill: #000;
+}
+.free-ship svg {
+    position: relative;
+    top: 3px;
+}
+a.button.button--colo.button--full-width.js-button {
+    height: 45px;
+    line-height: 45px;
+    background: #0a0a0a;
+    border: 0px solid !important;
+    box-shadow: none !important;
+    font-weight: normal !important;
+    font-family: 'BWMODELICA-MEDIUM';
+    min-height: auto;
+    margin-bottom: 6px;
+}
+.ajax-cart-drawer__content {
+    padding: 25px 0 0;
+    height: calc(100% - 230px);
+    overflow: hidden;
+    overflow-y: scroll;
+    border-top: 1.5px solid #0A0A0A;
+    margin-top: 10px;
+}
+ .ajax-cart-drawer__buttons {
+	 position: absolute;
+	 z-index: 10;
+	 left: 0;
+	 bottom: 0;
+	 width: 100%;
+	 height: 190px;
+	 background: #f6f6f6;
+	 padding: 15px 20px;
+	 display: flex;
+	 flex-direction: column;
+	 justify-content: flex-end;
+}
+ .ajax-cart-drawer__buttons .button:last-child {
+	 margin-top: auto;
+}
+.ajax-cart-item__single {
+    position: relative;
+    margin-bottom: 20px;
+    border-bottom: 0px solid red;
+    display: inline-flex;
+    width: 100%;
+    align-items: flex-start;
+}
+.ajax-cart-item__image {
+    width: 70px;
+    margin-right: 20px;
+}
+.ajax-cart-item__remove {
+    width: auto;
+    cursor: pointer;
+    margin-left: 20px;
+    text-align: right;
+    opacity: .5;
+    position: absolute;
+    right: 12px;
+}
+.ajax-cart-item__remove:hover {
+    opacity: 1;
+}
+.rig-img {
+    padding-right: 15px;
+  width: 100%;
+}
+.qunt-grid {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 5px;
+  font-size: 13px;
+}
+span.ajax-cart-suv {
+    width: 100%;
+    float: left;
+    font-size: 13px;
+    color: #000000;
+    font-family: 'BWMODELICA REGULAR';
+    margin-top: 5px;
+}
+.ajax-cart-item__title {
+    font-size: 16px;
+    color: #000;
+    line-height: 17px;
+    font-family: 'DUKE CHARMING';
+    max-width: calc(100% - 30px);
+}
+
+.grid-tit {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-start;
+}
+.qty-wrapper input[type="button"] {
+    font-size: 16px;
+    color: #000000;
+    font-family: 'BWMODELICA-MEDIUM';
+    border: 0px solid;
+    background: transparent;
+}
+.qty-wrapper {
+    display: inline-flex;
+    max-width: 100px;
+    border: 2px solid #0A0A0A;
+}
+input#Quantity {
+    max-width: 50px;
+    text-align: center;
+    background: transparent;
+    border: 0px solid;
+    font-size: 16px;
+    color: #000000;
+    font-family: 'BWMODELICA-MEDIUM';
+    padding: 7px 1px;
+}
+.ajax-cart-item__price {
+    font-size: 16px;
+    color: #000000;
+    font-family: 'BWMODELICA BOLD';
+}
+.free-ship {
+    text-align: center;
+  font-size: 15px;
+}
+p.cal-ship {
+    font-size: 15px;
+    color: #000000;
+    font-family: 'BWMODELICA-MEDIUM';
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+a.button.button--black.button--full-width.js-button.js-ajax-checkout-button {
+    font-size: 17px;
+    text-align: center;
+    font-family: 'BWMODELICA BOLD';
+    height: 60px;
+    background: #F26B27;
+    border-radius: 10px;
+    margin: 10px 0 10px;
+}
+
+

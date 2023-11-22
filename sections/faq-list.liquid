@@ -1,0 +1,70 @@
+<!--AZEXO_sections/faq-list.liquid_Section--><div class="page-width {{section.settings.class}}">
+  {% if section.settings.title %}
+  <h2 class="faq_title">
+    {{ section.settings.title}}
+  </h2> {% endif %}
+  
+  <div class="rte">
+   {%for block in section.blocks %}
+
+        {% if block.type == 'faq' %}
+        <div class="accordion">
+          {% include 'icon-ques' %}
+          <div class="ques">
+            <p><strong>{{ block.settings.title}}</strong></p>
+          <div class="response">
+            {{ block.settings.faq_answer }}
+          </div>
+          </div>
+        </div>
+        {% endif %}
+    
+    
+
+      {% endfor %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "FAQ List",
+  "tag": "section",
+  "class": "spaced-section faq-list",
+  "settings": [
+    {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+		{
+          "type": "text",
+          "id": "class",
+          "label": "Class Name"
+        }
+  ],
+   "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Block",
+
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "FAQ Question"
+        },
+        {
+          "type": "richtext",
+          "id": "faq_answer",
+          "label": "FAQ Answer"
+        }
+      ]
+    }
+   ],
+  "presets": [
+    {
+      "name": "FAQ List"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/faq-list.liquid_Section-->

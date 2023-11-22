@@ -1,0 +1,236 @@
+<!--AZEXO_sections/ingredients-products.liquid_Section-->{% assign number_of_related_products_to_shows = 10 %}
+{% assign counters = '' %}
+{% assign products_count = 0 %}
+{% paginate collections.all.products by 1000 %}
+    {% for prod in collections.all.products %}
+        
+        {% if prod.tags contains article.title and counters.size < number_of_related_products_to_shows %}
+          {% assign products_count = products_count | plus: 1 %}
+
+        {% endif %}
+        {% endfor %}
+ {% endpaginate %}
+{% if products_count > 0 %}
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'template-collection.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'template-collection.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- liquid
+  assign products_to_display = section.settings.collection.all_products_count
+
+  if section.settings.collection.all_products_count > section.settings.products_to_show
+    assign products_to_display = section.settings.products_to_show
+    assign more_in_collection = true
+  endif
+-%}
+<div class="collection page-width{% if section.settings.swipe_on_mobile == true and section.settings.collection.all_products_count > 2 and section.settings.products_to_show > 2 %} page-width-desktop{% endif %}">
+  <div class="title-wrapper-with-link{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}{% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} title-wrapper--self-padded-tablet-down{% endif %}">
+    <h2 class="title{% if section.settings.title == blank %} title--no-heading{% endif %}">{{ section.settings.title | escape }} {{ article.title | escape }}</h2>
+
+   
+  </div>
+{% assign number_of_related_products_to_show = 10 %}
+{% assign counterssss = '' %}
+  
+    <ul class="grid ingredients-slider p-slider grid--2-col product-grid grid--2-col-tablet grid--4-col-desktop negative-margin" role="list">
+     
+   
+      
+       {% paginate collections.all.products by 1000 %}
+    {% for prod in collections.all.products %}
+        {% if prod.tags contains article.title and counterssss.size < number_of_related_products_to_show %}
+         <li class="grid__item">
+              {% render 'product-card',
+                product_card_product: prod,
+                media_size: section.settings.image_ratio,
+                show_secondary_image: section.settings.show_secondary_image,
+                add_image_padding: section.settings.add_image_padding,
+                show_vendor: section.settings.show_vendor,
+                show_image_outline: section.settings.show_image_outline,
+                show_rating: section.settings.show_rating
+              %}
+            </li>
+        {% endif %}
+        {% endfor %}
+      {% endpaginate %}
+      
+      
+      
+      
+      
+      
+    </ul>
+  
+  <div class="flex-slick">
+   <div class="prev">
+    <svg width="16" height="26" viewBox="0 0 16 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.78873e-07 13L15.75 0.00961895L15.75 25.9904L1.78873e-07 13Z" fill="#0A0A0A"/></svg>
+</div>
+   <div class="slick-slider-dots"></div>
+<div class="next">
+    <svg width="16" height="26" viewBox="0 0 16 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 13L0.250001 25.9904L0.250002 0.00961807L16 13Z" fill="#0A0A0A"/></svg>
+</div>
+  </div>
+
+  
+</div>
+<style>
+  
+  section#shopify-section-{{section.id}} {
+    background-color: {{section.settings.bg_color}};
+    margin: 0;
+    padding-top: 5rem;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  
+  
+</style>
+
+
+
+ <script type="text/javascript">//<![CDATA[
+
+
+
+$('.p-slider').slick({
+  dots: true,
+  arrows: true,
+  speed: 500,
+  cssEase: 'fade',
+  infinite: false,
+  slidesToShow: 4,
+ slidesToScroll: 4,  
+   appendDots: $('.slick-slider-dots'),
+   prevArrow: $('.prev'),
+   nextArrow: $('.next'),
+  // prevArrow: '<div class="slick-prev"><svg width="16" height="26" viewBox="0 0 16 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.78873e-07 13L15.75 0.00961895L15.75 25.9904L1.78873e-07 13Z" fill="#0A0A0A"/></svg></div>',
+   //nextArrow: '<div class="slick-next"><svg width="16" height="26" viewBox="0 0 16 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 13L0.250001 25.9904L0.250002 0.00961807L16 13Z" fill="#0A0A0A"/></svg></div>',
+
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+         cssEase: 'linear',
+        dots: false,
+  arrows: false,
+      }
+    },
+    {
+      breakpoint: 520,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+         cssEase: 'linear',
+        dots: false,
+  arrows: false,
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+
+
+  //]]></script>
+
+{% endif %}
+{% schema %}
+{
+  "name": "Ingredients Products",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+{
+      "type": "color",
+      "id": "bg_color",
+      "default": "#fff",
+      "label": "BG Color"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Featured collection",
+      "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-collection.settings.header.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.featured-collection.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_outline",
+      "default": true,
+      "label": "t:sections.featured-collection.settings.show_image_outline.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_rating.label",
+      "info": "t:sections.featured-collection.settings.show_rating.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredients Products"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/ingredients-products.liquid_Section-->

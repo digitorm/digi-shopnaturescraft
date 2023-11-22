@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic%7CWork+Sans:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&subset=latin,latin-ext&display=swap');/*
+"color_text": "#3d4246",
+"color_body_text": "#69727B",
+"color_sale_text": "#557B97",
+
+"color_button": "#557B97",
+"color_button_text": "#FFFFFF",
+"color_small_button_text_border": "#3D4246",
+
+"color_text_field_text": "#000000",
+"color_text_field_border": "#949494",
+"color_text_field": "#FFFFFF",
+
+"color_image_overlay_text": "#FFFFFF",
+"color_image_overlay": "#3D4246",
+"image_overlay_opacity": "40%",
+
+"color_borders": "#E8E9EB",
+"color_body_bg": "#FFFFFF",
+
+"type_header_font": "Work Sans",
+"type_header_font_weight": "700",
+"type_header_font_style": "normal",
+"type_header_base_size": "26px",
+
+"type_base_font": "Work Sans",
+"type_base_font_weight": "400",
+"type_base_font_style": "normal"
+"type_base_size": "16px",
+*/
+.az-debut {
+  color: #69727b;
+  font-family: Work Sans;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+.az-debut h1,
+.az-debut h2,
+.az-debut h3,
+.az-debut h4,
+.az-debut h5,
+.az-debut h6 {
+  color: #3d4246;
+  font-family: Work Sans;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 26px;
+  margin: 0 0 17.5px;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.az-debut h1 {
+  font-size: 2.1875em;
+  text-transform: none;
+  letter-spacing: 0;
+}
+@media only screen and (max-width: 749px) {
+  .az-debut h1 {
+    font-size: 2em;
+  }
+}
+.az-debut h2 {
+  font-size: 1.25em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+@media only screen and (max-width: 749px) {
+  .az-debut h2 {
+    font-size: 1.125em;
+  }
+}
+.az-debut h3 {
+  font-size: 1.625em;
+  text-transform: none;
+  letter-spacing: 0;
+}
+@media only screen and (max-width: 749px) {
+  .az-debut h3 {
+    font-size: 1.25em;
+  }
+}
+.az-debut h4 {
+  font-size: 1.0625em;
+}
+@media only screen and (max-width: 749px) {
+  .az-debut h4 {
+    font-size: 0.9375em;
+  }
+}
+.az-debut h5 {
+  font-size: 0.9375em;
+}
+@media only screen and (max-width: 749px) {
+  .az-debut h5 {
+    font-size: 0.8125em;
+  }
+}
+.az-debut h6 {
+  font-size: 0.875em;
+}
+@media only screen and (max-width: 749px) {
+  .az-debut h6 {
+    font-size: 0.75em;
+  }
+}
+.az-debut a {
+  color: #3d4246;
+  text-decoration: none;
+}
+.az-debut img {
+  max-width: 100%;
+}
+.az-debut input,
+.az-debut select,
+.az-debut textarea {
+  color: #000000;
+  border: 1px solid #949494;
+  background-color: #ffffff;
+}
+.az-debut button {
+  color: #ffffff;
+  background-color: #557b97;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  padding: 10px 18px;
+}
+.az-debut .az-button a {
+  color: #ffffff;
+  background-color: #557b97;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  padding: 10px 18px;
+}
+.az-debut .az-product-price .az-product-prices {
+  font-weight: 600;
+  color: #69727b;
+}
+.az-debut .az-product-price .az-product-prices .az-sale-price {
+  color: #557b97;
+}
+.az-debut .az-product-image img {
+  border: 1px solid rgba(105, 114, 123, 0.2);
+}
+.az-debut .az-collections-list .az-background,
+.az-debut .az-collection .az-background {
+  background-color: rgba(61, 66, 70, 0.4);
+}
+.az-debut .az-collections-list .az-collection-title > div > h3,
+.az-debut .az-collection .az-collection-title > div > h3 {
+  text-align: center;
+  color: white;
+}
+.az-debut .az-article-read-more button {
+  color: #ffffff;
+  background-color: #557b97;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  padding: 10px 18px;
+  border: 1px solid #3d4246;
+  color: #3d4246;
+  background-color: transparent;
+  font-size: 12px;
+  padding: 5px 15px;
+}
+.az-debut .az-product .az-product-prices {
+  font-size: 20px;
+}
+.az-debut .az-product .az-product-options .az-product-option label {
+  color: #3d4246;
+}
+.az-debut .az-product .az-product-options .az-product-option select {
+  color: #000000;
+  border: 1px solid #949494;
+  background-color: #ffffff;
+  font-size: 15px;
+  line-height: 22px;
+}
+.az-debut .az-product .az-quantity-wrapper input {
+  color: #000000;
+  border: 1px solid #949494;
+  background-color: #ffffff;
+  font-weight: 600;
+  text-align: center;
+  font-size: 15px;
+}
+.az-debut .az-product .az-quantity-wrapper svg {
+  fill: #3d4246;
+}
+.az-debut .az-product .az-product-description {
+  color: #3d4246;
+}
+.az-debut .az-product .az-product-cart-button button {
+  color: #ffffff;
+  background-color: #557b97;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  padding: 10px 18px;
+}
+.az-debut .az-image img {
+  border: 1px solid rgba(105, 114, 123, 0.2);
+}
+.az-debut img[src*="/collection1.svg"],
+.az-debut img[src*="/collection2.svg"],
+.az-debut img[src*="/collection3.svg"],
+.az-debut img[src*="/logo.svg"],
+.az-debut img[src*="/product1.svg"],
+.az-debut img[src*="/product2.svg"],
+.az-debut img[src*="/product3.svg"],
+.az-debut img[src*="/product4.svg"],
+.az-debut img[src*="/product5.svg"],
+.az-debut img[src*="/product6.svg"],
+.az-debut img[src*="/square-image.svg"],
+.az-debut img[src*="/wide-image1.svg"],
+.az-debut img[src*="/wide-image2.svg"] {
+  opacity: 0.3;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.az-button.az-debut-button a {
+  color: #ffffff;
+  background-color: #557b97;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  padding: 10px 18px;
+}
+.az-button.az-debut-small-button a {
+  color: #ffffff;
+  background-color: #557b97;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  padding: 10px 18px;
+  border: 1px solid #3d4246;
+  color: #3d4246;
+  background-color: transparent;
+  font-size: 12px;
+  padding: 5px 15px;
+}
+.az-debut-border-color {
+  border-color: #e8e9eb;
+}
+.az-debut-overlay-background {
+  background-color: rgba(61, 66, 70, 0.4);
+}
+.az-debut-gray-background {
+  background-color: rgba(105, 114, 123, 0.05);
+}

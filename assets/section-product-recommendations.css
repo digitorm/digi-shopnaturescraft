@@ -1,0 +1,35 @@
+.product-recommendations {
+  display: block;
+}
+.product-recommendations__heading {
+    margin: 0;
+    margin-bottom: 6rem;
+}
+product-recommendations .card-inner .card-information__wrapper {
+    text-align: center;
+}
+product-recommendations .card-information__wrapper>.price {
+    justify-content: center;
+}
+product-recommendations .card-inner span.button_product_info path {
+    fill: #fff;
+}
+product-recommendations .card-inner span.button_product_info {
+    max-height: none;
+    margin-top: 18px !important;
+    max-width: 200px;
+    width: 100%;
+}
+product-recommendations .card.card--product.card--outline .card__inner {
+    background: #F3F3F4;
+}
+section.product-recommendations {
+    margin: 12rem 0 10rem;
+}
+
+
+
+
+
+
+

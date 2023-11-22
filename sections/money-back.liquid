@@ -1,0 +1,125 @@
+<!--AZEXO_sections/money-back.liquid_Section--><link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'section-rich-text.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}</noscript>
+
+<div class="page-width">
+  <div class="rich-text color-accent-1 small-bg gradient{% if section.settings.full_width %} rich-text--full-width{% endif %}">
+    <div class="rich-text__blocks">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'heading' -%}
+            <h2 class="{{ block.settings.heading_size }}" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
+          {%- when 'text' -%}
+            <div class="rich-text__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+<style>
+  {% if section.settings.image != blank %}
+#shopify-section-{{section.id}} .small-bg{
+    background-image: url({{section.settings.image | img_url: '1600x'}});
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;      
+    background-attachment: scroll;
+    margin: 0;
+    padding: 70px 0 0;
+    background-repeat: no-repeat;
+    min-height: 278px;
+      margin-bottom: -160px;
+    position: relative;
+  }
+#shopify-section-{{section.id}} .rich-text__text.rte {
+    margin-top: 10px;
+}
+#shopify-section-{{section.id}} .rich-text__blocks {
+    max-width: 75.4rem;
+}
+@media only screen and (max-width: 989px) and (min-width: 768px)  {
+#shopify-section-{{section.id}} .rich-text__blocks {
+    max-width: 59.4rem;
+}
+#shopify-section-{{section.id}} .rich-text__text.rte {
+    font-size: 14px;
+}
+}
+  @media only screen and (max-width: 767px) {
+#shopify-section-{{section.id}} .small-bg{
+    background-size: cover;
+  padding: 13vw 0 0;
+  }
+  }
+    {% endif %}
+</style>
+{% schema %}
+{
+  "name": "Money Back Section",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bg Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.rich-text.blocks.heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Talk about your brand",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__3.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.rich-text.blocks.text.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Money Back Section"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/money-back.liquid_Section-->

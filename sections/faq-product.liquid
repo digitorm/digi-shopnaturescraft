@@ -1,0 +1,141 @@
+<!--AZEXO_sections/faq-product.liquid_Section--><div class="page-width {{section.settings.class}}">
+  
+    <div class="title-wrapper-with-link title-wrapper--self-padded-mobile">
+     
+  {% if section.settings.title %}
+  <h1 class="title">
+    {{ section.settings.title}}
+  </h1> {% endif %}
+   <div class="rich-text__text rte">{{ section.settings.text }}</div>
+    </div>
+  <div class="rte">
+    {% assign variable = 0 %}
+
+ 
+   {%for block in section.blocks %}
+{% assign variable = variable | plus: 1 %}
+        {% if block.type == 'faq' %}
+        <div class="accordions">
+          
+          <div class="accorfion-section">
+            <p class="accordion-section-title" data-attr="#accordion-{{ variable }}"><strong>{{ block.settings.title}}</strong> {% include 'icon-plus-circle' %}</p>
+             
+          <div id="accordion-{{ variable }}" class="accordion-section-content responses">
+            {{ block.settings.faq_answer }}
+          </div>
+         </div>
+        </div>
+        {% endif %}
+    
+    
+
+      {% endfor %}
+  </div>
+</div>
+<style>
+  .faq-list h1 {
+    text-align: center;
+}
+.accorfion-section > p {
+    padding: 0;
+    margin: 0;
+    font-family: "BWMODELICA-MEDIUM";
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  cursor: pointer;
+  
+}
+.accordion-section-title svg {
+    transition: .3s;
+}
+
+.accordion-section-title.active svg {
+    transform: rotate(45deg);
+}
+.accordions {
+    background: #fff;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+    padding: 14px 22px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#shopify-section-{{section.id}} {
+    background: #F3F3F4;
+    padding: 5rem 0 10rem;
+}
+.accordions .responses {
+    display: none;
+}
+  
+</style>
+<script type="text/javascript">//<![CDATA[
+
+
+ $(document).ready(function(){
+     $('.accordion-section-title').click(function(e){
+         var currentAttrvalue = $(this).data('attr');
+         if($(e.target).is('.active')){
+             $(this).removeClass('active');
+             $('.accordion-section-content:visible').slideUp(300);
+         } else {
+             $('.accordion-section-title').removeClass('active').filter(this).addClass('active');
+             $('.accordion-section-content').slideUp(300).filter(currentAttrvalue).slideDown(300);
+         }
+     });
+ });
+
+
+  //]]></script>
+{% schema %}
+{
+  "name": "FAQ Product",
+  "tag": "section",
+  "class": "faq-list",
+  "settings": [
+    {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+     {
+          "type": "richtext",
+          "id": "text",
+       "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        },
+		{
+          "type": "text",
+          "id": "class",
+          "label": "Class Name"
+        }
+  ],
+   "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Block",
+
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "FAQ Question"
+        },
+        {
+          "type": "richtext",
+          "id": "faq_answer",
+          "label": "FAQ Answer"
+        }
+      ]
+    }
+   ],
+  "presets": [
+    {
+      "name": "FAQ Product"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/faq-product.liquid_Section-->

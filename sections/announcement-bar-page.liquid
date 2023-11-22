@@ -1,0 +1,81 @@
+<!--AZEXO_sections/announcement-bar-page.liquid_Section-->{{'section-announcement-bar-page.css' | asset_url | stylesheet_tag}}
+
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'announcement' -%}
+      <div class="announcement-bar-new color-{{ block.settings.color_scheme }} gradient" role="region" aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.text != blank -%}
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="announcement-bar__link link link--text focus-inset animate-arrow">
+          {%- endif -%}
+              <div class="announcement-bar__message h5">
+                {{ block.settings.text  }}
+                {%- if block.settings.link != blank -%}
+                  {% render 'icon-arrow' %}
+                {%- endif -%}
+              </div>
+          {%- if block.settings.link != blank -%}
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+  {%- endcase -%}
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar-page.name",
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement-bar-page.blocks.announcement-bar-page.name",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+"default": "<p>Welcome to our store</p>",
+          "label": "t:sections.announcement-bar-page.blocks.announcement-bar-page.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "options": [
+            {
+              "value": "background-1",
+              "label": "t:sections.announcement-bar-page.blocks.announcement-bar-page.settings.color_scheme.options__1.label"
+            },
+            {
+              "value": "background-2",
+              "label": "t:sections.announcement-bar-page.blocks.announcement-bar-page.settings.color_scheme.options__2.label"
+            },
+            {
+              "value": "inverse",
+              "label": "t:sections.announcement-bar-page.blocks.announcement-bar-page.settings.color_scheme.options__3.label"
+            },
+            {
+              "value": "accent-1",
+              "label": "t:sections.announcement-bar-page.blocks.announcement-bar-page.settings.color_scheme.options__4.label"
+            },
+            {
+              "value": "accent-2",
+              "label": "t:sections.announcement-bar-page.blocks.announcement-bar-page.settings.color_scheme.options__5.label"
+            }
+          ],
+          "default": "accent-1",
+          "label": "t:sections.announcement-bar-page.blocks.announcement-bar-page.settings.color_scheme.label"
+        }
+      ]
+    }
+  ],
+ "presets": [
+    {
+      "name": "t:sections.announcement-bar-page.presets.name",
+      "blocks": [
+       
+      ]
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/announcement-bar-page.liquid_Section-->

@@ -1,0 +1,60 @@
+<!--AZEXO_sections/main-full-width.liquid_Section--><link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% if section.settings.check %}
+
+<div class="page_bg_top">
+  <h1 class="main-page-title page-title text-center" style="color: {{section.settings.image }}">
+    {{ page.title | escape }}
+  </h1>
+</div>
+{% endif %}
+
+
+
+<div class="page-width">
+  <div class="rte">
+    {{ page.content }}
+  </div>
+</div>
+
+
+<style>
+  {% if section.settings.image != blank %}
+  .page_bg_top{
+    background-image: url({{section.settings.image | img_url : '1900x'}});
+  
+  }
+  {% endif %}
+</style>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "spaced-section page-top",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "check",
+ 	  "default": true,
+      "label": "Show Title"
+    },
+	{
+      "type": "color",
+      "id": "t_color",
+      "label": "Title Color"
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Title BG Image"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/main-full-width.liquid_Section-->

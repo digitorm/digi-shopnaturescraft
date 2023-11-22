@@ -1,0 +1,335 @@
+<!--AZEXO_sections/collection-tab.liquid_Section--><style>
+ul.nav.nav-tabs {
+    border-bottom: 1.5px solid #0A0A0A;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 25px;
+    margin-bottom: 58px;
+}
+ul.nav.nav-tabs > li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 19px;
+}
+  ul.nav.nav-tabs li a {
+    font-size: 24px;
+    color: #A2A2A2;
+    text-decoration: none;
+    border-bottom: 10px solid transparent;
+    padding-bottom: 20px;
+    letter-spacing: .25px;
+    font-weight: normal;
+    font-family: 'BWMODELICA-MEDIUM';
+    text-transform: capitalize;
+}
+.tab-pane.active {
+    height: auto;
+    overflow: visible;
+}
+  .tab-pane {
+    height: 0;
+    overflow: hidden;
+}
+ul.nav.nav-tabs li.active a {
+    border-color: #0a0a0a;
+}
+ul.nav.nav-tabs li.active a{
+    border-color: #0a0a0a;
+    color: #0A0A0A;
+    font-family: 'BWMODELICA BOLD';
+}
+ ul.nav.nav-tabs li:hover a {
+    border-color: #0a0a0a;
+}
+.product-list {
+    margin-bottom: 5rem;
+}
+
+
+
+
+
+
+
+
+</style>
+
+
+<div id="collection-filter-{{ section.id }}" class="block-by-collection page-width main-tab-products"> 
+   
+      <div class="shop-by-collection tab-product-collection">  
+        {% if section.blocks.size > 0 %}
+        <div class="category-list ">
+          <span>
+            {% if settings.language_enable %}
+            <span class="lang1">{{ section.settings.category_list_title | split: '|' | first }}</span>
+            <span class="lang2">{{ section.settings.category_list_title | split: '|' | last }}</span>
+            {% else %}
+            {{ section.settings.category_list_title | split: '|' | first }}
+            {% endif %}
+          </span>
+          <div class="tab-selector">
+            <ul class="nav nav-tabs">
+              {% for block in section.blocks %}
+              <li class="{% if forloop.index == 1%}active{% endif %}">
+                <a href="#filter-{{forloop.index}}-{{ section.id }}" data-toggle="tab"> 
+                  {% if settings.language_enable %}
+                  <span class="lang1">{{ block.settings.title | split: '|' | first }}</span>
+                  <span class="lang2">{{ block.settings.title | split: '|' | last }}</span>
+                  {% else %}
+                  {{ block.settings.title | split: '|' | first }}
+                  {% endif %}
+                </a>
+              </li>
+              {% endfor %} 
+            </ul>
+          </div>  
+        </div> 
+        <div class="product-list">
+          <div class="tab-content">            
+            {% for block in section.blocks %}
+            <div class="tab-pane {% if forloop.index == 1%}active{% endif %}" id="filter-{{forloop.index}}-{{ section.id }}">
+              <div class="category-products">  
+                {%- assign name_collection = block.settings.collection -%}
+                {%- if name_collection == blank -%}{%- assign name_collection = "all" -%}{%- endif -%}
+                {%- assign collection = collections[name_collection] -%} 
+                {% if collection.products.size == 0 %}
+                <p class="no_product">No More Product</p>
+                {% else %}
+                
+                
+    <ul class="grid grid--2-col product-grid{% if products_to_display == 4 or section.settings.collection == blank %} grid--2-col-tablet grid--4-col-desktop{% else %} grid--3-col-tablet{% endif %}{% if products_to_display > 5 %} grid--one-third-max grid--4-col-desktop grid--quarter-max{% endif %}{% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} slider slider--tablet grid--peek{% endif %}{% if section.settings.show_view_all == false or section.settings.collection.products.size < section.settings.products_to_show %} negative-margin{% endif %}{% if section.settings.show_view_all and section.settings.collection.products.size > section.settings.products_to_show %} negative-margin--small{% endif %}">
+       {% for product in collection.products limit: 4 %}  
+        <li class="grid__item{% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} slider__slide{% endif %}">
+          {% render 'product-grid-home',
+            product_card_product: product,
+            media_size: section.settings.image_ratio,
+            show_secondary_image: section.settings.show_secondary_image,
+            add_image_padding: section.settings.add_image_padding,
+            show_vendor: section.settings.show_vendor,
+            show_image_outline: section.settings.show_image_outline,
+            show_rating: section.settings.show_rating
+          %}
+        </li>
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <li class="grid__item">
+            {% render 'product-card-placeholder' %}
+          </li>
+        {%- endfor -%}
+      {%- endfor -%}
+    </ul>
+                
+                
+                
+                {% endif %}
+                
+              </div>
+            </div>
+            {% endfor %}  
+          </div>
+        </div> 
+        {% endif %}
+      </div>
+    </div>
+ <script type="text/javascript">//<![CDATA[
+
+
+// From http://learn.shayhowe.com/advanced-html-css/jquery
+
+// Change tab class and display content
+$('ul.nav.nav-tabs a').on('click', function (event) {
+    event.preventDefault();
+    
+    $('.active').removeClass('active');
+    $(this).parent().addClass('active');
+    //$('.tab-content > .tab-pane').hide();
+    $($(this).attr('href')).addClass("active");
+  
+});
+
+$('nav.nav-tabs li:first a:first').trigger('click'); // Default
+
+
+
+
+$('.category-products > ul').slick({
+  dots: false,
+  arrows: false,
+  infinite: true,
+  speed: 500,
+  cssEase: 'linear',
+  infinite: false,
+  slidesToShow: 4,
+ slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 520,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+
+
+  //]]></script>
+
+{% schema %}
+{
+  "name": "Shop By Collection",
+"class": "spaced-section col-slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "text",
+      "id": "category_list_title",
+      "label": "Category List Title",
+	  "default": "Shop By"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-collection.settings.header.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.featured-collection.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_outline",
+      "default": true,
+      "label": "t:sections.featured-collection.settings.show_image_outline.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_rating.label",
+      "info": "t:sections.featured-collection.settings.show_rating.info"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Collection Title",
+		  "default": "Collection Title"
+        },
+        {
+          "type":"collection",
+          "id":"collection",
+          "label":"Collection"
+        } 
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop By Collection",
+      "category": "Products",
+      "blocks": [ 
+        {
+          "type": "collection",
+          "settings": {
+            "title": "NEW ARRIVALS" 
+          } 
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "MEN" 
+          } 
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "WOMAN" 
+          } 
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "BOYS" 
+          } 
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "GIRLS" 
+          } 
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<!--End_AZEXO_sections/collection-tab.liquid_Section-->

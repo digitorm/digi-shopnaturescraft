@@ -1,0 +1,1512 @@
+<!--AZEXO_sections/ambassdor.liquid_Section--><form id="email_signup" class="klaviyo_styling klaviyo_gdpr_embed_UvZEKp" action="//manage.kmail-lists.com/subscriptions/subscribe" data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe" method="GET" target="_blank" novalidate="novalidate">
+   <input type="hidden" name="g" value="UvZEKp">
+   <input type="hidden" name="$fields" value="email,CHOOSE YOUR FREE PRODUCT!,Tiktok,Instagram,Youtube,Other Media Account">
+   <input type="hidden" name="$list_fields" value="$consent">
+   <div class="klaviyo_field_group klaviyo_form_actions step1 actives">
+      <div class="half-sec dark-bg">
+         <div class="align-center">
+            <img src="https://cdn.shopify.com/s/files/1/0444/6512/7578/files/white-logo.png?v=1654237016">
+            <h2>Become a Nature's Craft Ambassador</h2>
+            <p>At Nature's Craft we focus on creating herbal-based supplements, gummy vitamins, and other amazing products that help people feel and look their best.</p>
+ 			<p>As our Ambassador, you will receive a free product of your choice from our diverse catalog and a personalized affiliate link for you to earn commission from every sale made.</p>
+ 			<p>Apply below to become a Nature's Craft Ambassador and contribute to the well-being of people all over the world!</p>
+            
+            <div class="email-flex">
+               <input class="" type="email" value="" required name="email" id="k_id_email" placeholder="Enter your email address" />
+               <button class="next disabled">Apply</button>
+            </div>
+           <div class="steps-4">
+             <div class="step-active">
+               <span>1.</span> Welcome
+             </div>
+             <div class="">
+               <span>2.</span> Products
+             </div>
+			 <div class="">
+               <span>3.</span> Platforms
+             </div>
+			 <div class="">
+               <span>4.</span> End
+             </div>
+           </div>
+         </div>
+      </div>
+      <div class="half-sec">
+         <img class="p-20" src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/Page1_Group_Pic_UGC_1.png?v=1663239864">
+      </div>
+   </div>
+   <div class="klaviyo_field_group klaviyo_form_actions step2" >
+     <img class="top_op" src="https://cdn.shopify.com/s/files/1/0444/6512/7578/files/Topography_1.png?v=1654492744">
+      <h2 class="klaviyo_helptext" style="text-align: center;">Choose your free product</h2>
+     <p class="max-width">We have so many amazing products for you to choose from. Please check our catalog and select what product you would like to get as a complimentary gift.</p>
+      <div class="pro-flex p-slider">
+         {% assign count = 0 %}
+         {%- for block in section.blocks -%}
+         {% assign count = count | plus: 1 %}
+        {% assign product = block.settings.product %}
+        {% if product.title != blank %}
+         <div class="block">
+<!--             <h5>{{count}}</h5> -->
+           {% if product.featured_media != blank %}
+           <div class="flip_image">
+            	<img src="{{product.featured_media | img_url : '500x'}}">
+             {% if product.media[1] != blank %}
+             <img src="{{product.media[1] | img_url : '500x'}}">
+             {% endif %}
+           </div>
+           {% endif %}
+           
+           <h3>{{product.title}}</h3>
+           
+            
+    		
+            <!--ul class="tab_li" id="tab-wrapper-{{count}}">
+               <li><a href="#tab-{{count}}">Description</a></li>
+               <li><a href="#tab-{{count}}2">Products included</a></li>
+            </ul-->
+            <div class="tab_cont" id="tab-body-{{count}}">
+               <div id="tab-{{count}}">
+                 {% if block.settings.richtext != blank %}
+                  {{block.settings.richtext}}
+                 
+                 {% endif %}
+                
+              </div>
+               <div id="tab-{{count}}2">{{block.settings.richtext_in}}</div>
+            </div>
+           {% if block.settings.product != blank %}
+           		<div class="wc_product_review_badge" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}"></div>
+            {% endif %}
+<!--             <script>
+               // From http://learn.shayhowe.com/advanced-html-css/jquery
+                 $('#tab-wrapper-{{count}} li:first').addClass('active');
+                 $('#tab-body-{{count}} > div').hide();
+                 $('#tab-body-{{count}} > div:first').show();
+                 $('#tab-wrapper-{{count}} a').click(function() {
+                     $('#tab-wrapper-{{count}} li').removeClass('active');
+                     $(this).parent().addClass('active');
+                     var activeTab = $(this).attr('href');
+                     $('#tab-body-{{count}} > div:visible').hide();
+                     $(activeTab).show();
+                     return false;
+                 });
+            </script> -->
+            <input required class="click_rad" id="choose-{{ count }}" type="checkbox" name="CHOOSE YOUR FREE PRODUCT!" value="{{product.title | remove: '<br>'}}"> 
+            <label for="choose-{{ count }}">SELECT</label>
+         </div>
+         {% endif %}
+         {%- endfor -%}
+      </div>
+     <div class="click_rads disabled">Next »</div>
+     <div class="steps-4 dark">
+             <div class="">
+               <span>1.</span> Welcome
+             </div>
+             <div class="step-active">
+               <span>2.</span> Products
+             </div>
+			 <div class="disabled">
+               <span>3.</span> Platforms
+             </div>
+			 <div class="">
+               <span>4.</span> End
+             </div>
+           </div>
+     <img class="bottom_op" src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/Topography_2.png?v=1654492744">
+   </div>
+   <div class="klaviyo_field_group klaviyo_form_actions step3">
+      <div class="half-sec">
+         <img src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/Page_3_UGC.png?v=1663239865">
+      </div>
+      <div class="half-sec bg_step_3">
+         <div class="last-sec">
+           <ul>
+             <li><a href="https://www.facebook.com/bynaturescraft/"><img src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/fb.png?v=1654494515"></a></li>
+             <li><a href="https://www.instagram.com/bynaturescraft/"><img src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/ig.png?v=1654494515"></a></li>
+             <li><a href="https://twitter.com/bynaturescraft/status/1455078123947626500"><img src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/tiktok.png?v=1654494515"></a></li>
+<!--              <li><a href="#"><img src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/tik-tok.png?v=1654494515"></a></li>
+             <li><a href="#"><img src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/yt.png?v=1654494515"></a></li> -->
+			</ul>
+            <h1>What Platforms <br>are you on?</h1>
+            <p>Please leave a link to your social media account where you would like to promote our products let's get started! </p>
+            <div class="email-flexs">
+           
+           <div class="in-btn"> 
+             <label for="tiktok">TiKTok URL</label>
+           		<input type="text" name="Tiktok" id="tiktok"  value="">
+            
+           </div>
+           <div class="in-btn">
+               <label for="instagram">Instagram URL</label>
+           <input type="text" name="Instagram" id="instagram"  value="">
+           
+           </div>
+            <div class="in-btn">
+              <label for="youtube">YouTube URL</label>
+           <input type="text" name="Youtube" id="youtube"  value="">
+              
+           </div>
+            <div class="in-btn">
+               <label for="social_media">Other social media URL</label>
+           <input type="text" name="Other Media Account" id="social_media"  value="">
+             
+           </div>
+              </div>
+          <div class="email-flex">
+<!--             <input class="border" id="enter-social-media-url" required placeholder="https://www.facebook.com/" type="text" name="Enter social media URL" placeholder="Enter social media URL" > -->
+            <div class="klaviyo_form_actions aaa">
+               <button type="submit" class="klaviyo_submit_button disabled">Submit</button> 
+            </div>
+           </div>
+          
+           <div class="steps-4">
+             <div class="darki">
+               <span>1.</span> Welcome
+             </div>
+             <div class="darki">
+               <span>2.</span> Products
+             </div>
+			 <div class="step-active">
+               <span>3.</span> Platforms
+             </div>
+			 <div class="">
+               <span>4.</span> End
+             </div>
+           </div>
+         </div>
+      </div>
+   </div>
+    
+   <div class="klaviyo_messages success_message">
+     <img class="top_op" src="https://cdn.shopify.com/s/files/1/0444/6512/7578/files/Topography_1.png?v=1654492744">
+     
+     <div class="success_messages" >
+         <a href="/"><img class="stop_op" src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/logo_2x_712b4b82-2435-4fe7-8a3f-debcfdf1f144.png?v=1639542755"></a>
+     <br>
+         
+         <h2 class="thank_you" >Thanks for applying to become Nature's Craft Ambassador</h2>
+         <p>We are excited to work with you!<br>
+We'll be in touch soon to discuss the details about our potential partnership.<br>
+Have a great day!</p>
+           <div class="steps-4">
+             <a class="link-over" href="/pages/become-an-ambassador"></a>
+             <div class="darki">
+               <span>1.</span> Welcome
+             </div>
+             <div class="darki">
+               <span>2.</span> Products
+             </div>
+			 <div class="darki">
+               <span>3.</span> Platforms
+             </div>
+			 <div class="darki" style="color: #000;">
+               <span>4.</span> End
+             </div>
+           </div>
+     </div>
+      <div class="error_message" style="display:none;"></div>
+      <img class="bottom_op" src="//cdn.shopify.com/s/files/1/0444/6512/7578/files/Topography_2.png?v=1654492744">
+ 
+   </div>
+ 
+      </form> 
+ <script type="text/javascript">//<![CDATA[
+
+
+
+$('.p-slider').slick({
+  dots: false,
+  arrows: true,
+  infinite: true,
+  speed: 500,
+  cssEase: 'linear',
+  infinite: false,
+  slidesToShow: 4,
+ slidesToScroll: 1,
+    prevArrow: '<div class="slick-prev"><svg width="11" height="16" viewBox="0 0 11 16" fill="none"><path d="M9 1.32422L3 8.05339L9 14.7826" stroke="black" stroke-width="3"/></svg></div>',
+  nextArrow: '<div class="slick-next"><svg width="11" height="16" viewBox="0 0 11 16" fill="none"><path d="M2 14.7812L8 8.05208L2 1.32292" stroke="black" stroke-width="3"/></svg></div>',
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 520,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+
+
+  //]]></script>
+
+<style type="text/css">
+.giraffly_announce {
+    display: none !important;
+}
+  .steps-4.dark > div.disabled {
+    pointer-events: none;
+}
+.pro-flex > .slick-arrow svg path {
+    stroke: #fff;
+}
+.pro-flex > .slick-arrow {
+    width: 35px;
+    height: 35px;
+    background: #4caf50;
+    padding: 10px 0;
+    border-radius: 50%;
+}
+.slick-prev {
+    left: 0px;
+  z-index: 2;
+}
+  .slick-next {
+    right: 0px;
+    z-index: 2;
+}
+  .slick-prev:before, .slick-next:before {
+    content: none;
+}
+.pro-flex > .slick-arrow.slick-disabled {
+    opacity: .5;
+}
+.steps-4 > div:last-child {
+    cursor: default;
+}
+.steps-4 > div {
+    cursor: pointer;
+}
+.klaviyo_field_group.step3 .half-sec:first-child img {
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+}
+.klaviyo_field_group.klaviyo_form_actions.step2:not(.actives) {
+    padding: 0;
+}
+
+
+
+
+
+  .flip_image {
+    position: relative;
+}
+.flip_image img + img {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+}
+.pro-flex .block:hover .flip_image img + img {
+    z-index: 1;
+}
+div#shopify-section-header, div#shopify-section-announcement, div#shopify-section-footer {
+    display: none;
+}
+  button.klaviyo_submit_button.disabled {
+    cursor: default;
+    pointer-events: none;
+}
+.steps-4 {
+    display: flex;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  position: relative;
+}
+  a.link-over:empty {
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    height: 100%;
+}
+.steps-4 > div {
+    color: #fff;
+    margin: 0 7px;
+    font-weight: normal;
+    opacity: .6;
+    position: relative;
+    min-width: 100px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+.klaviyo_field_group p {
+    margin-top: 0;
+}
+.steps-4 > div.step-active {
+    opacity: 1;
+}
+.steps-4 > div span {
+    font-size: 23px;
+    font-weight: 600;
+    position: relative;
+    top: -2px;
+    margin-right: 4px;
+}
+.steps-4 > div:before {
+    content: "";
+    height: 6px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    background: #fff;
+    border-radius: 20px;
+}
+button {
+    cursor: pointer;
+}
+.steps-4.dark > div {
+    color: #000;
+}
+.steps-4.dark > div.step-active {
+    color: #000;
+}
+  .steps-4.dark > div:before  {
+     background: #000;
+}
+  .steps-4 > div.darki {
+    opacity: 1;
+    color: #3a893d;
+}
+  .steps-4 > div.darki:before {
+    opacity: 1;
+    background: #3a893d;
+}
+form#email_signup {
+    max-width: calc(100% - 2vw);
+    margin: 0 auto;
+}
+.klaviyo_styling.klaviyo_gdpr_embed_UvZEKp,
+.klaviyo_condensed_styling.klaviyo_gdpr_embed_UvZEKp {
+}
+.msg {
+	display: none;
+}
+.error {
+	color: red;
+}
+.success {
+	color: green;
+}
+.klaviyo_styling.klaviyo_gdpr_embed_UvZEKp .klaviyo_helptext,
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.klaviyo_styling.klaviyo_gdpr_embed_UvZEKp .klaviyo_gdpr_text,
+.klaviyo_condensed_styling.klaviyo_gdpr_embed_UvZEKp .klaviyo_gdpr_text {
+	font-size: 14px;
+	line-height: 1.3;
+}
+.klaviyo_styling.klaviyo_gdpr_embed_UvZEKp label,
+.klaviyo_condensed_styling.klaviyo_gdpr_embed_UvZEKp label {
+	color: #222;
+}
+.klaviyo_styling .klaviyo_field_group .klaviyo_form_actions {
+	text-align: left;
+}
+/* .klaviyo_styling.klaviyo_gdpr_embed_UvZEKp input[type=checkbox]+label,
+.klaviyo_condensed_styling.klaviyo_gdpr_embed_UvZEKp input[type=checkbox]+label {
+	display: inline;
+	font-weight: normal;
+	padding-left: 5px;
+} */
+.klaviyo_styling.klaviyo_gdpr_embed_UvZEKp input[type=text],
+.klaviyo_styling.klaviyo_gdpr_embed_UvZEKp input[type=email],
+.klaviyo_condensed_styling.klaviyo_gdpr_embed_UvZEKp input[type=text],
+.klaviyo_condensed_styling.klaviyo_gdpr_embed_UvZEKp input[type=email] {
+	border-radius: 2px;
+}
+.klaviyo_styling.klaviyo_gdpr_embed_UvZEKp .klaviyo_submit_button,
+.klaviyo_condensed_styling.klaviyo_gdpr_embed_UvZEKp .klaviyo_submit_button {
+	background-color: #f26b27;
+	border-radius: 2px;
+}
+.klaviyo_styling.klaviyo_gdpr_embed_UvZEKp .klaviyo_submit_button:hover,
+.klaviyo_condensed_styling.klaviyo_gdpr_embed_UvZEKp .klaviyo_submit_button:hover,
+  .block>label:hover{
+	background-color: #4caf50;
+}
+.email-flex button:hover {
+    background-color: #4caf50;
+    border: 1px solid;
+}
+/*.step1 {
+	display: block;
+}
+.step2 {
+	display: none;
+}
+.step3 {
+	display: none;
+}*/
+button.next.disabled {
+	cursor: default;
+	pointer-events: none;
+}
+
+.step1 {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+}
+.half-sec {
+	width: calc(50% - 15px);
+}
+.klaviyo_field_group.step3 .half-sec {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+.half-sec.dark-bg {
+	background: #4caf50;
+}
+.half-sec img {
+    margin: 0;
+    width: 100%;
+}
+.p-20 {
+    padding: 20px;
+}
+/* .align-center {
+	padding: 30px;
+	text-align: center;
+	max-width: 572px;
+	margin: 0 auto;
+} */
+  .align-center {
+    padding: 30px;
+    text-align: center;
+    max-width: 572px;
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.align-center img {
+	margin: 0 auto;
+}
+.pro-flex {
+	display: flex;
+	text-align: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.block {
+    width: calc(25% - 15px);
+    text-align: left;
+}
+  .slick-slide  .block {
+    padding: 0 15px;
+}
+.block img {
+    width: 100%;
+}
+label.klaviyo_helptext {
+	text-align: center;
+}
+ul.tab_li {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	margin-bottom: 10px !important;
+}
+ul.tab_li>li {
+    display: inline;
+    width: 100%;
+    border-bottom: 4px solid rgb(0 0 0 / 10%);
+}
+ul.tab_li>li.active{
+    border-bottom-color: #A3C66E;
+}
+ul.tab_li>li a {
+    width: 100%;
+    display: inline-block;
+    text-decoration: none !important;
+    font-weight: 500;
+}
+.tab_cont>div {
+    text-align: left;
+    min-height: auto;
+    margin-bottom: 0;
+}
+.tab_cont>div p {
+    font-weight: 400;
+    color: #000;
+    line-height: 1.4;
+}
+.tab_cont>div >p:last-child {
+    margin-bottom: 5px;
+}
+.block>input {
+	display: none;
+}
+.block .wc_product_review_badge {
+    margin-bottom: 13px;
+}
+  body .block .wc_icon_color svg path {
+    fill: #000000!important;
+}
+.steps-4.dark {
+    margin-top: 4rem;
+}
+.block>label {
+    width: 100%;
+    background: #f26b27;
+    text-align: center;
+    color: #fff !important;
+    height: 48px;
+    line-height: 48px;
+    cursor: pointer;
+    letter-spacing: 1.8px;
+    font-weight: 600;
+    font-family: Montserrat, sans-serif;
+    border-radius: 8px;
+}
+.block>h5 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    background: #A3C66E;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 50%;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 0 !important;
+}
+.klaviyo_field_group.step3 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	background: #4caf50;
+	text-align: center;
+}
+.last-sec {
+    padding: 30px;
+    width: 100%;
+}
+.success_message {
+	text-align: center;
+}
+.align-center h5 {
+	margin: 0;
+	text-transform: capitalize !important;
+	letter-spacing: 0 !important;
+}
+.align-center>h2 {
+	margin: 0;
+}
+.klaviyo_field_group.klaviyo_form_actions.step1 .email-flex {
+    flex-wrap: nowrap;
+    background: #ffff;
+}
+.bg_step_3 .email-flexs {
+    justify-content: space-around;
+}
+.email-flexs  label {
+    color: #fff !important;
+    font-size: 16px;
+    font-weight: normal;
+}
+.email-flexs > .in-btn {
+    width: calc(50% - 7px);
+}
+.email-flex {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 3px;
+    background: transparent;
+    width: 100%;
+    max-width: 480px;
+    margin-top: 2rem;
+    border-radius: 10px;
+    color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+.email-flexs {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 3px;
+    background: transparent;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+    border-radius: 10px;
+    color: #fff;
+    flex-wrap: wrap;
+}
+.email-flex  label {
+    color: #fff !important;
+}
+.bg_step_3 .email-flexs > .in-btn input {
+    border-radius: 7px;
+    height: 45px;
+}
+.in-btn {
+    margin-bottom: 20px;
+}
+.email-flex button {
+    min-width: 140px;
+    background: #f26b27;
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: normal !important;
+    height: 47px !important;
+    border: 0px solid;
+    border-radius: 10px !important;
+}
+.email-flex > input {
+    border: 0px solid !important;
+    min-height: 47px !important;
+    box-shadow: none !important;
+}
+.klaviyo_field_group.klaviyo_form_actions.step1 h2 {
+    font-weight: normal;
+    letter-spacing: 0;
+    color: #fff;
+    font-size: 37px;
+    margin: 25px 0;
+    line-height: 1.2;
+}
+.half-sec.dark-bg>.align-center>img {
+	max-width: 80px;
+}
+.half-sec.dark-bg>.align-center>h5 {
+	color: #000000;
+  line-height: 1.4;
+}
+.half-sec.dark-bg>.align-center>h5 strong {
+	font-weight: bold;
+}
+.half-sec.dark-bg>.align-center>h5+h5 {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.half-sec.dark-bg>.align-center>p {
+    margin-bottom: 15px;
+    line-height: 1.4;
+      color: #fff;
+}
+.half-sec.dark-bg>.align-center>p:last-child {
+	margin-bottom: 0;
+}
+.features--heading-large .Rte  h3.klaviyo_helptext {
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 0 !important;
+    font-size: 25px !important;
+  color: #000;
+}
+.pro-flex .block img {
+    margin-bottom: 0;
+    background: #f3f3f4;
+    padding: 30px;
+}
+.pro-flex .block h3 {
+    font-weight: bold;
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 21px;
+    margin: 10px 0;
+    line-height: 1.3;
+  color: #000000;
+  display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.last-sec > h1 {
+    margin: 25px 0;
+    font-weight: normal;
+    letter-spacing: 0 !important;
+    color: #fff;
+    font-size: 34px !important;
+}
+.klaviyo_field_group.klaviyo_form_actions.step2.actives {
+    padding: 40px 0;
+}
+h2.klaviyo_helptext {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+p.max-width {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+svg#TikTok_logo {
+    max-width: 60px;
+    height: auto;
+}
+.klaviyo_field_group .last-sec > h4 {
+    margin: 0;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 19px;
+   font-weight: normal;
+    font-size: 17px !important;
+}
+.last-sec > p {
+    color: #fff;
+}
+.last-sec .check-btn {
+  text-align: left;
+  color: #fff !important;
+}
+.check-btn {
+    text-align: left;
+}
+.last-sec .check-btn * {
+    color: #fff !important;
+    font-weight: bold !important;
+}
+.check-btn input{
+  	display: none;
+}
+.check-btn > label {
+    font-size: 16px;
+    line-height: 1.2 !important;
+    display: inline-block !important;
+    position: relative;
+    padding-left: 25px !important;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500 !important;
+    cursor: pointer;
+}
+.check-btn > label:before {
+    content: "";
+    width: 13px;
+    border: 1px solid #ffff;
+    position: absolute;
+    left: 0;
+    height: 13px;
+    border-radius: 2px;
+    background: #fff;
+    top: 2px;
+}
+.check-btn + .check-btn {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.check-btn input:checked + label::before {
+    content: "✔";
+    font-size: 11px;
+    text-align: center;
+    font-weight: bold;
+  color: #000;
+}
+.last-sec > ul {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.last-sec > ul > li {
+    list-style: none;
+    margin: 0 10px;
+}
+.klaviyo_messages .success_messages  {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+.success_messages svg {
+  max-width: 100px;
+  height: auto;
+}
+.success_messages p.thank_you {
+  font-size: 30px;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 25px;
+}
+.success_messages .thank_you + p {
+    font-size: 20px;
+    text-transform: none !important;
+    max-width: 480px;
+    margin: 40px auto;
+    font-weight: normal;
+}
+img.top_op {
+    max-width: 500px;
+    margin-right: 0;
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    top: 100px;
+}
+img.bottom_op {
+    margin: 0;
+    position: absolute;
+    top: -60px;
+    right: 0;
+    z-index: -1;
+}
+/*.half-sec.bg_step_3 {
+    background-image: url(//cdn.shopify.com/s/files/1/0040/4884/6894/files/illustration-021.png?v=1650867688);
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: 190px auto;
+}*/
+.success_messages > img.top_op {
+    margin-right: -7vw;
+    position: relative;
+    top: -100px;
+}
+  main#main {
+    position: relative;
+}
+  form input#enter-social-media-url.border {
+    border: 2px solid #f00 !important;
+    border-radius: 9px !important;
+}
+   form input#enter-social-media-url {
+    border: 2px solid transparent !important;
+}
+form#email_signup > div {
+    animation: 2s ease 0s 1 normal forwards running fade-out;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+form#email_signup > div.actives {
+    opacity: 1;
+    height: auto;
+  overflow: auto;
+  visibility: visible;
+ animation: 3s ease 0s 1 normal forwards running fade-in;
+}
+  .announce_add_empty {
+    display: none !important;
+}
+  @keyframes fade-out {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0%;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+img.stop_op {
+    max-width: 120px;
+}
+.block >input:checked + label:after {
+    content: "ED";
+}
+.block >input:checked + label {
+    background: #000;
+}
+  .klaviyo_field_group.klaviyo_form_actions.step2 {
+    text-align: center;
+}
+  .click_rads:hover {
+    background: #000;
+}
+.click_rads {
+    margin-top: 40px;
+    text-align: center;
+    cursor: pointer;
+    background: #388e3c;
+    width: auto;
+    display: inline-block;
+    color: #fff;
+    padding: 0 30px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+.click_rads.disabled {
+    cursor: default;
+    pointer-events: none;
+}
+.klaviyo_form_actions.aaa:hover:before {
+    content: "Please input at least 1 URL";
+    position: absolute;
+    top: -20px;
+    font-size: 12px;
+    text-align: center;
+    white-space: pre;
+    left: 0;
+}
+.klaviyo_form_actions.aaa {
+    position: relative;
+}
+@media only screen and (max-width: 767px) {
+
+.email-flexs > .in-btn {
+    width: 100%;
+}
+
+}
+  
+@media only screen and (max-width: 991px) {
+  .steps-4 > div {
+    font-size: 12px;
+        min-width: auto;
+}
+.steps-4 > div span {
+    font-size: 18px;
+}
+.step1 {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+}
+.half-sec {
+    width: 100%;
+}
+.half-sec.dark-bg>.align-center>img {
+    max-width: 96px;
+}
+.klaviyo_field_group.klaviyo_form_actions.step1 h2 {
+    font-size: 22px;
+}
+.half-sec.dark-bg>.align-center>p {
+    font-size: 16px;
+}
+.half-sec.dark-bg>.align-center>h5+h5 {
+    font-size: 15px;
+}
+.email-flex button {
+    padding: 0;
+    width: auto;
+    min-width: 100px;
+}
+.half-sec.dark-bg>.align-center>p:last-child {
+    font-size: 13px;
+}
+.features--heading-large .Rte  h3.klaviyo_helptext {
+    font-size: 24px !important;
+    line-height: 1.4;
+}
+img.top_op {
+    max-width: 90vw;
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 100%;
+    position: absolute;
+    top: 190vw;
+    left: -20vw;
+}
+.klaviyo_field_group.klaviyo_form_actions.step2 {
+    padding: 40px 30px;
+}
+
+.block {
+    width: 100%;
+}
+img.bottom_op {
+    bottom: auto;
+    max-width: 54vw;
+    top: -50px;
+}
+.block + .block {
+    margin-top: 40px;
+}
+.klaviyo_field_group.step3 .half-sec {
+    width: 100%;
+}
+.half-sec.bg_step_3 {
+    background-position: 100% -10px;
+    background-size: 100px auto;
+}
+.last-sec > h1 {
+    font-size: 25px !important;
+}
+.klaviyo_field_group .last-sec > h4 {
+    font-size: 16px !important;
+}
+.klaviyo_messages > img.top_op {
+    top: auto;
+    bottom: -9vh;
+}
+.check-btn > label {
+    font-size: 14px;
+}
+.klaviyo_form_actions {
+    width: auto;
+}
+.klaviyo_messages .success_messages {
+    padding: 80px 40px;
+}
+.success_messages .thank_you + p br {
+    display: none;
+}
+.success_messages svg {
+    max-width: 96px;
+}
+.success_messages p.thank_you {
+    font-size: 20px;
+}
+.success_messages p.thank_you + p {
+    font-size: 16px;
+}
+.success_messages > img.top_op {
+    margin-right: 0 !important;
+    position: static;
+    margin-top: -41px !important;
+    display: inline-block;
+    margin: 0;
+}
+.success_messages img.bottom_op {
+    bottom: 0;
+    width: 14vw;
+}
+.email-flex button {
+    font-size: 14px !important;
+}
+
+
+
+
+
+
+}
+  
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+  .block {
+    width: calc(50% - 15px);
+}
+.block {
+    margin-top: 40px;
+}
+}
+  
+@media only screen and (max-width: 1200px) and (min-width: 992px) {
+.klaviyo_field_group.klaviyo_form_actions.step1 h2 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+.half-sec.dark-bg>.align-center>p {
+    line-height: 1.2;
+    font-size: 14px;
+}
+.half-sec.dark-bg>.align-center>h5 {
+    font-size: 14px;
+  line-height: 1.2;
+}
+.half-sec.dark-bg>.align-center>img {
+    max-width: 60px;
+}
+.half-sec.dark-bg>.align-center>h5+h5 {
+    margin-top: 10px;
+}
+.email-flex > input {
+    min-height: 42px !important;
+}
+.email-flex button {
+    height: 42px !important;
+}
+ul.tab_li>li a {
+    font-size: 11px;
+}
+.tab_cont>div p {
+    line-height: 1.3;
+    font-size: 14px;
+}
+.pro-flex .block h3 {
+    font-size: 18px;
+}
+.block>label {
+    height: 42px;
+    line-height: 42px;
+    font-size: 14px;
+}
+.klaviyo_field_group .last-sec > h4 {
+    line-height: 1.3;
+    font-size: 14px !important;
+}
+.check-btn > label {
+    font-size: 15px;
+}
+svg#TikTok_logo {
+    max-width: 50px;
+    height: auto;
+}
+.last-sec > h1 {
+    margin: 15px 0;
+    font-size: 24px !important;
+}
+
+
+
+
+
+}
+@media only screen and (min-width: 1450px) {  
+.align-center {
+    max-width: 90%;
+}
+.half-sec.dark-bg>.align-center>img {
+    max-width: 6vw;
+}
+.klaviyo_field_group.klaviyo_form_actions.step1 h2 {
+    font-weight: normal;
+    letter-spacing: 0;
+    color: #fff;
+    font-size: 2.5vw;
+    margin: 25px 0;
+    line-height: 1.2;
+}
+.klaviyo_field_group.klaviyo_form_actions.step1 h2 {
+    font-size: 2.5vw;
+    margin: 1.2vw 0;
+}
+.half-sec.dark-bg>.align-center>p,
+.klaviyo_field_group.klaviyo_form_actions.step2 > p,
+.tab_cont>div p,
+.last-sec > p {
+    margin-bottom: 0.9vw;
+    font-size: 1.2vw;
+}
+.email-flexs label {
+    font-size: 1.2vw;
+}
+.email-flex {
+    margin-bottom: 1vw;
+    padding: .2vw;
+    max-width: 30vw;
+    margin-top: 1vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+.email-flex button {
+    min-width: auto;
+    font-size: 1vw !important;
+    height: 3vw !important;
+    padding: 0 3vw !important;
+}
+.email-flex > input{
+    height: 3vw !important;
+    font-size: 1vw !important;
+    padding: 0vw 1vw !important;
+}
+  .email-flexs > .in-btn {
+    width: calc(50% - .7vw);
+}
+.bg_step_3 .email-flexs > .in-btn input {
+    height: 3vw !important;
+    font-size: 1vw !important;
+    padding: 0vw 1vw !important;
+    border-radius: 0.5vw;
+}
+.steps-4 > div:before {
+    height: .3vw;
+    bottom: -.4vw;
+}
+.steps-4 > div {
+    margin: 0 .8vw;
+    opacity: .6;
+    min-width: 6vw;
+    font-size: 1vw;
+}
+.steps-4 > div span {
+    font-size: 1.5vw;
+    top: -.2vw;
+    margin-right: .4vw;
+}
+h2.klaviyo_helptext {
+    margin-bottom: .5vw;
+    font-size: 2vw;
+}
+.klaviyo_field_group.klaviyo_form_actions.step2 > p.max-width {
+    max-width: 58vw;
+    margin-bottom: 2vw;
+}
+.block {
+    width: calc(25% - 1vw);
+}
+.pro-flex .block h3 {
+    font-size: 1.6vw;
+    margin: .6vw 0;
+}
+.wc_product_review_badge .wc_review_badge_inner {
+    padding: .3vw 0;
+}
+.wc_icon_color svg {
+    width: 1vw!important;
+    height: auto;
+}
+.wc_product_review_badge .wc_review_badge_inner .wc_product_review_title {
+    font-size: 1vw !important;
+}
+.block>label{
+    min-width: auto;
+    font-size: 1.2vw !important;
+    height: 3vw !important;
+  	line-height: 3vw !important;
+    padding: 0 3vw;
+}
+.block .wc_product_review_badge {
+    margin-bottom: 1vw;
+}
+.tab_cont>div >p:last-child {
+    margin-bottom: .7vw;
+}
+.klaviyo_field_group.klaviyo_form_actions.step2.actives {
+    padding: 3vw 0;
+}
+.pro-flex .block img {
+    padding: 2vw;
+}
+.last-sec ul li img {
+    height: 1.8vw;
+}
+.last-sec > ul > li {
+    list-style: none;
+    margin: 0 .5vw;
+}
+.last-sec > h1 {
+    margin: 1vw 0;
+    font-size: 2.4vw !important;
+}
+.last-sec {
+    padding: 3vw;
+}
+.check-btn > label{
+    margin-bottom: 0.9vw;
+    font-size: 1.2vw;
+}
+img.stop_op {
+    max-width: 7vw;
+    width: 100%;
+}
+h2.thank_you {
+    font-size: 1.5vw;
+    line-height: 1.2;
+    margin: 1vw 0;
+}
+.success_messages .thank_you + p {
+    font-size: 1vw;
+    max-width: 23vw;
+    margin: 2vw auto;
+}
+.klaviyo_messages .success_messages {
+    max-width: 29vw;
+    padding: 2vw 0;
+}
+
+}
+
+/*@media only screen and (min-width: 1600px) {
+    #shopify-section-{{section.id}} {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+  } */
+</style>
+  <script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+  <script type="text/javascript">
+    
+    
+    $('form input[name="email"]').keyup(function () {
+  var email = $(this).val();
+      var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+      if (re.test(email)) {
+           $('.next').removeClass('disabled');
+         $(".steps-4 > div:nth-child(1)").click(function() {
+        $("form#email_signup > div").removeClass('actives');
+       $("form#email_signup .step1").addClass('actives');      
+	});
+    $(".steps-4 > div:nth-child(2)").click(function() {
+    $("form#email_signup > div").removeClass('actives');
+       $("form#email_signup .step2").addClass('actives');      
+	});
+    
+    $(".steps-4 > div:nth-child(3)").click(function() {
+    $("form#email_signup > div").removeClass('actives');
+       $("form#email_signup .step3").addClass('actives');      
+	});
+      } else {
+          $('.next').addClass('disabled');
+        
+      }
+});
+    
+    
+    
+    
+    var max = 1;
+jQuery('input[type=checkbox].click_rad').click(function(){
+                var n = jQuery('input.click_rad:checked').length;
+ 
+   
+                 if(n === 1 ){
+                    // here your code
+                    $('.steps-4 > div:nth-child(3)').removeClass('disabled');
+   
+                           // this.checked = true;     
+                     $('.click_rads').removeClass('disabled');
+                 } else if (n >1) {
+                   this.checked = false;
+                    alert('You can select only 1 Product');
+                 } else  {
+                   this.checked = false;
+                   $('.click_rads').addClass('disabled');
+                   $('.steps-4 > div:nth-child(3)').addClass('disabled');
+                 }
+            });
+    $('.click_rads').on("click", function(e) {
+      e.preventDefault();
+         $('html,body').animate({
+        scrollTop: $("#MainContent").offset().top},
+        'slow');
+			$(".step2").removeClass('actives');
+      $(".step3").addClass('actives');
+	}); 
+      $('.next').on("click", function(e) {
+      e.preventDefault();
+         $('html,body').animate({
+        scrollTop: $("#MainContent").offset().top},
+        'slow');
+			$(".step1").removeClass('actives');
+      $(".step2").addClass('actives');
+	}); 
+    
+    
+    $("button.klaviyo_submit_button").click(function() {
+    $('html,body').animate({
+        scrollTop: $("#MainContent").offset().top},
+        'slow');
+      setTimeout( function(){
+       $(".step3").removeClass('actives');
+      $(".klaviyo_messages.success_message").addClass('actives');
+      },1100);
+	});
+ 
+   
+//     var step = 1;
+//     $(".next, .click_rads").on("click", function(e) {
+//       e.preventDefault();
+//       $('html,body').animate({
+//         scrollTop: $("#MainContent").offset().top},
+//         'slow');
+      
+//       //setTimeout( function(){
+//       $(".step" + step).removeClass('actives');
+//       step+= 1;
+//       $(".step" + step).addClass('actives')
+//       //}, 5000);
+//     });
+    
+    
+    $('form .in-btn  > input').keyup(function () {
+  var email = $(this).val();
+      
+     
+      if(email.length<3){
+       $('button.klaviyo_submit_button').addClass('disabled');
+         $('.email-flex .klaviyo_form_actions').addClass('aaa');
+        $('form .in-btn  > input').addClass('border');
+      }else{
+         $('button.klaviyo_submit_button').removeClass('disabled');
+         $('form .in-btn  > input').removeClass('border');
+       $('.email-flex .klaviyo_form_actions').removeClass('aaa');
+      }
+});
+   
+    KlaviyoSubscribe.attachToForms('#email_signup', {
+      hide_form_on_success: true,
+   	custom_success_message: true,
+      extra_properties: {
+        $source: '$embed',
+        $method_type: "Klaviyo Form",
+        $method_id: 'embed',
+        $consent_version: 'Embed default text'
+      }
+    });
+  </script>
+    
+
+
+
+{% schema %}
+  {
+    "name": "Ambassador",
+    "settings": [],
+"blocks": [
+    {
+      "type": "product",
+      "name": "Product Data",
+      "settings": [
+       {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "richtext",
+          "id": "richtext",
+          "label": "Description"
+        }
+		
+        
+      ]
+    }
+    
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<!--End_AZEXO_sections/ambassdor.liquid_Section-->

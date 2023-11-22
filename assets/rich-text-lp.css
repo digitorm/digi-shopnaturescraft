@@ -1,0 +1,38 @@
+.rich-text__blocks h2.h1 {
+  font-family: "Duke Charming";
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  color: #ffffff;
+}
+.rich-text__text.rte p {
+  font-family: "Bw Modelica";
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+  color: #ffffff;
+}
+.rich-text__text.rte {
+/*   padding-top: 3rem; */
+}
+@media (min-width: 767px) {
+/*   .rich-text__blocks h2.h1 {
+    font-size: 60px;
+    line-height: 60px;
+  }
+  .rich-text__text.rte p {
+    font-size: 24px;
+    line-height: 40px;
+    letter-spacing: 0.25px;
+  } */
+}
+
+@media (max-width: 765px) {
+  .rich-text__blocks h2.h1 {
+    font-size: 35px;
+    line-height: 45px;
+  }
+  .rich-text__text.rte p {
+    font-size: 22px;
+  }
+}

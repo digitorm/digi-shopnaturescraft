@@ -1,0 +1,72 @@
+<!--AZEXO_sections/main-collection-banner.liquid_Section-->{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+
+{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="collection-hero">
+  
+  
+  {%- if section.settings.image != blank -%}
+      <div class="banner banner--medium banner--adapt banner--desktop-transparent">
+  <div class="banner__media media">
+  <img src="{{ section.settings.image | img_url: '1920x' }}"
+         
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >  
+  </div>
+<div class="collection__content collection-ban banner__content--center page-width">
+    <div class="banner__box color-accent-1">
+      <h2 class="banner__heading h1">
+              <span>{{ section.settings.title }}</span>
+            </h2>
+    
+              {%- if section.settings.html -%}
+          <div class="collect__text">{{ section.settings.html }}</div>
+      {%- endif -%}
+      
+      </div>
+  </div>
+</div>
+        
+        
+ 
+  
+    {%- endif -%}
+  
+  
+</div>
+
+<style>
+
+  
+  
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-banner.name",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-collection-banner.settings.paragraph.content"
+    },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon"
+        },
+        {
+          "type": "html",
+          "id": "html",
+          "label": "Insert HTML"
+        }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/main-collection-banner.liquid_Section-->

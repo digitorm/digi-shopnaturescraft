@@ -1,0 +1,406 @@
+{{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'section-rich-text.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}</noscript>
+<div class="black_friday_bg">
+  {% comment %}
+    <div class="page-width" >
+      <div class="rich-text color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width{% endif %}" style="padding: 0;margin-bottom: 0;">
+        <div class="rich-text__blocks">
+                <h2 class="{{ section.settings.heading_size }}" {{ section.shopify_attributes }}>{{ section.settings.heading | escape }}</h2>
+                <div class="rich-text__text rte" {{ section.shopify_attributes }}>{{ section.settings.text }}</div>
+        </div>
+      </div>
+    </div>
+  {% endcomment %}
+  <div class="pro_grid">
+    {%- for block in section.blocks -%}
+      <div class="image-with-text {% if block.settings.full_width %}image-with-text--full-width{% else %}page-width{% endif %} color-scheme-{{ block.settings.color_scheme }}">
+      {%- if block.settings.button_link != blank and block.settings.button_label == blank -%}
+                <a class="full-link" href="{{ block.settings.button_link }}"}></a>
+        {%- endif -%}  
+      <div
+          class="image-with-text__grid color-{{ section.settings.color_scheme }} grid grid--gapless grid--1-col grid--2-col-tablet gradient{% if block.settings.layout == 'text_first' %} image-with-text__grid--reverse{% endif %}"
+          style="background:{{ block.settings.background_color }}; border-radius: 30px;"
+        >
+          <div class="grid__item">
+            <div
+              class="image-with-text__media img_contain image-with-text__media--{{ block.settings.height }} image__round {% if block.settings.image != blank %}media{% else %}image-with-text__media--placeholder placeholder{% endif %}"
+              {% if block.settings.height == 'adapt' and block.settings.image != blank %}
+                style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
+              {% endif %}
+            >
+              {%- if block.settings.image != blank -%}
+                <img
+                  srcset="
+                    {%- if block.settings.image.width >= 165 -%}{{ block.settings.image | img_url: '165x' }} 165w,{%- endif -%}
+                    {%- if block.settings.image.width >= 360 -%}{{ block.settings.image | img_url: '360x' }} 360w,{%- endif -%}
+                    {%- if block.settings.image.width >= 535 -%}{{ block.settings.image | img_url: '535x' }} 535w,{%- endif -%}
+                    {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                    {%- if block.settings.image.width >= 1070 -%}{{ block.settings.image | img_url: '1070x' }} 1070w,{%- endif -%}
+                    {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                    {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w
+                  "
+                  src="{{ block.settings.image | img_url: '1500x' }}"
+                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="grid__item">
+            <div class="image-with-text__content image-with-text__content--{{ block.settings.height }}">
+              <h2 class="image-with-text__heading h1" {{ block.shopify_attributes }}>
+                {{ block.settings.heading | escape }}
+              </h2>
+              <div class="image-with-text__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+              {%- if block.settings.button_label != blank -%}
+                <a
+                  {% if block.settings.button_link != blank %}
+                    href="{{ block.settings.button_link }}"
+                  {% endif %}
+                  class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary btn__friday {% endif %}"
+                  {% if block.settings.button_link == blank %}
+                    aria-disabled="true"
+                  {% endif %}
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.button_label | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+<style>
+a.full-link:empty {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    left: 0;
+}
+        .pro_grid > div {
+          position: relative;
+      }
+        h2.h2 {
+          font-family: inherit;
+      }
+        .banner__box.color-icon__box h1 {
+          color: #ffffff;
+      }
+        .pro_grid > div:nth-child(1):before {
+          background-image: url(https://cdn.shopify.com/s/files/1/0444/6512/7578/files/leaf_3_1.png?v=1664522288);
+          background-repeat: no-repeat;
+          position: absolute;
+          width: 170px;
+          height: 170px;
+          right: 0;
+          top: -80px;
+          content: "";
+          background-size: contain;
+          z-index: 0;
+      }
+        .black_friday_bg{
+           background-image: url(https://cdn.shopify.com/s/files/1/0444/6512/7578/files/blabk_bg.png?v=1669098841);
+         background-size: contain;
+
+        }
+    /*     .image-with-text__media.img_contain.image-with-text__media--adapt.image__round.media img {
+          border-radius: 50%;
+
+      } */
+        a.button.button--primary.btn__friday {
+          background: #000;
+          color: #fff;
+          opacity: 1;
+          border: 1px solid #000;
+      }
+        a.button.button--primary.btn__friday:hover {
+          background: #f26b27;
+          opacity: 1;
+          border: 1px solid #f26b27;
+      }
+        h2.image-with-text__heading.h1, .image-with-text__text.rte p {
+          color: #ffffff;
+        }
+       .pro_grid {
+          padding: 5rem 0;
+      }
+  /*     .pro_grid > div:nth-child(1n+1):before {
+          background-image: url(https://cdn.shopify.com/s/files/1/0444/6512/7578/files/leaf_2_1_1.png?v=1669099608);
+          background-repeat: no-repeat;
+          position: absolute;
+          width: 240px;
+          height: 260px;
+          left: -30px;
+          bottom: -71px;
+          top: auto;
+          content: "";
+          background-size: contain;
+          z-index: 2;
+      } */
+/*         .image-with-text__media.img_contain.image-with-text__media--adapt.image__round.media img {
+          max-width: 70%;
+          height: auto;
+         border: 10px solid #ffffff;
+          margin-top: 15%;
+          margin-left: 15%;
+      } */
+/*   .pro_grid {
+    position: relative;
+    overflow: hidden;
+} */
+      .pro_grid > div:nth-child(1n):before {
+          background-image: url(https://cdn.shopify.com/s/files/1/0444/6512/7578/files/leaf-1-_3_-11.png?v=1669099868);
+          background-repeat: no-repeat;
+          position: absolute;
+          width: 160px;
+          height: 190px;
+          right: 30px;
+          left: auto;
+          bottom: -90px;
+          top: auto;
+          content: "";
+          background-size: contain;
+          z-index: 2;
+      }
+        .pro_grid > div > div {
+          position: relative;
+          z-index: 1;
+      }
+        .banner__text span p {
+          color: #f26b27;
+/*           font-size: 30px; */
+          font-weight: 500 ;
+          font-family: 'DUKE CHARMING';
+      }
+      @media screen and (min-width: 990px){
+      div#shopify-section-{{section.id}} .image-with-text__content {
+          padding-left: 4rem;
+         right: 4rem;
+      }
+      }
+      @media screen and (max-width: 989px){
+      div#shopify-section-{{section.id}} .rich-text__blocks {
+          max-width: 100%;
+      }
+      }
+      @media screen and (max-width: 767px){
+      #shopify-section-{{section.id}} .image-with-text .grid {
+          flex-direction: column;
+      }
+      #shopify-section-{{section.id}} a.button.button--primary {
+          margin-left: auto;
+          margin-right: auto;
+      }
+      .pro_grid > div:nth-child(1):before, .pro_grid > div:nth-child(3):before, .pro_grid > div:nth-child(5):before {
+          width: 90px;
+          height: 90px;
+          bottom: -40px;
+          right: 0;
+      }
+        body .image-with-text__content {
+          padding: 4rem 20px;
+      }
+      .pro_grid > div:nth-child(2):before, .pro_grid > div:nth-child(4):before, .pro_grid > div:nth-child(6):before  {
+          width: 150px;
+          height: 160px;
+      }
+      /*    .pro_grid > div:nth-child(3):before {
+          width: 100px;
+          height: 100px;
+          bottom: -30px;
+      } */
+      .image-with-text__media.img_contain.image-with-text__media--adapt.image__round.media img {
+          max-width: 90%;
+          margin-top: 10%;
+        margin-left: 5%;
+      }
+       }
+
+      @media only screen and (max-width: 1080px) and (min-width: 768px){
+      body .image-with-text__grid--reverse .image-with-text__content.image-with-text__content--adapt {
+          padding-left: 4rem;
+          padding-right: 4rem;
+          padding-top: 4rem;
+      }
+      .pro_grid > div:nth-child(1n+1):before {
+          height: 160px;
+      }
+      .pro_grid > div:nth-child(2n+1):before {
+          width: 120px;
+          height: 160px;
+          right: 10px;
+      }
+        }
+</style>
+{% schema %}
+{
+  "name": "Product section LP",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+     {
+          "type": "text",
+          "id": "heading",
+          "default": "Talk about your brand",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__3.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label"
+        },
+    {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.rich-text.settings.color_scheme.options__1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.rich-text.settings.color_scheme.options__2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.rich-text.settings.color_scheme.options__3.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.rich-text.settings.color_scheme.options__4.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.rich-text.settings.color_scheme.options__5.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.rich-text.settings.color_scheme.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.image-with-text.blocks.heading.name",
+      "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.image-with-text.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.image-with-text.settings.height.options__1.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.image-with-text.settings.height.options__2.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image-with-text.settings.height.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.image-with-text.settings.height.label"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "t:sections.image-with-text.settings.layout.options__1.label"
+        },
+        {
+          "value": "text_first",
+          "label": "t:sections.image-with-text.settings.layout.options__2.label"
+        }
+      ],
+      "default": "image_first",
+      "label": "t:sections.image-with-text.settings.layout.label",
+      "info": "t:sections.image-with-text.settings.layout.info"
+    },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Image with text",
+          "label": "t:sections.image-with-text.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+          "label": "t:sections.image-with-text.blocks.text.settings.text.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:sections.image-with-text.blocks.button.settings.button_label.label",
+          "info": "t:sections.image-with-text.blocks.button.settings.button_label.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.image-with-text.blocks.button.settings.button_link.label"
+        },
+        {
+  "type": "color",
+  "id": "background_color",
+  "label": "Background color",
+  "default": "#ff0000"
+}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product section LP",
+      "blocks": [
+        {
+          "type": "heading"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

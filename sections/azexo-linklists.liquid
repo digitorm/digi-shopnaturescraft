@@ -1,0 +1,31 @@
+<!--AZEXO_sections/azexo-linklists.liquid_Section-->{ 
+{% for menu in linklists %} 
+	"{{ menu.handle }}": {
+            "title": "{{ menu.title }}",
+            "links": [
+                {% for link in linklists[menu.handle].links %} 
+                    {
+                        "title": "{{ link.title }}",
+                        "url": "{{ link.url }}",
+                        "links": [
+                            {% for childlink in link.links %} 
+                                {
+                                    "title": "{{ childlink.title }}",
+                                    "url": "{{ childlink.url }}",
+                                    "links": [
+                                        {% for grandchildlink in childlink.links %} 
+                                            {
+                                                "title": "{{ grandchildlink.title }}",
+                                                "url": "{{ grandchildlink.url }}"
+                                            }{% if forloop.last == false %},{% endif %} 
+                                        {% endfor %}
+                                    ]
+                                }{% if forloop.last == false %},{% endif %} 
+                            {% endfor %}
+                        ]
+                    }{% if forloop.last == false %},{% endif %} 
+                {% endfor %}
+            ]
+        }{% if forloop.last == false %},{% endif %} 
+{% endfor %} 
+}<!--End_AZEXO_sections/azexo-linklists.liquid_Section-->

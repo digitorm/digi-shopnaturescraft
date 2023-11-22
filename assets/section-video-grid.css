@@ -1,0 +1,94 @@
+.video__main_container {
+   /* width: 100%;
+    display: inline-flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-left: -2rem;*/
+}
+.video__main_container .slick-list {
+    overflow: visible;
+}
+.video__one{
+    width: calc(20% - 2rem);
+    
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-left: 0;
+  max-width: 100%
+}
+li.video__one.grid__item deferred-media.video-section__media.deferred-media {
+   /* min-height: 310px;*/
+}
+ .fancybox-bg:empty {
+    display: block;
+}
+.video-grid {
+    background-image: url('https://cdn.shopify.com/s/files/1/0554/0246/3371/files/Rectangle_351.png?v=1637052041');
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+  background-size: cover;
+}
+
+.deferred-media__poster-button.motion-reduce {
+	   background: transparent;
+	}
+.video__container {
+    width: 100%;
+    display: flex;
+    background: #ffecdc;
+    justify-content: space-evenly;
+    border-radius: 0 0 10px 10px;
+}
+.video__product__image img {
+    height: 40px;
+    width: auto;
+}
+.video__container {
+    padding: 25px 22px 19px 22px;
+}
+.product_header {
+    font-weight: normal;
+  font-family: "BWMODELICA BOLD";
+	}
+.video__product__image {
+    max-width: 40px;
+    width: 100%;
+}
+.video__product__data {
+    line-height: 21px;
+    width: 100%;
+   font-weight: normal;
+  font-family: "BWMODELICA-MEDIUM";
+    font-size: 14px;
+}
+.video__sub__text, .title {
+    text-align: center;
+}
+.video-section.page-width {
+    padding-top: 10.5rem;
+    padding-bottom: 5rem;
+}
+.video__sub__text p img {
+    position: relative;
+    top: 2px;
+    margin-left: 5px;
+}
+.video__sub__text p {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.video-section h1 {
+    text-align: center;
+    margin: 0 0 5rem;
+}
+.video__sub__text {
+    margin-bottom: 48px;
+}
+@media only screen and (max-width:767px) {  
+.video__one {
+  width: calc(50% - 20px);
+}
+}

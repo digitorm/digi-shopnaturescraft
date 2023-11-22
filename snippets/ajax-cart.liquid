@@ -1,0 +1,67 @@
+<!--ajax cart modal-->
+<div class="ajax-cart__modal js-ajax-cart-modal">
+
+    <div class="ajax-cart-modal">
+
+        <!--ajax cart modal close-->
+        <div class="ajax-cart-modal__close js-ajax-cart-modal-close">
+            {% include 'icon-close' %}
+        </div>
+        <!--end ajax cart modal close-->
+
+        <!--ajax cart modal content-->
+        <div class="ajax-cart-modal__content js-ajax-cart-modal-content"></div>
+        <!--end ajax cart modal content-->
+
+    </div>
+
+</div>
+<!--end ajax cart modal-->
+
+<!--ajax cart drawer-->
+<div class="ajax-cart__drawer js-ajax-cart-drawer">
+
+    <div class="ajax-cart-drawer">
+
+        <!--ajax cart drawer close-->
+        <div class="ajax-cart-drawer__close js-ajax-cart-drawer-close">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="10" cy="10" r="10" fill="#C4C4C4"/>
+<path d="M13.59 5L10 8.59L6.41 5L5 6.41L8.59 10L5 13.59L6.41 15L10 11.41L13.59 15L15 13.59L11.41 10L15 6.41L13.59 5Z" fill="#F4F4F4"/>
+</svg>
+
+        </div>
+        <!--end ajax cart drawer close-->
+      <div class="inline-title"><h2>Your Cart</h2> <div class="itm">(<span class="itms"></span> <b>Item</b>)</div></div>
+        <!--ajax cart drawer content-->
+        <div class="ajax-cart-drawer__content js-ajax-cart-drawer-content"></div>
+        <!--end ajax cart drawer content-->
+
+        <!--ajax cart drawer buttons-->
+        <div class="ajax-cart-drawer__buttons">
+
+           <div class="free-ship">
+                <span><svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 0.75V2H8.125V11.375H11.9725C12.2513 10.3006 13.2175 9.5 14.375 9.5C15.5325 9.5 16.4987 10.3006 16.7775 11.375H17.5V8.25H18.75V12.625H16.7775C16.4987 13.6994 15.5325 14.5 14.375 14.5C13.2175 14.5 12.2513 13.6994 11.9725 12.625H6.7775C6.49875 13.6994 5.5325 14.5 4.375 14.5C3.2175 14.5 2.25125 13.6994 1.9725 12.625H0V7.5275L0.0393753 7.42938L1.28938 3.67938L1.425 3.25H6.875V0.75H20ZM19.375 3.25V4.5H13.75V3.25H19.375ZM6.875 4.5H2.32438L1.25 7.70312V11.375H1.9725C2.25125 10.3006 3.2175 9.5 4.375 9.5C5.5325 9.5 6.49875 10.3006 6.7775 11.375H6.875V4.5ZM18.75 5.75V7H15V5.75H18.75ZM14.375 10.75C13.6769 10.75 13.125 11.3019 13.125 12C13.125 12.6981 13.6769 13.25 14.375 13.25C15.0731 13.25 15.625 12.6981 15.625 12C15.625 11.3019 15.0731 10.75 14.375 10.75ZM4.375 10.75C3.67687 10.75 3.125 11.3019 3.125 12C3.125 12.6981 3.67687 13.25 4.375 13.25C5.07312 13.25 5.625 12.6981 5.625 12C5.625 11.3019 5.07312 10.75 4.375 10.75Z" fill="black"/>
+</svg>
+Free shipping on all orders over $30</span>
+            </div>
+
+            <a href="/checkout/" class="button button--black button--full-width js-button js-ajax-checkout-button">
+              <span>Proceed to checkout <span class="to">{{ cart.total_price | money_with_currency }}</span></span>
+            </a>
+          <a href="/cart/" class="button button--colo button--full-width js-button ">
+              <span>View Cart</span>
+            </a>
+          <p class="cal-ship">*Shipping and Taxes will be calculated at checkout</p>
+        </div>
+        <!--end ajax cart drawer buttons-->
+
+    </div>
+
+</div>
+<!--end ajax cart drawer-->
+
+<!--ajax cart overlay-->
+<div class="ajax-cart__overlay js-ajax-cart-overlay"></div>
+<!--end ajax cart overlay-->

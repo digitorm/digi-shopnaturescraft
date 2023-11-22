@@ -1,0 +1,387 @@
+<!--AZEXO_sections/main-collection-product-grid.liquid_Section-->{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+{% render 'menu-icon' %}
+<link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+  {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+
+  <div class="page-width" id="main-collection-filters" data-id="{{ section.id }}">
+    {% render 'facets', results: collection, enable_filtering: section.settings.enable_filtering, enable_sorting: section.settings.enable_sorting, collapse_on_larger_devices: section.settings.collapse_on_larger_devices %}
+  </div>
+{%- endif -%}
+
+<div id="ProductGridContainer">
+  {%- paginate collection.products by section.settings.products_per_page -%}
+   
+      <div class="collection page-width">
+        <div class="loading-overlay gradient"></div>
+        
+        <div class="grid-sidebar">
+<div class="filter">
+  <div class="filter-mob">Filter <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 0.999896L4.84524 4.42847L8.69047 0.999895" stroke="#388E3C" stroke-width="2"/>
+</svg>
+</div>
+    <div class="sb-menu">
+       
+      <div class="filter-close">Shop by <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 0.999896L4.84524 4.42847L8.69047 0.999895" stroke="#388E3C" stroke-width="2"/>
+</svg>
+</div>
+      
+      <div class="tabs-nav">
+    <span class="tab-active"><a href="#tab-1" rel="nofollow">{{ section.settings.title1 }}</a>
+    </span>
+    <span class=""><a href="#tab-2" rel="nofollow">{{ section.settings.title2 }}</a>
+    </span>
+</div>
+<div class="tabs-stage">
+    <div id="tab-1" style="display: block;">
+             
+{% if section.settings.title1  != blank %}<p class="side-title"> {{ section.settings.title1 }}</p> {% endif %}
+      <ul class="categories-menu">
+                      {%- for link in section.settings.menu.links -%}
+                        <li>
+                          {% if link.url contains '#' %}
+                          <span class="cat-men">{{ link.title }}</span>
+                          {%else%}
+                          <a href="{{ link.url }}"  class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                            {{ link.title }}
+                          </a>
+                          {% endif %}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+      
+    </div>
+    <div id="tab-2" style="display: none;">
+         {% if section.settings.title2  != blank %}<p class="side-title"> {{ section.settings.title2 }}</p> {% endif %}
+      
+      <ul class="categories-menu">
+{% for link in linklists[section.settings.menu2].links %}
+  <li>
+    <a href="{{ link.url }}">  
+    {% if link.type == "collection_link" %}
+    {{ link.object.description }}
+    {% endif %}
+    {{ link.title }}
+    </a>
+  </li>
+{% endfor %}
+</ul>
+      
+     
+    </div>
+</div>
+      
+
+      
+     
+
+     
+    </div>
+  </div>
+          <div class="pro-sec">
+             
+            
+        <ul id="product-grid" data-id="{{ section.id }}" class="
+          grid grid--2-col negative-margin product-grid {% if collection.products_count == 4 %} grid--4-col-desktop{% else %} grid--3-col-tablet grid--one-third-max grid--4-col-desktop grid--quarter-max{% endif %}
+         ">
+          {%- if collection.products.size == 0 -%}
+    
+        <div class="loading-overlay gradient"></div>
+        <div class="title-wrapper center">
+          <h2 class="title title--primary">
+            {{ 'sections.collection_template.empty' | t }}<br>
+          
+          </h2>
+        </div>
+      
+    {%- else -%}
+            
+          {%- for product in collection.products -%}
+            <li class="grid__item">
+              {% render 'product-card',
+                product_card_product: product,
+                media_size: section.settings.image_ratio,
+                show_secondary_image: section.settings.show_secondary_image,
+                add_image_padding: section.settings.add_image_padding,
+                show_vendor: section.settings.show_vendor,
+                show_image_outline: section.settings.show_image_outline,
+                show_rating: section.settings.show_rating
+              %}
+            </li>
+          {%- endfor -%}
+           {%- endif -%}
+        </ul>
+
+       
+        
+        
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate: paginate, anchor: '' %}
+        {%- endif -%}
+          </div>
+        </div>
+      </div>
+    
+  {%- endpaginate -%}
+</div>
+
+
+<script>
+  
+$(document).ready(function() {
+                 
+// From http://learn.shayhowe.com/advanced-html-css/jquery
+
+// Change tab class and display content
+$('.tabs-nav a').on('click', function (event) {
+    event.preventDefault();
+    
+    $('.tab-active').removeClass('tab-active');
+    $(this).parent().addClass('tab-active');
+    $('.tabs-stage > div').hide();
+    $($(this).attr('href')).show();
+});
+$('.sb-menu > div li a').click(function(e) {
+    e.preventDefault(); //prevent the link from being followed
+    $('.sb-menu > div li a').removeClass('selected');
+    $(this).addClass('selected');
+});
+                                  
+$('.tabs-nav a:first').trigger('click'); // Default
+  
+  
+  $(document).on("click", ".nxt, .aa", function(e){
+  
+ 
+
+        e.preventDefault();
+     var abc = $(this).attr('href');
+      
+    
+        var getUrl = "{{ shop.url }}"+abc;
+
+        $.ajax({
+             url: getUrl,
+             type:'GET',
+             success: function(data){
+                // console.log(getUrl);
+                $("#product-grid").html($(data).find('#product-grid').html());
+				$(".pagination__list").empty().html($(data).find(".pagination__list").html());
+                
+                 $('html, body').animate({
+                        scrollTop: $("#product-grid").offset().top - 50
+                 }, 500);
+				rivyo_badge_update_fun();
+             }
+        });
+   return false;
+    });
+  
+  
+  $(document).on("click", ".categories-menu a", function(e){
+       
+   
+        e.preventDefault();
+      
+      
+      var abcs = $(this).attr('href');
+      
+      
+     // alert (abcs);
+       
+        var getUrl = "{{ shop.url }}"+abcs;
+
+        $.ajax({
+             url: getUrl,
+             type:'GET',
+            success: function(data){
+              //console.log(getUrl);
+
+              var pages = Math.ceil('{{ collection.all_products_count }}' / {{ section.settings.products_per_page }});
+              var maxCount = pages + 1;
+              $("#product-grid").html($(data).find('#product-grid').html());
+
+              $(".pagination__list").empty().html($(data).find(".pagination__list").html());
+              $('html, body').animate({
+                scrollTop: $("#product-grid").offset().top - 50
+              }, 500);
+              rivyo_badge_update_fun();
+            }	
+        });
+  // history.pushState({
+        //        page: getUrl
+         //   }, null, getUrl);
+  
+ return false;
+
+    });
+   
+   function rivyo_badge_update_fun(){
+    if($('.wc_product_review_badge').length > 0){
+      var ajax_shop_badge_url = $('#th_shop_url').attr('content'), ajax_product_handle = new Array();
+      if(typeof ajax_shop_badge_url != 'undefined'){
+        ajax_shop_badge_url = ajax_shop_badge_url.replace(/^https?\:\/\//i, '');
+      }
+      $('.wc_product_review_badge').each(function(idx, val){
+        ajax_product_handle.push($(this).data('handle'));
+        if(idx === ($('.wc_product_review_badge').length - 1)){
+          $.ajax({
+            url: '//thimatic-apps.com/product_review/get_review_rating_update.php',
+            type: 'post',
+            dataType: 'json',
+            data: {shop: ajax_shop_badge_url, product_handles: ajax_product_handle},
+            success: function(result){
+              $('.wc_product_review_badge').html(result.empty.html);
+              $.each(result, function(key, value){
+                $('.wc_product_review_badge[data-handle="'+key+'"]').html(value.html);
+              });
+            },
+            error: function(XMLHttpRequest, textStatus){
+              console.log(XMLHttpRequest);
+            }
+          });
+        }
+      });
+    }
+  }      
+});
+  
+  
+</script>
+
+<style>.card-inner span.button_product_info a svg * {
+    fill: #fff;
+}
+ .collection-hero {
+    position: relative;
+    z-index: 1;
+} 
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-product-grid.name",
+  "class": "spaced-section collection-grid-section",
+  "settings": [
+	{
+          "type": "text",
+          "id": "title1",
+          "label": "Label"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Category Menu"
+        },
+{
+          "type": "text",
+          "id": "title2",
+          "label": "Label 2"
+        },
+        {
+          "type": "link_list",
+          "id": "menu2",
+          "label": "Health Interest Menu"
+        },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 16,
+      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__3.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.main-collection-product-grid.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_outline",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.show_image_outline.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
+      "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
+      "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "collapse_on_larger_devices",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.collapse_on_larger_devices.label"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/main-collection-product-grid.liquid_Section-->

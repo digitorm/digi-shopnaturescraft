@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Support</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  .input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  .input-group.inline {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .input-group.inline input,
+  .input-group.inline textarea {
+    flex: 1;
+  }
+  .input-group textarea {
+    resize: vertical;
+    background-color: lightgreen;
+  }
+  .attach-file-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .attach-file-link {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+    font-size: 14px;
+    background-color: lightgreen;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  .submit-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="form-container">
+  <form action="#" method="post" enctype="multipart/form-data" id="custom-support-form">
+    <div class="input-group">
+      <label for="subject">Subject *</label>
+      <input type="text" name="contact[subject]" id="subject" required>
+    </div>
+    <div class="input-group">
+      <label for="description">Support Details *</label>
+      <textarea name="contact[description]" id="description" required></textarea>
+    </div>
+    <div class="input-group">
+      <label for="file">Attach a file</label>
+      <input type="file" name="contact[file]" id="file">
+    </div>
+    <div class="input-group inline">
+      <label for="productName">Product Name</label>
+      <input type="text" name="contact[productName]" id="productName">
+      <label for="orderId">Order Id</label>
+      <input type="text" name="contact[orderId]" id="orderId">
+    </div>
+    <div class="input-group">
+      <label for="priority">Priority</label>
+      <select name="contact[priority]" id="priority">
+        <option value="low">Low</option>
+        <option value="normal">Normal</option>
+        <option value="high">High</option>
+        <option value="urgent">Urgent</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="email">Email *</label>
+      <input type="email" name="contact[email]" id="email" required>
+    </div>
+    <div class="input-group">
+      <label for="fullName">Full Name</label>
+      <input type="text" name="contact[fullName]" id="fullName">
+    </div>
+    <input type="submit" value="Create">
+  </form>
+  <div id="success-message">
+    <p>Thank you for your inquiry! Expect to hear from us within 1 business day.</p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('custom-support-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Implement your form submission logic here
+    document.getElementById('custom-support-form').style.display = 'none';
+    document.getElementById('success-message').style.display = 'block';
+  });
+</script>
+</body>
+</html>

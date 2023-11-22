@@ -1,0 +1,218 @@
+{{ 'video-section.css' | asset_url | stylesheet_tag }}
+{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+{{'section-video-grid.css' | asset_url | stylesheet_tag }}
+<div class="video-section{% unless section.settings.full_width %} page-width{% endunless %}">
+  <div{% if section.settings.full_width %} class="page-width"{% endif %}>
+    <h1>{{ section.settings.heading }}</h1>
+  </div>
+  <div class="video__sub__text">
+   {{section.settings.sub_text }}
+  </div>
+  <ul class="video__main_container grid product-grid negative-margin--small">
+  {% comment %}video 1  {% endcomment %}
+    
+{%- for block in section.blocks -%}
+    
+  <li class="video__one grid__item">
+  <noscript>
+    <div class="video-section__media"
+      {% if block.settings.cover_image_one != blank %} style="padding-bottom: {{ 1 | divided_by: block.settings.cover_image_one.aspect_ratio | times: 100 }}%;"{% endif %}
+    >
+      <a  href="{{ block.settings.video_url_one }}" class="video-section__poster media media--transparent media--landscape{% if block.settings.cover_image_one == blank %} video-section__placeholder{% endif %}">
+        {%- if block.settings.cover_image_one != blank -%}
+          <img
+            srcset="{%- if block.settings.cover_image_one.width >= 375 -%}{{ block.settings.cover_image_one | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if block.settings.cover_image_one.width >= 750 -%}{{ block.settings.cover_image_one | img_url: '750x' }} 750w,{%- endif -%}
+              {%- if block.settings.cover_image_one.width >= 1100 -%}{{ block.settings.cover_image_one | img_url: '1100x' }} 1100w,{%- endif -%}
+              {%- if block.settings.cover_image_one.width >= 1500 -%}{{ block.settings.cover_image_one | img_url: '1500x' }} 1500w,{%- endif -%}
+              {%- if block.settings.cover_image_one.width >= 1780 -%}{{ block.settings.cover_image_one | img_url: '1780x' }} 1780w,{%- endif -%}
+              {%- if block.settings.cover_image_one.width >= 2000 -%}{{ block.settings.cover_image_one | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if block.settings.cover_image_one.width >= 3000 -%}{{ block.settings.cover_image_one | img_url: '3000x' }} 3000w,{%- endif -%}
+              {%- if block.settings.cover_image_one.width >= 3840 -%}{{ block.settings.cover_image_one | img_url: '3840x' }} 3840w,{%- endif -%}
+              {{ block.settings.cover_image_one | img_url: 'master' }} {{ block.settings.cover_image_one.width }}w"
+            src="{{ block.settings.cover_image_one | img_url: '1920x' }}"
+            sizes="{% if block.settings.full_width %}100vw{% else %}(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw{% endif %}"
+            alt="{{ 'sections.video.load_video' | t: description: block.settings.description | escape }}"
+            loading="lazy"
+            width="{{ block.settings.cover_image_one.width }}"
+            height="{{ block.settings.cover_image_one.height }}"
+          >
+         {%- elsif block.settings.video_url_one.type == 'youtube' -%}
+          <img src="//img.youtube.com/vi/{{ block.settings.video_url_one.id }}/0.jpg" sizes="(min-width: 1520px) 1420px, (min-width: 750px) calc(100vw - 10rem), 100vw" alt="Load video: " loading="lazy" width="267" height="275">
+        
+        {%- else -%}
+          {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        {%- endif -%}
+      </a>
+    </div>
+  </noscript>
+  <deferred-media class="video-section__media deferred-media no-js-hidden" data-media-id="{{ block.settings.video_url_one.id }}"
+    {% if block.settings.cover_image_one != blank %} style="padding-bottom: {{ 1 | divided_by: block.settings.cover_image_one.aspect_ratio | times: 100 }}%;"{% endif %}
+  >
+    <button
+      data-fancybox href="{%- if block.settings.video_url_one.type == 'youtube' -%}
+							https://www.youtube.com/embed/{{ block.settings.video_url_one.id }}{%- else -%}
+							https://player.vimeo.com/video/{{ block.settings.video_url_one.id }}{%- endif -%}" 
+            				id="Deferred-Poster-Modal-{{ block.settings.video_url_one.id }}"      
+                            id="Deferred-Poster-Modal-{{ block.settings.video_url_one.id }}"
+                            class="video-section__poster media deferred-media__poster media--landscape"
+                            type="button"
+    >
+      {%- if block.settings.cover_image_one != blank -%}
+        <img
+          srcset="{%- if block.settings.cover_image_one.width >= 375 -%}{{ block.settings.cover_image_one | img_url: '375x' }} 375w,{%- endif -%}
+            {%- if block.settings.cover_image_one.width >= 750 -%}{{ block.settings.cover_image_one | img_url: '750x' }} 750w,{%- endif -%}
+            {%- if block.settings.cover_image_one.width >= 1100 -%}{{ block.settings.cover_image_one | img_url: '1100x' }} 1100w,{%- endif -%}
+            {%- if block.settings.cover_image_one.width >= 1500 -%}{{ block.settings.cover_image_one | img_url: '1500x' }} 1500w,{%- endif -%}
+            {%- if block.settings.cover_image_one.width >= 1780 -%}{{ block.settings.cover_image_one | img_url: '1780x' }} 1780w,{%- endif -%}
+            {%- if block.settings.cover_image_one.width >= 2000 -%}{{ block.settings.cover_image_one | img_url: '2000x' }} 2000w,{%- endif -%}
+            {%- if block.settings.cover_image_one.width >= 3000 -%}{{ block.settings.cover_image_one | img_url: '3000x' }} 3000w,{%- endif -%}
+            {%- if block.settings.cover_image_one.width >= 3840 -%}{{ block.settings.cover_image_one | img_url: '3840x' }} 3840w,{%- endif -%}
+            {{ block.settings.cover_image_one | img_url: 'master' }} {{ block.settings.cover_image_one.width }}w"
+          src="{{ block.settings.cover_image_one | img_url: '1920x' }}"
+          sizes="{% if block.settings.full_width %}100vw{% else %}(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw{% endif %}"
+          alt="{{ 'sections.video.load_video' | t: description: block.settings.description | escape }}"
+          loading="lazy"
+          width="{{ block.settings.cover_image_one.width }}"
+          height="{{ block.settings.cover_image_one.height }}"
+        >
+       {%- elsif block.settings.video_url_one.type == 'youtube' -%}
+          <img src="//img.youtube.com/vi/{{ block.settings.video_url_one.id }}/0.jpg" sizes="(min-width: 1520px) 1420px, (min-width: 750px) calc(100vw - 10rem), 100vw" alt="Load video: " loading="lazy" width="267" height="275">
+        
+      {%- else -%}
+        {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+      {%- endif -%}
+      <span class="deferred-media__poster-button motion-reduce">
+        {%- render 'icon-play' -%}
+      </span>
+    </button>
+  </deferred-media>
+    <div class="video__container">
+      <div class="video__product__image">
+        <img loading="lazy" src="{{ block.settings.product_image_one | img_url: '30x'}}" alt="{{ block.settings.product_image_one.alt | escape }}"/>
+      </div>
+	<div class="video__product__data">
+     
+      <span class="product_header"> {{block.settings.client_name_one}} </span><br/>
+      {{block.settings.product_name_one}}
+      </div>
+    </div>
+  </li>
+  
+  
+ {%- endfor -%}
+    
+    
+</ul>
+
+</div>
+<script type="text/javascript">//<![CDATA[
+
+
+
+$('.video__main_container').slick({
+  dots: false,
+  arrows: false,
+  infinite: true,
+  speed: 500,
+  cssEase: 'linear',
+  infinite: false,
+  slidesToShow: 4,
+ slidesToScroll: 1, prevArrow: '<div class="slick-prev"><svg width="11" height="16" viewBox="0 0 11 16" fill="none"><path d="M9 1.32422L3 8.05339L9 14.7826" stroke="black" stroke-width="3"/></svg></div>',
+  nextArrow: '<div class="slick-next"><svg width="11" height="16" viewBox="0 0 11 16" fill="none"><path d="M2 14.7812L8 8.05208L2 1.32292" stroke="black" stroke-width="3"/></svg></div>',
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+
+  //]]></script>
+{% schema %}
+{
+  "name": "t:sections.video-grid.name",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width video-grid",
+"blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+      "type": "image_picker",
+      "id": "cover_image_one",
+      "label": "t:sections.video-grid.settings.cover_image_one.label"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url_one",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "default": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+      "label": "t:sections.video-grid.settings.video_url_one.label",
+      "placeholder": "t:sections.video-grid.settings.video_url_one.placeholder",
+      "info": "t:sections.video-grid.settings.video_url_one.info"
+    },
+	{
+      "type": "text",
+      "id": "product_name_one",
+      "default": "Product name one",
+      "label": "t:sections.video-grid.settings.product_name_one.label"
+    },
+	{
+      "type": "text",
+      "id": "client_name_one",
+      "default": "Client name one",
+      "label": "t:sections.video-grid.settings.client_name_one.label"
+    }, 
+  {
+  "type" : "image_picker", 
+  "id" : "product_image_one", 
+  "label" : "t:sections.video-grid.settings.product_image_one.label"
+  }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Video",
+      "label": "t:sections.video-grid.settings.heading.label"
+    },
+      {
+      "type" :"html", 
+      "id": "sub_text", 
+      "label": "t:sections.video-grid.settings.sub-heading.label"
+      }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.video-grid.presets.name"
+    }
+  ]
+}
+  {% endschema %}

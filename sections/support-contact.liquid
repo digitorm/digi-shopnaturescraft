@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Support</title>
+  <style>
+    #custom-support-form-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #custom-support-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    #custom-support-form input[type="text"],
+    #custom-support-form input[type="email"],
+    #custom-support-form select,
+    #custom-support-form textarea,
+    #custom-support-form input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    #custom-support-form textarea {
+      height: 100px;
+    }
+    #custom-support-form input[type="submit"] {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+    #custom-support-form input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    #success-message {
+      display: none;
+      color: green;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+    </head>
+<body>
+  <div id="custom-support-form-container">
+{% form 'contact', id: 'custom-support-form' %}
+  {{ form.errors | default_errors }}
+  <label for="subject">Subject *</label>
+      <input type="text" name="contact[subject]" id="subject" required>
+      <label for="description">Support Details *</label>
+      <textarea name="contact[description]" id="description" required></textarea>
+      <label for="file">Attach a file</label>
+      <input type="file" name="contact[file]" id="file">
+      <label for="productName">Product Name</label>
+      <input type="text" name="contact[productName]" id="productName">
+      <label for="orderId">Order Id</label>
+      <input type="text" name="contact[orderId]" id="orderId">
+      <label for="priority">Priority</label>
+      <select name="contact[priority]" id="priority">
+        <option value="low">Low</option>
+        <option value="normal">Normal</option>
+        <option value="high">High</option>
+        <option value="urgent">Urgent</option>
+      </select>
+      <label for="email">Email *</label>
+      <input type="email" name="contact[email]" id="email" required>
+      <label for="fullName">Full Name</label>
+      <input type="text" name="contact[fullName]" id="fullName">
+      <input type="submit" value="Create">
+{% endform %}
+    <div id="success-message">
+      <p>Thank you for your inquiry! Expect to hear from us within 1 business day.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('custom-support-form').addEventListener('submit', function(e) {
+      // Prevent the default behavior of the form (page reload)
+      e.preventDefault();
+
+      // You can add code here to send the form data to a third-party email service
+
+      // Hide the form
+      document.getElementById('custom-support-form').style.display = 'none';
+
+      // Display the success message
+      document.getElementById('success-message').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

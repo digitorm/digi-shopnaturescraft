@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      padding-top: 50px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .form-container textarea {
+      height: 100px;
+    }
+    #success-message {
+      display: none;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Need More Help</h2>
+    {% form 'contact', id: 'custom-support-form' %}
+      {{ form.errors | default_errors }}
+      <label for="name">Name</label>
+      <input type="text" id="name" name="contact[name]" required>
+      <label for="email">Email*</label>
+      <input type="email" id="email" name="contact[email]" required>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="contact[phone]">
+      <label for="order">Order Number</label>
+      <input type="text" id="order" name="contact[order]">
+      <label for="comment">Comment*</label>
+      <textarea id="comment" name="contact[comment]" rows="4" required></textarea>
+      <input type="submit" value="Create">
+    {% endform %}
+    <div id="success-message">
+      <p>Thank you for your inquiry! Expect to hear from us within 1 business day.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!--AZEXO_sections/contact-form.liquid_Section-->{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+<div class="contact page-width spaced-section">
+  <h1 class="title">{{ section.settings.heading | escape }}</h1>
+  <div class="rte">{{ section.settings.richtext }}</div>
+  {%- form 'contact', id: 'ContactForm' -%}
+  
+    
+     
+
+<div class="cont_select_center">
+
+  <!-- Custom select structure --> 
+<div class="select_mate" data-mate-select="active" >
+<select name="" onchange="" onclick="return false;" id="">
+<option value=""  >How can we assist you?</option>
+<option value="1">Help with an online Order/Product availability</option>
+<option value="2">Question about a Product formula or Ingredients</option>
+<option value="3">Retail or Health care Professional inquiry</option>
+  <option value="4">Subscription Cancellation</option>
+  <option value="5">Others</option>
+  </select>
+<p class="selecionado_opcion"  onclick="open_select(this)" ></p><span onclick="open_select(this)" class="icon_select_mate" >
+  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.59 0L6 4.94467L1.41 0L0 1.52227L6 8L12 1.52227L10.59 0Z" fill="white"/>
+</svg>
+
+  </span>
+<div class="cont_list_select_mate">
+  <ul class="cont_select_int">  </ul> 
+</div>
+  </div>
+  <!-- Custom select structure --> 
+
+
+</div> <!-- End div center   -->
+	<script id="rendered-js">
+window.onload = function(){
+  crear_select();
+}
+
+var Navegador_ = (window.navigator.userAgent||window.navigator.vendor||window.opera),
+		Firfx = /Firefox/i.test(Navegador_),
+		Mobile_ = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(Navegador_),
+	FirfoxMobile = (Firfx && Mobile_);
+
+var li = new Array();
+function crear_select(){
+var div_cont_select = document.querySelectorAll("[data-mate-select='active']");
+var select_ = '';
+for (var e = 0; e < div_cont_select.length; e++) {
+div_cont_select[e].setAttribute('data-indx-select',e);
+div_cont_select[e].setAttribute('data-selec-open','false');
+var ul_cont = document.querySelectorAll("[data-indx-select='"+e+"'] > .cont_list_select_mate > ul");
+ select_ = document.querySelectorAll("[data-indx-select='"+e+"'] >select")[0];
+ if (Mobile_ || FirfoxMobile) { 
+select_.addEventListener('change', function () {
+ _select_option(select_.selectedIndex,e);
+});
+ }
+var select_optiones = select_.options;
+document.querySelectorAll("[data-indx-select='"+e+"']  > .selecionado_opcion ")[0].setAttribute('data-n-select',e);
+document.querySelectorAll("[data-indx-select='"+e+"']  > .icon_select_mate ")[0].setAttribute('data-n-select',e);
+for (var i = 0; i < select_optiones.length; i++) {
+li[i] = document.createElement('li');
+if (select_optiones[i].selected == true || select_.value == select_optiones[i].innerHTML ) {
+li[i].className = 'active';
+document.querySelector("[data-indx-select='"+e+"']  > .selecionado_opcion ").innerHTML = select_optiones[i].innerHTML;
+};
+li[i].setAttribute('data-index',i);
+li[i].setAttribute('data-selec-index',e);
+// funcion click al selecionar 
+li[i].addEventListener( 'click', function(){  _select_option(this.getAttribute('data-index'),this.getAttribute('data-selec-index')); });
+
+li[i].innerHTML = select_optiones[i].innerHTML;
+ul_cont[0].appendChild(li[i]);
+
+    }; // Fin For select_optiones
+  }; // fin for divs_cont_select
+} // Fin Function 
+
+
+
+var cont_slc = 0;
+function open_select(idx){
+var idx1 =  idx.getAttribute('data-n-select');
+  var ul_cont_li = document.querySelectorAll("[data-indx-select='"+idx1+"'] .cont_select_int > li");
+var hg = 0;
+var slect_open = document.querySelectorAll("[data-indx-select='"+idx1+"']")[0].getAttribute('data-selec-open');
+var slect_element_open = document.querySelectorAll("[data-indx-select='"+idx1+"'] select")[0];
+ if (Mobile_ || FirfoxMobile) { 
+   for (var i = 0; i < ul_cont_li.length; i++) {
+hg += ul_cont_li[i].offsetHeight;
+}; 
+ if (slect_open == 'false') {  
+ document.querySelectorAll("[data-indx-select='"+idx1+"']")[0].setAttribute('data-selec-open','true');
+ document.querySelectorAll("[data-indx-select='"+idx1+"'] > .cont_list_select_mate > ul")[0].style.height = hg+"px";
+ document.querySelectorAll("[data-indx-select='"+idx1+"'] > .icon_select_mate")[0].style.transform = 'rotate(180deg)';
+}else{
+ document.querySelectorAll("[data-indx-select='"+idx1+"']")[0].setAttribute('data-selec-open','false');
+ document.querySelectorAll("[data-indx-select='"+idx1+"'] > .icon_select_mate")[0].style.transform = 'rotate(0deg)';
+ document.querySelectorAll("[data-indx-select='"+idx1+"'] > .cont_list_select_mate > ul")[0].style.height = "0px";
+ }
+}else {
+
+  
+  for (var i = 0; i < ul_cont_li.length; i++) {
+hg += ul_cont_li[i].offsetHeight;
+}; 
+ if (slect_open == 'false') {  
+ document.querySelectorAll("[data-indx-select='"+idx1+"']")[0].setAttribute('data-selec-open','true');
+ document.querySelectorAll("[data-indx-select='"+idx1+"'] > .cont_list_select_mate > ul")[0].style.height = hg+"px";
+ document.querySelectorAll("[data-indx-select='"+idx1+"'] > .icon_select_mate")[0].style.transform = 'rotate(180deg)';
+}else{
+ document.querySelectorAll("[data-indx-select='"+idx1+"']")[0].setAttribute('data-selec-open','false');
+ document.querySelectorAll("[data-indx-select='"+idx1+"'] > .icon_select_mate")[0].style.transform = 'rotate(0deg)';
+ document.querySelectorAll("[data-indx-select='"+idx1+"'] > .cont_list_select_mate > ul")[0].style.height = "0px";
+ }
+}
+
+} // fin function open_select
+
+function salir_select(indx){
+var select_ = document.querySelectorAll("[data-indx-select='"+indx+"'] > select")[0];
+ document.querySelectorAll("[data-indx-select='"+indx+"'] > .cont_list_select_mate > ul")[0].style.height = "0px";
+document.querySelector("[data-indx-select='"+indx+"'] > .icon_select_mate").style.transform = 'rotate(0deg)';
+ document.querySelectorAll("[data-indx-select='"+indx+"']")[0].setAttribute('data-selec-open','false');
+}
+
+
+function _select_option(indx,selc){
+
+  var li_s = document.querySelectorAll("[data-indx-select='"+selc+"'] .cont_select_int > li");
+  var p_act = document.querySelectorAll("[data-indx-select='"+selc+"'] > .selecionado_opcion")[0].innerHTML = li_s[indx].innerHTML;
+var select_optiones = document.querySelectorAll("[data-indx-select='"+selc+"'] > select > option");
+for (var i = 0; i < li_s.length; i++) {
+if (li_s[i].className == 'active') {
+li_s[i].className = '';
+};
+li_s[indx].className = 'active';
+
+};
+select_optiones[indx].selected = true;
+salir_select(selc); 
+}
+    </script>
+     
+     
+  
+    {%- if form.posted_successfully? -%}
+      <div class="form-status form-status-list form__message" tabindex="-1" autofocus>{% render 'icon-success' %} {{ 'templates.contact.form.post_success' | t }}</div>
+    {%- elsif form.errors -%}
+      <div class="form__message">
+        <h2 class="form-status caption-large" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</h2>
+      </div>
+      <ul class="form-status-list caption-large" role="list">
+        <li>
+          <a href="#ContactForm-email" class="link">
+            {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+          </a>
+        </li>
+      </ul>
+    {%- endif -%}
+    <div class="contact__fields">
+      <div class="field">
+        <input class="field__input" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ 'templates.contact.form.name' | t }}">
+        <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+      </div>
+       <div class="field">
+        <input class="field__input" autocomplete="lname" type="text" id="ContactForm-lname" name="contact[Last Name]" value="" placeholder="Last Name">
+        <label class="field__label" for="ContactForm-lname">Last Name</label>
+      </div>
+     </div>
+   
+       <div class="field field--with-error">
+        <input
+          autocomplete="email"
+          type="email"
+          id="ContactForm-email"
+          class="field__input"
+          name="contact[email]"
+          spellcheck="false"
+          autocapitalize="off"
+          value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+          aria-required="true"
+          {% if form.errors contains 'email' %}
+            aria-invalid="true"
+            aria-describedby="ContactForm-email-error"
+          {% endif %}
+          placeholder="{{ 'templates.contact.form.email' | t }}"
+        >
+        <label class="field__label" for="ContactForm-email">{{ 'templates.contact.form.email' | t }} </label>
+        {%- if form.errors contains 'email' -%}
+          <small class="contact__field-error" id="ContactForm-email-error">
+            <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+            <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+          </small>
+        {%- endif -%}
+      </div>
+   
+      
+      
+    <div class="field">
+      <textarea
+        rows="10"
+        id="ContactForm-body"
+        class="text-area field__input"
+        name="contact[{{ 'templates.contact.form.comment' | t }}]"
+        placeholder="{{ 'templates.contact.form.comment' | t }}"
+      >
+        {{- form.body -}}
+      </textarea>
+      <label class="form__label field__label" for="ContactForm-body">{{ 'templates.contact.form.comment' | t }}</label>
+    </div>
+    <div class="contact__button">
+      <button type="submit" class="button">
+        {{ 'templates.contact.form.send' | t }}
+      </button>
+    </div>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "Heading"
+    },
+	{
+      "type": "richtext",
+      "id": "richtext",
+      "label": "Sub Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.name"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/contact-form.liquid_Section-->

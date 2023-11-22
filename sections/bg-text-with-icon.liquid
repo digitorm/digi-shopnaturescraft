@@ -1,0 +1,267 @@
+<!--AZEXO_sections/bg-text-with-icon.liquid_Section-->{% if section.settings.image != blank %}
+{% for block in section.blocks %}  
+        {% case block.type %}
+      
+          {% when 'text' %}   
+{% if block.settings.text == blank %}
+<div class="empty">
+        {%- endif -%}   
+       {% when 'icons' %} 
+        {% endcase %}
+      {% endfor %}
+      
+
+
+{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+{{ 'section-text-with-banner' | assets_url | stylesheet_tag }}
+
+{%- if section.settings.adapt_height_first_image and section.settings.image != blank -%}
+  {%- style -%}
+  @media screen and (max-width: 749px) {
+    #Banner-{{ section.id }}::before,
+    #Banner-{{ section.id }} .banner__media::before,
+    #Banner-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
+      padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+      content: '';
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #Banner-{{ section.id }}::before,
+    #Banner-{{ section.id }} .banner__media::before {
+      padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+      content: '';
+      display: block;
+    }
+  }
+  {%- endstyle -%}
+{%- endif -%}
+
+{%- style -%}
+  #Banner-{{ section.id }}::after {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
+<div id="Banner-{{ section.id }}" class="banner banner--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank %} banner--stacked{% endif %}{% if section.settings.adapt_height_first_image and section.settings.image != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %}">
+  {%- if section.settings.image != blank -%}
+    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}">
+      <img
+        srcset="{%- if section.settings.image.width >= 375 -%}{{ section.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+          {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+          {%- if section.settings.image.width >= 1100 -%}{{ section.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+          {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+          {%- if section.settings.image.width >= 1780 -%}{{ section.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+          {%- if section.settings.image.width >= 2000 -%}{{ section.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+          {%- if section.settings.image.width >= 3000 -%}{{ section.settings.image | img_url: '3000x' }} 3000w,{%- endif -%}
+          {%- if section.settings.image.width >= 3840 -%}{{ section.settings.image | img_url: '3840x' }} 3840w,{%- endif -%}
+          {{ section.settings.image | img_url: 'master' }} {{ section.settings.image.width }}w"
+        sizes="{% if section.settings.image_2 != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image_2 != blank %}50vw{% else %}100vw{% endif %}"
+        src="{{ section.settings.image | img_url: '1500x' }}"
+        loading="lazy"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio }}"
+        {% if section.settings.image_2 != blank %}class="banner__media-image-half"{% endif %}
+      >
+    </div>
+  {%- elsif section.settings.image_2 == blank -%}
+    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}">
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+
+  <div class="banner__contents banner__content--{{ section.settings.desktop_text_box_position }} page-width">
+    <div class="banner__box color-icon__box color-white">
+        	
+      {% for block in section.blocks %}  
+        {% case block.type %}
+      
+          {% when 'text' %}   
+
+            <div class="banner__text" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+      </div>
+       {% when 'icons' %} 
+        {% endcase %}
+      {% endfor %}
+      
+       <div class="icon__list__flex">
+        {% for block in section.blocks %} 
+         {% case block.type %}
+      
+          {% when 'text' %} 
+            {% when 'icons' %} 
+          <div class="icon_list">
+        {% if block.settings.icon_list != blank %}
+          <img loading="lazy" width="70" height="70" src="{{block.settings.icon_list | img_url :'170x'}}" alt="{{ block.settings.icon_list.alt | escape }}">
+        {% endif %}
+         {%- if block.settings.desc != blank -%}
+         <div class="rte">{{block.settings.desc}}</div>
+        {% endif %}
+         </div>
+          {% endcase %}
+        {% endfor %}
+        </div>
+    </div>
+  </div>
+</div>
+ {% for block in section.blocks %}  
+        {% case block.type %}
+      
+          {% when 'text' %}   
+{% if block.settings.text == blank %}
+</div>
+        {%- endif -%}   
+       {% when 'icons' %} 
+        {% endcase %}
+      {% endfor %}
+      {%- endif -%}
+{% schema %}
+{
+  "name": "BG Image text with Icon",
+  "tag": "section",
+  "class": "spaced-section--full-width icon-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.text-with-banner.settings.image.label"
+    },
+    
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.text-with-banner.settings.image_height.options__1.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.text-with-banner.settings.image_height.options__2.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.text-with-banner.settings.image_height.options__3.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.text-with-banner.settings.image_height.label",
+      "info": "t:sections.text-with-banner.settings.image_height.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "adapt_height_first_image",
+      "default": false,
+      "label": "t:sections.text-with-banner.settings.adapt_height_first_image.label",
+      "info": "t:sections.text-with-banner.settings.adapt_height_first_image.info"
+    },
+    {
+      "type": "select",
+      "id": "desktop_text_box_position",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:sections.text-with-banner.settings.desktop_text_box_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.text-with-banner.settings.desktop_text_box_position.options__2.label"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:sections.text-with-banner.settings.desktop_text_box_position.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.text-with-banner.settings.desktop_text_box_position.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text_box",
+      "default": true,
+      "label": "t:sections.text-with-banner.settings.show_text_box.label"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "t:sections.text-with-banner.settings.image_overlay_opacity.label",
+      "default": 0
+    },
+    
+    {
+      "type": "header",
+      "content": "t:sections.text-with-banner.settings.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_images_on_mobile",
+      "default": true,
+      "label": "t:sections.text-with-banner.settings.stack_images_on_mobile.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text_below",
+      "default": true,
+      "label": "t:sections.text-with-banner.settings.show_text_below.label"
+    },
+ {
+          "type": "image_picker",
+          "id": "icon_blocks",          
+          "label": "t:sections.text-with-banner.blocks.icon_block.settings.icon_block.label"
+        }
+
+  ],
+  "blocks": [
+   
+    {
+      "type": "text",
+      "name": "t:sections.text-with-banner.blocks.text.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "text",
+  "default": "<p>Give customers details about the banner image(s) or content on the template.</p>",
+          "label": "t:sections.text-with-banner.blocks.text.settings.text.label"
+        }
+
+      ]
+    },
+	{ 
+      "type": "icons", 
+      "name": "t:sections.image-with-text-icon.blocks.icons.name", 
+      "limit":5, 
+      "settings":[
+      {
+      "type": "image_picker", 
+      "id": "icon_list", 
+      "label": "t:sections.image-with-text-icon.blocks.icons.settings.image_picker.label"
+	},{
+      "type": "richtext", 
+      "id": "desc", 
+      "label": "Description"
+	}
+		]
+}
+  ],
+  "presets": [
+    {
+      "name": "BG Image text with Icon",
+      "blocks": [
+        
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/bg-text-with-icon.liquid_Section-->

@@ -1,0 +1,262 @@
+<!--AZEXO_sections/main-blog-in.liquid_Section-->{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+
+
+{%- paginate blog.articles by 16 -%}
+
+
+
+   
+
+  <div class="main-blog page-width">
+     <div class="grid-sidebar">
+
+         <div id="sidebar-tags">
+	{% comment %}
+      Blog tags
+    {% endcomment %}
+    {% if blog.all_tags.size > 0 %}
+     
+      <ul class="blog-listing">
+        <li><a class="active" href="/blogs/ingredients">All</a></li>
+        
+        {% for tag in blog.all_tags %}
+        	
+        	  		{% assign tag = tag |downcase %}
+                      {% if tag == 'a' or tag == 'b' or tag == 'c' or tag == 'd'  or tag == 'e'  or tag == 'f'  or tag == 'g'  or tag == 'h'  or tag == 'i'  or tag == 'j'  or tag == 'k'  or tag == 'l' or tag == 'm' or tag == 'n' or tag == 'o' or tag == 'p' or tag == 'q' or tag == 'r' or tag == 's' or tag == 't' or tag == 'u' or tag == 'v' or tag == 'w' or tag == 'x' or tag == 'y' or tag == 'z' %}
+                
+                    <li>{{ tag | link_to_tag: tag   }}</li>
+                   
+                  {% endif %}
+        		
+        {% endfor %}
+      </ul>
+    {% endif %}
+</div>
+            
+    <div id="product-grid" class="ingredients-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
+      {%- for article in blog.articles -%}
+        <div class="blog-articles__article article">
+          {%- render 'article-card', article: article, text: section.settings.text_center, image_height: section.settings.image_height, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+   
+       
+  </div>
+      
+            {%- if paginate.pages > 1 -%}
+              {% render 'pagination', paginate: paginate %}
+            {%- endif -%}
+{%- endpaginate -%}
+
+
+<script>
+  
+$(document).ready(function() {
+     $('.blog-listing a').click(function(e) {
+    e.preventDefault(); //prevent the link from being followed
+    $('.blog-listing a').removeClass('active');
+    $(this).addClass('active');
+});            
+  
+
+  
+  
+    $(document).on("click", ".nxt, .aa", function(e){
+  
+ 
+
+        e.preventDefault();
+     var abc = $(this).attr('href');
+      
+    
+        var getUrl = "{{ shop.url }}"+abc;
+
+        $.ajax({
+             url: getUrl,
+             type:'GET',
+             success: function(data){
+                // console.log(getUrl);
+                $("#product-grid").html($(data).find('#product-grid').html());
+                
+             
+                
+$(".pagination__list").empty().html($(data).find(".pagination__list").html());
+                
+                 $('html, body').animate({
+                        scrollTop: $("#product-grid").offset().top - 50
+                 }, 500);
+
+             }
+        });
+   return false;
+    });
+
+  
+  $(document).on("click", ".blog-listing a", function(e){
+       
+   
+        e.preventDefault();
+      
+      
+       var abcs = $(this).attr('href');
+      
+      
+      //alert (abcs);
+       
+        var getUrl = "{{ shop.url }}"+abcs;
+
+        $.ajax({
+             url: getUrl,
+             type:'GET',
+             success: function(data){
+               //console.log(getUrl);
+               
+  
+    //var maxCount = pages + 1;
+
+                $("#product-grid").html($(data).find('#product-grid').html());
+           
+                
+             
+             $(".pagination__list").empty().html($(data).find(".pagination__list").html());
+                
+                 $('html, body').animate({
+                        scrollTop: $("#product-grid").offset().top - 50
+                 }, 500);
+             }
+        });
+  // history.pushState({
+       //         page: getUrl
+        //    }, null, getUrl);
+  
+ return false;
+
+    });
+   
+         
+});
+  
+</script>
+
+<style>
+.banner__box.color-background-1 * {
+    color: #0A0A0A;
+}
+div#product-grids>div:nth-child(1n+5) {
+    display: none;
+}
+
+.multiple-block-icon .multicolumn {
+    padding: 0;
+    margin: 0 !important;
+}
+.multiple-block-icon .multicolumn .title-wrapper-with-link {
+    margin-top: 0;
+}
+.multiple-block-icon .multicolumn .title-wrapper-with-link .rte {
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+</style>
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "tag": "section",
+     "class": "in-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-blog.settings.header.content"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.main-blog.settings.layout.options__1.label"
+        },
+        {
+          "value": "collage",
+          "label": "t:sections.main-blog.settings.layout.options__2.label"
+        }
+      ],
+      "default": "collage",
+      "label": "t:sections.main-blog.settings.layout.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_image.label"
+    },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select Filter Menu"
+        },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-blog.settings.image_height.options__1.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.main-blog.settings.image_height.options__2.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.main-blog.settings.image_height.options__3.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.main-blog.settings.image_height.options__4.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.main-blog.settings.image_height.label",
+      "info": "t:sections.main-blog.settings.image_height.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_date.label"
+    },    
+    {
+      "type": "checkbox",
+      "id": "text_center",
+      "default": true,
+      "label": "text Center"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": false,
+      "label": "t:sections.main-blog.settings.show_author.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-blog.settings.paragraph.content"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/main-blog-in.liquid_Section-->

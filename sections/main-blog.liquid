@@ -1,0 +1,514 @@
+<!--AZEXO_sections/main-blog.liquid_Section-->{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+
+{% render 'menu-icon' %}
+{%- paginate blog.articles by 5 -%}
+
+<div class="blog-top">
+   <div class="page-width">
+     <div class="max-width-600">
+   <h1 class="title--primary">{{ blog.title | escape }}</h1>
+ 
+       
+  
+       
+       
+       
+      
+       
+     {%- if section.settings.menu != blank -%}
+       <div class="mobile-drop">
+       <ul class="varient-main mobile">
+           
+          {% assign count = 0 %}
+ <li class="init">Most Recent</li>
+                      {%- for link in linklists[section.settings.menu].links -%}
+           {% assign count = count | plus: 1 %}
+                        <li data-value="value {{ count }}">
+                         
+                          <a href="{{ link.url }}" class="{% if link.active %} active{% endif %}">
+                            {{ link.title }}
+                          </a>
+                          
+                        </li>
+                      {%- endfor -%}
+          </ul>
+       </div>
+		<ul class="varient-main">
+           
+        {%- for link in linklists[section.settings.menu].links -%}
+           
+                        <li>
+                         
+                          <a href="{{ link.url }}" class="{% if link.active %} active{% endif %}">
+                            {{ link.title }}
+                          </a>
+                          
+                        </li>
+                      {%- endfor -%}
+          </ul>
+      {%- endif -%}
+  </div>
+  </div>
+</div>
+
+
+
+  <div class="main-blog page-width">
+     <div class="grid-sidebar">
+<div class="filter">
+    <p class="side-title">Be in the know</p> 
+    <div class="sb-menu">
+       <div class="newsleetr">
+         
+         <h3> {{section.settings.text}}</h3>
+         <div class="rte">
+           {{section.settings.sub}}
+         </div>
+          <div class="footer-block__newsletter">
+            
+            {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="newsletter-form__field-wrapper">
+                <div class="field">
+                  <input
+                    id="NewsletterForm--{{ section.id }}"
+                    type="email"
+                    name="contact[email]"
+                    class="field__input"
+                    value="{{ form.email }}"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    {% if form.errors %}
+                      autofocus
+                      aria-invalid="true"
+                      aria-describedby="ContactFooter-error"
+                    {% elsif form.posted_successfully? %}
+                      aria-describedby="ContactFooter-success"
+                    {% endif %}
+                    placeholder="Email Address"
+                    required
+                  >
+                  <label class="field__label" for="NewsletterForm--{{ section.id }}">
+                   Email Address
+                  </label>
+                  <button type="submit" class="newsletter-form__button field__button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
+                  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.1094 0C5.41992 0 0 5.41992 0 12.1094C0 18.7988 5.41992 24.2188 12.1094 24.2188C18.7988 24.2188 24.2188 18.7988 24.2188 12.1094C24.2188 5.41992 18.7988 0 12.1094 0ZM18.0566 8.2959L16.0693 17.6611C15.9229 18.3252 15.5273 18.4863 14.9756 18.1738L11.9482 15.9424L10.4883 17.3486C10.3271 17.5098 10.1904 17.6465 9.87793 17.6465L10.0928 14.5654L15.7031 9.49707C15.9473 9.28223 15.6494 9.16016 15.3271 9.375L8.39355 13.7402L5.40527 12.8076C4.75586 12.6025 4.74121 12.1582 5.54199 11.8457L17.2168 7.34375C17.7588 7.14844 18.2324 7.47559 18.0566 8.2959Z" fill="white"/>
+</svg>
+
+                  </button>
+                </div>
+                {%- if form.errors -%}
+                  <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+                {%- endif -%}
+              </div>
+              {%- if form.posted_successfully? -%}
+                <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        
+      </div>
+      
+      
+      
+<div class="tabs-stage">
+    
+    <div id="tab-2" style="display: block;">
+         {% if section.settings.title2  != blank %}<p class="side-title"> {{ section.settings.title2 }}</p> {% endif %}
+      <ul class="categories-menu">
+      {% for link in linklists[section.settings.menu2].links %}
+  <li>
+    <a href="{{ link.url }}">  
+    {% if link.type == "collection_link" %}
+    {{ link.object.description }}
+    {% endif %}
+    {{ link.title }}
+    </a>
+  </li>
+{% endfor %}
+      </ul>
+    </div>
+  
+    {% if blog.tags.size > 0 %}
+    <p class="side-title">Popular Tags</p>
+  	<ul class="varient-side">
+
+            {% for tag in blog.all_tags %}
+              <li>{{ tag | link_to_tag: tag }}</li>
+            {% endfor %}
+         
+  
+  
+  
+</ul>
+      {% endif %}
+
+      
+     
+
+     
+    </div>
+  </div>
+       </div>
+         <div class="pro-sec">
+             <p class="side-title">Most Recent</p> 
+    <div id="product-grid" class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
+      {%- for article in blog.articles -%}
+        <div class="blog-articles__article article">
+          {%- render 'article-card', article: article, image_height: section.settings.image_height, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+   
+       </div>
+  </div>
+        {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+{%- endpaginate -%}
+<div class="filter mob-bar">
+  
+   <div class="filter-mob" style="margin-bottom: 49px;">Filter articles <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 0.999896L4.84524 4.42847L8.69047 0.999895" stroke="#388E3C" stroke-width="2"/>
+</svg>
+</div>
+  
+   <div class="sb-menu">
+  <div class="filter-close">Filter articles <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 0.999896L4.84524 4.42847L8.69047 0.999895" stroke="#388E3C" stroke-width="2"/>
+</svg>
+</div>
+  <div id="tab-2" style="display: block;">
+         
+    <div class="tabs-nav">
+    <span class="tab-active"><a href="#tab-1" rel="nofollow">Health Interest</a>
+    </span>
+    
+    </span>
+</div>
+       <ul class="categories-menu">
+      {% for link in linklists[section.settings.menu2].links %}
+  <li>
+    <a href="{{ link.url }}">  
+    {% if link.type == "collection_link" %}
+    {{ link.object.description }}
+    {% endif %}
+    {{ link.title }}
+    </a>
+  </li>
+{% endfor %}
+      </ul>
+    </div>
+  </div>
+  
+  
+  
+    <p class="side-title">Be in the know</p> 
+    <div class="sb-menu hide-m">
+      
+      
+      
+      
+       <div class="newsleetr">
+         
+         <h3> {{section.settings.text}}</h3>
+         <div class="rte">
+           {{section.settings.sub}}
+         </div>
+          <div class="footer-block__newsletter">
+            
+            {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="newsletter-form__field-wrapper">
+                <div class="field">
+                  <input
+                    id="NewsletterForm--{{ section.id }}"
+                    type="email"
+                    name="contact[email]"
+                    class="field__input"
+                    value="{{ form.email }}"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    {% if form.errors %}
+                      autofocus
+                      aria-invalid="true"
+                      aria-describedby="ContactFooter-error"
+                    {% elsif form.posted_successfully? %}
+                      aria-describedby="ContactFooter-success"
+                    {% endif %}
+                    placeholder="Email Address"
+                    required
+                  >
+                  <label class="field__label" for="NewsletterForm--{{ section.id }}">
+                   Email Address
+                  </label>
+                  <button type="submit" class="newsletter-form__button field__button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
+                  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.1094 0C5.41992 0 0 5.41992 0 12.1094C0 18.7988 5.41992 24.2188 12.1094 24.2188C18.7988 24.2188 24.2188 18.7988 24.2188 12.1094C24.2188 5.41992 18.7988 0 12.1094 0ZM18.0566 8.2959L16.0693 17.6611C15.9229 18.3252 15.5273 18.4863 14.9756 18.1738L11.9482 15.9424L10.4883 17.3486C10.3271 17.5098 10.1904 17.6465 9.87793 17.6465L10.0928 14.5654L15.7031 9.49707C15.9473 9.28223 15.6494 9.16016 15.3271 9.375L8.39355 13.7402L5.40527 12.8076C4.75586 12.6025 4.74121 12.1582 5.54199 11.8457L17.2168 7.34375C17.7588 7.14844 18.2324 7.47559 18.0566 8.2959Z" fill="white"/>
+</svg>
+
+                  </button>
+                </div>
+                {%- if form.errors -%}
+                  <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+                {%- endif -%}
+              </div>
+              {%- if form.posted_successfully? -%}
+                <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        
+      </div>
+      
+      
+      
+<div class="tabs-stage">
+    
+    
+  
+    {% if blog.tags.size > 0 %}
+    <p class="side-title">Popular Tags</p>
+  	<ul class="varient-side">
+
+            {% for tag in blog.all_tags %}
+              <li>{{ tag | link_to_tag: tag }}</li>
+            {% endfor %}
+         
+  
+  
+  
+</div>
+      {% endif %}
+
+      
+     
+
+     
+    </div>
+  </div>
+
+<script>
+  
+$(document).ready(function() {
+     $('.varient-main a').click(function(e) {
+    e.preventDefault(); //prevent the link from being followed
+    $('.varient-main a').removeClass('active');
+    $(this).addClass('active');
+});           
+  
+  
+  
+
+  
+  
+  
+  
+    $(document).on("click", ".nxt, .aa", function(e){
+  
+ 
+
+        e.preventDefault();
+     var abc = $(this).attr('href');
+      
+    
+        var getUrl = "https://shopnaturescraft.com"+abc;
+
+        $.ajax({
+             url: getUrl,
+             type:'GET',
+             success: function(data){
+                 //console.log(getUrl);
+                $("#product-grid").html($(data).find('#product-grid').html());
+                
+             
+                
+$(".pagination__list").empty().html($(data).find(".pagination__list").html());
+                
+                 $('html, body').animate({
+                        scrollTop: $("#product-grid").offset().top - 50
+                 }, 500);
+
+             }
+        });
+   return false;
+    });
+
+  
+  $(document).on("click", ".varient-main a", function(e){
+       
+   
+        e.preventDefault();
+      
+      
+       var abcs = $(this).attr('href');
+      
+      
+      //alert (abcs);
+       
+        var getUrl = "https://shopnaturescraft.com"+abcs;
+
+        $.ajax({
+             url: getUrl,
+             type:'GET',
+             success: function(data){
+               //console.log(getUrl);
+               
+  
+    //var maxCount = pages + 1;
+
+                $("#product-grid").html($(data).find('#product-grid').html());
+           
+                
+             
+             $(".pagination__list").empty().html($(data).find(".pagination__list").html());
+                
+                // $('html, body').animate({
+                  //      scrollTop: $("#product-grid").offset().top - 50
+                // }, 500);
+             }
+        });
+  // history.pushState({
+       //         page: getUrl
+        //    }, null, getUrl);
+  
+ return false;
+
+    });
+   
+         
+});
+  
+</script>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "tag": "section",
+  "settings": [
+    {
+          "type": "text",
+          "id": "title2",
+          "label": "Sidebar Collection Title"
+        },
+    
+    {
+      "type": "image_picker",
+       "id": "background-image",
+       "label": "Background image"
+       },
+       
+        {
+          "type": "link_list",
+          "id": "menu2",
+          "label": "Health Interest Menu"
+        },
+	{
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "sub",
+      "label": "Sub Text"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-blog.settings.header.content"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.main-blog.settings.layout.options__1.label"
+        },
+        {
+          "value": "collage",
+          "label": "t:sections.main-blog.settings.layout.options__2.label"
+        }
+      ],
+      "default": "collage",
+      "label": "t:sections.main-blog.settings.layout.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_image.label"
+    },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select Filter Menu"
+        },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-blog.settings.image_height.options__1.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.main-blog.settings.image_height.options__2.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.main-blog.settings.image_height.options__3.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.main-blog.settings.image_height.options__4.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.main-blog.settings.image_height.label",
+      "info": "t:sections.main-blog.settings.image_height.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": false,
+      "label": "t:sections.main-blog.settings.show_author.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-blog.settings.paragraph.content"
+    }
+  ]
+}
+{% endschema %}
+
+    <style>
+         
+         .blog-top{
+           background:url("{{ section.settings.background-image | img_url:'' }}");
+           background-size:cover;
+          filter: brightness(1.2);
+}
+             
+         }
+    </style><!--End_AZEXO_sections/main-blog.liquid_Section-->

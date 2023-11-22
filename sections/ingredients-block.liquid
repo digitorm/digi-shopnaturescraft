@@ -1,0 +1,113 @@
+<!--AZEXO_sections/ingredients-block.liquid_Section-->{{'section-ingredients-block.css' | asset_url | stylesheet_tag}}
+<div class=" page-width">
+  
+  
+ <div class="text-center title-wrapper-with-link title-wrapper--self-padded-mobile">
+    <h1 class="collection-list-title ">{{ section.settings.title | escape }}</h1>
+{% if section.settings.text != blank %} 
+     <div class="rich-text__text rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="main__box">
+{%- for block in section.blocks -%}
+  <div class="ingredient__main_container">
+     
+        <div class="ingred__img">
+        <img src="{{block.settings.image | img_url: '350x'}}"/>
+        </div>
+        <h2 class="ingred__title">
+        {{block.settings.heading |escape}}
+        </h2>
+        <div class="ingred__sub__text">
+        {{block.settings.sub_text}}
+        </div>  
+    	<div class="ingred__sub_button ">
+        <a href ="{{block.setting.product_url}}"> {{block.settings.button_label}}</a>
+     	</div>
+  </div>    
+{%- endfor -%}   
+  </div>
+   <div class="ingred__button">
+   	 <a href ="{{section.settings.block_url}}"> {{section.settings.block_button_label}}</a>
+    </div>
+  </div>
+   
+{% schema %}
+ {
+  "name": "t:sections.ingredients-block.name",
+  "class" :"shopify-section spaced-section spaced-section--full-width ingredients__block",
+  "settings":[
+	{
+     "type": "url", 
+     "id": "block_url",
+     "label" : "t:sections.ingredients-block.blocks.ingredients-block.settings.block_url.label"
+    }, 
+	{
+	 "type":"text",
+	 "id": "block_button_label",
+	"label": "t:sections.ingredients-block.blocks.ingredients-block.settings.block_button_label.label"
+	},{
+      "type": "text",
+      "id": "title",
+      "default": "Collections",
+      "label": "t:sections.collection-list.settings.title.label"
+    }, {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        }
+	], 
+    
+    "blocks":[
+    { 
+	 "type" : "ingredients-block", 
+     "name": "t:sections.ingredients-block.blocks.ingredients-block.name",
+	 "limit": 8,
+     "settings" :[
+    {
+     "type" : "image_picker",
+     "id" : "image", 
+     "label": "t:sections.ingredients-block.blocks.ingredients-block.settings.image.label"
+    }, 
+    {
+     "type": "text",
+     "id": "heading",
+     "default": "Welcome to our store",
+     "label": "t:sections.ingredients-block.blocks.ingredients-block.settings.heading.label"   
+	},
+    {
+     "type": "richtext",
+     "id": "sub_text", 
+     "label": "t:sections.ingredients-block.blocks.ingredients-block.settings.sub_text.label"
+    }, 
+    {
+     "type": "url", 
+     "id": "product_url",
+     "label" : "t:sections.ingredients-block.blocks.ingredients-block.settings.product_url.label"
+    }, 
+	{
+	 "type":"text",
+	 "id": "button_label",
+	 "label": "t:sections.ingredients-block.blocks.ingredients-block.settings.button_label.label"
+	} ]
+    }
+    ],
+    "presets": [
+        {
+          "name": "t:sections.ingredients-block.presets.name",
+          "blocks": [
+
+          ]
+        }
+      ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<!--End_AZEXO_sections/ingredients-block.liquid_Section-->

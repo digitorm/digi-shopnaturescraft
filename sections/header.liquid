@@ -1,0 +1,1937 @@
+<!--AZEXO_sections/header.liquid_Section--><link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'mega-header.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- if settings.predictive_search_enabled -%}
+  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+
+<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}</noscript>
+
+<style>
+  header-drawer {
+    justify-self: start;
+    margin-left: -1.2rem;
+  }
+
+  @media screen and (min-width: 990px) {
+    header-drawer {
+      display: none;
+    }
+  }
+
+  .menu-drawer-container {
+    display: flex;
+  }
+
+  .list-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .list-menu--inline {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+
+  summary.list-menu__item {
+    padding-right: 2.7rem;
+  }
+
+  .list-menu__item {
+    display: flex;
+    align-items: center;
+    line-height: calc(1 + 0.3 / var(--font-body-scale));
+  }
+
+  .list-menu__item--link {
+    text-decoration: none;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    line-height: calc(1 + 0.8 / var(--font-body-scale));
+  }
+
+  @media screen and (min-width: 750px) {
+    .list-menu__item--link {
+      padding-bottom: 0.5rem;
+      padding-top: 0.5rem;
+    }
+  }
+</style>
+
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+ 
+  <symbol id="icon-search" width="16" height="16" viewBox="0 0 16 16" fill="none">
+<path d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13Z" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.5008 14.5008L11.2383 11.2383" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+
+  
+  <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+  </symbol>
+</svg>
+<{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %} 
+               class="header-wrapper color-{{ section.settings.color_scheme }} 
+                      gradient{% if section.settings.show_line_separator %} 
+                      header-wrapper--border-bottom{% endif %}"
+  {% comment %}
+                      {%- if request.page_type == 'index'-%} 
+                      style="background-image: linear-gradient(180deg,#e9e0e1,#e7dedd);"{%- endif -%}{% endcomment %}>
+  <header class="header header--{{ section.settings.logo_position }} page-width
+                 {% if section.settings.menu != blank %} header--has-menu{% endif %} "
+                >
+    {%- if section.settings.menu != blank -%}
+      <header-drawer data-breakpoint="tablet">
+        <details class="menu-drawer-container">
+          <summary class="header__icon header__icon--menu header__icon--summary link focus-inset" aria-label="{{ 'sections.header.menu' | t }}">
+            <span>
+              {% render 'icon-hamburger' %}
+              {% render 'icon-close' %}
+            </span>
+          </summary>
+          <div id="menu-drawer" class="menu-drawer motion-reduce top-navigation" tabindex="-1">
+            <div class="menu-drawer__inner-container">
+              <div class="menu-drawer__navigation-container">
+                <nav class="menu-drawer__navigation">
+                  <ul class="menu-drawer__menu list-menu" role="list">
+                    {%- for link in section.settings.menu.links -%}                    
+                    {% capture menu_type %}menu_item_type_{{ forloop.index }}{% endcapture %}  
+                    {% capture menu_bottom %}menu_bottom_{{ forloop.index }}{% endcapture %}
+                    {% capture menu_column %}menu_item_column_{{ forloop.index }}{% endcapture %}      
+                    {% capture block_left %}menu_item_block_left_{{ forloop.index }}{% endcapture %}
+                    {% capture heading_top %}heading_2_{{ forloop.index }}{% endcapture %}
+                    {% capture heading_middle %}heading_1_{{ forloop.index }}{% endcapture %}        
+                    {% capture menu_item_block_left_1 %}menu_item_block_left_1_{{ forloop.index }}{% endcapture %}
+                    {% capture image_1 %}image_1_{{ forloop.index }}{% endcapture %}
+                    {% capture url_1 %}url_1_{{ forloop.index }}{% endcapture %}        
+                    {% capture menu_item_block_left_2 %}menu_item_block_left_2_{{ forloop.index }}{% endcapture %}
+                    {% capture image_2 %}image_2_{{ forloop.index }}{% endcapture %}
+                    {% capture url_2 %}url_2_{{ forloop.index }}{% endcapture %}        
+                    {% capture menu_item_block_left_3 %}menu_item_block_left_3_{{ forloop.index }}{% endcapture %}
+                    {% capture image_3 %}image_3_{{ forloop.index }}{% endcapture %}
+                    {% capture url_3 %}url_3_{{ forloop.index }}{% endcapture %}        
+                    {% capture menu_item_block_left_4 %}menu_item_block_left_4_{{ forloop.index }}{% endcapture %}
+                    {% capture image_4 %}image_4_{{ forloop.index }}{% endcapture %}
+                    {% capture url_4 %}url_4_{{ forloop.index }}{% endcapture %}       
+                    {% capture url_last_1 %}url_last_1_{{ forloop.index }}{% endcapture %}
+                    {% capture text_last_1 %}text_last_1_{{ forloop.index }}{% endcapture %}
+                    {% capture image_last_1 %}image_last_1_{{ forloop.index }}{% endcapture %}
+                    {% capture svg_last_1 %}svg_last_1_{{ forloop.index }}{% endcapture %}        
+                    {% capture url_last_2 %}url_last_2_{{ forloop.index }}{% endcapture %}
+                    {% capture text_last_2 %}text_last_2_{{ forloop.index }}{% endcapture %}
+                    {% capture image_last_2 %}image_last_2_{{ forloop.index }}{% endcapture %}
+                    {% capture svg_last_2 %}svg_last_2_{{ forloop.index }}{% endcapture %}        
+                    {% capture url_last_3 %}url_last_3_{{ forloop.index }}{% endcapture %}
+                    {% capture text_last_3 %}text_last_3_{{ forloop.index }}{% endcapture %}
+                    {% capture image_last_3 %}image_last_3_{{ forloop.index }}{% endcapture %}
+                    {% capture svg_last_3 %}svg_last_3_{{ forloop.index }}{% endcapture %}        
+                    {% capture url_last_4 %}url_last_4_{{ forloop.index }}{% endcapture %}
+                    {% capture text_last_4 %}text_last_4_{{ forloop.index }}{% endcapture %}
+                    {% capture image_last_4 %}image_last_4_{{ forloop.index }}{% endcapture %}
+                    {% capture svg_last_4 %}svg_last_4_{{ forloop.index }}{% endcapture %}        
+                    {% capture last_url %}last_url_{{ forloop.index }}{% endcapture %}        
+                    {% capture proportions_left %}menu_proportions_left_{{ forloop.index }}{% endcapture %}
+                    {% capture banner_right_enable %}banner_right_enable_{{ forloop.index }}{% endcapture %}
+                    {% capture banner_right %}banner_right_{{ forloop.index }}.png{% endcapture %}
+                    {% capture block_right %}menu_item_block_right_{{ forloop.index }}{% endcapture %}
+                    {% capture proportions_right %}menu_proportions_right_{{ forloop.index }}{% endcapture %}      
+                    {% capture menu_i %}{{ forloop.index }}{% endcapture %}
+                    {% assign pro_left = section.settings[proportions_left] %}
+                    {% assign pro_right = section.settings[proportions_right] %}
+                    {% assign groups = pro_left | plus:pro_right %}
+                    {% assign grid = 12 | minus: groups %} 
+                    {% assign child_list_handle = link.title | handleize %}   
+                      <li class="level0 level-top parent">
+                        {%- if link.links != blank -%}
+                          <details>
+                            <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                              {{ link.title | escape }}
+                              {% render 'icon-arrow' %}
+                              {% render 'icon-caret' %}
+                            </summary>
+                            <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                              <div class="menu-drawer__inner-submenu">
+                                <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                  {% render 'icon-arrow' %}
+                                  {{ link.title | escape }}
+                                </button>
+                                {% if section.settings[banner_top_enable] or section.settings[block_top] != blank %}
+            <div class="ulmenu-block ulmenu-block-top grid-full std">
+              {% if section.settings[banner_top_enable] %}
+              {{ banner_top | asset_url | img_tag: 'banner-top' }} 
+              {% endif %} 
+              {% if section.settings.language_enable %}
+              <div class="lang1">{{ section.settings[block_top] | split: '[lang2]' | first }}</div>
+              <div class="lang2">{{ section.settings[block_top] | split: '[lang2]' | last }}</div>
+              {% else %}
+              {{ section.settings[block_top] | split: '|' | first }}
+              {% endif %} 
+            </div> 
+            {% endif %} 
+                            {% if section.settings.smenu != blank %}
+
+              <ul class="parent">
+              {% for link in linklists[section.settings.smenu].links %}
+                {% assign btn = link.title | handle %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a>
+              {% if link.links != blank %}
+                <ul class="child">
+                  {% for child_link in link.links %}  
+                  <li class="{% if btn contains 'button-menu' %}full-btn{% endif %}"><a class="{% if btn contains 'button-menu' %}button button--primary{% endif %}" href= "{{ child_link.url }}">{{ child_link.title }}</a>
+                  {% if child_link.links != blank %}
+                    <ul class="grandchild">
+                    {% for grandchild_link in child_link.links %}  
+                      <li><a href= "{{ grandchild_link.url }}">{{ grandchild_link.title }}</a></li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}   
+                  </li>
+                  {% endfor %}
+                </ul> 
+              {% endif %} 
+              </li>
+              {% endfor %}
+              </ul>
+
+            {% else %}
+            <div class="mega-columns row">
+              
+              <div class="ulmenu-block ulmenu-block-center menu-items col-sm-{{ grid }} itemgrid itemgrid-{{ section.settings[menu_column] }}col">
+                <div class="row">
+                  <h5>{{ section.settings[heading_top] }}</h5>
+                  <ul class="level0">  
+                    {% for childlink in linklists[child_list_handle].links %}  
+                    {% capture banner_sub_top_enable %}banner_sub_{{menu_i}}_top_enable_{{ forloop.index }}{% endcapture %}
+                    {% capture banner_sub_top %}banner_sub_{{menu_i}}_top_column_{{ forloop.index }}.png{% endcapture %}
+                    {% assign grand_child_list_handle = childlink.title | handle %} 
+                    {% if linklists[grand_child_list_handle].links != blank %} 
+                    <li class="level1 {% if childlink.active %}active{% endif %} {% if section.settings[menu_type] != 'classic' %} groups {%endif%} item {% if section.settings[menu_type] =='classic' %} parent {% endif %}"> 
+                      {% if section.settings[banner_sub_top_enable] != blank %}
+                      <div class="banner-sub-top">{{ banner_sub_top | asset_url | img_tag: 'banner-sub-top' }}</div>
+                      {% endif %}
+                      <a href='{{ childlink.url  | remove: "/es" }}' class="title-level1"> 
+                        {% if section.settings.language_enable %}
+                        <span class="lang1">{{ childlink.title | escape | split: '|' | first }}</span>
+                        <span class="lang2">{{ childlink.title | escape | split: '|' | last }}</span>
+                        {% else %}
+                        {{ childlink.title | escape | split: '|' | first }}
+                        {% endif %} 
+                      </a> 
+                      <div class="{% if section.settings[menu_type] != 'classic' %} menu-wrapper {% else %} menu-wrap-sub {% endif %}">
+                        <ul class="level1">
+                          {% for grand_child_link in linklists[grand_child_list_handle].links %}
+                          <li class="level2 {% if grand_child_link.active %}active{% endif %}">
+                            <a href='{{ grand_child_link.url  | remove: "/es" }}' class="site-nav__link"> 
+                              {% if section.settings.language_enable %}
+                              <span class="lang1">{{ grand_child_link.title | split: '|' | first }}</span>
+                              <span class="lang2">{{ grand_child_link.title | split: '|' | last }}</span>
+                              {% else %}
+                              {{ grand_child_link.title | split: '|' | first }}
+                              {% endif %} 
+                            </a>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </li>
+                    {% else %}
+                    <li class="level1 item {% if childlink.active %}active{% endif %}">
+                      {% if section.settings[banner_sub_top_enable] != blank %}
+                      <div class="banner-sub-top">
+                        {{ banner_sub_top | asset_url | img_tag: 'banner-sub-top' }}  
+                      </div>
+                      {% endif %}
+                      <a href='{{ childlink.url  | remove: "/es" }}'> 
+                        {% if section.settings.language_enable %}
+                        <span class="lang1">{{ childlink.title | split: '|' | first }}</span>
+                        <span class="lang2">{{ childlink.title | split: '|' | last }}</span>
+                        {% else %}
+                        {{ childlink.title | split: '|' | first }}
+                        {% endif %} 
+                      </a>
+                    </li>
+                    {% endif %}
+                    
+                    
+                    {% endfor %}
+                    {% if section.settings[menu_bottom] != blank %}
+                    <li class="menu-text">{{section.settings[menu_bottom]}}</li>
+                     {% endif %} 
+                  </ul>
+                </div>
+              </div> 
+              {% if section.settings[proportions_left] != '0' %}
+              <div class="menu-static-blocks ulmenu-block ulmenu-block-left pull-left col-sm-{{ section.settings[proportions_left] }}">
+              
+                <h5>{{ section.settings[heading_middle] }}</h5>
+                <div class="list-menu">
+                  <div class="list-inner">
+                    {% if section.settings[image_1] != blank %}
+                    	{% if section.settings[url_1] != blank %}
+                        	<a href="{{section.settings[url_1] | remove: '/es' }}">
+                        {% endif %}
+                    	<img src="{{ section.settings[image_1] | img_url : '100x' }}">
+                    {% if section.settings[url_1] != blank %}
+                        	</a>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if section.settings[menu_item_block_left_1] != blank %}
+                     <div class="text-flex">
+                       {% if section.settings[url_1] != blank %}
+                        	<a href="{{section.settings[url_1] | remove: '/es' }}">
+                        {% endif %}
+                  		{{ section.settings[menu_item_block_left_1]  }}
+                               {% if section.settings[url_1] != blank %}
+                        	</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="list-inner">
+                    {% if section.settings[image_2] != blank %}
+                    	{% if section.settings[url_2] != blank %}
+                        	<a href="{{section.settings[url_2] | remove: '/es' }}">
+                        {% endif %}
+                    	<img src="{{ section.settings[image_2] | img_url : '100x' }}">
+                    {% if section.settings[url_2] != blank %}
+                        	</a>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if section.settings[menu_item_block_left_2] != blank %}
+                     <div class="text-flex">
+                       {% if section.settings[url_2] != blank %}
+                        	<a href="{{section.settings[url_2] | remove: '/es' }}">
+                        {% endif %}
+                  		{{ section.settings[menu_item_block_left_2]  }}
+                               {% if section.settings[url_2] != blank %}
+                        	</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="list-inner">
+                    {% if section.settings[image_3] != blank %}
+                    	{% if section.settings[url_3] != blank %}
+                        	<a href="{{section.settings[url_3] | remove: '/es' }}">
+                        {% endif %}
+                    	<img src="{{ section.settings[image_3] | img_url : '100x' }}">
+                    {% if section.settings[url_3] != blank %}
+                        	</a>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if section.settings[menu_item_block_left_3] != blank %}
+                     <div class="text-flex">
+                       {% if section.settings[url_3] != blank %}
+                        	<a href="{{section.settings[url_3] | remove: '/es' }}">
+                        {% endif %}
+                  		{{ section.settings[menu_item_block_left_3]  }}
+                              {% if section.settings[url_3] != blank %}
+                        	</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="list-inner">
+                    {% if section.settings[image_4] != blank %}
+                    	{% if section.settings[url_4] != blank %}
+                        	<a href="{{section.settings[url_4] | remove: '/es' }}">
+                        {% endif %}
+                    	<img src="{{ section.settings[image_4] | img_url : '100x' }}">
+                    {% if section.settings[url_4] != blank %}
+                        	</a>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if section.settings[menu_item_block_left_4] != blank %}
+                    <div class="text-flex">
+                    {% if section.settings[url_4] != blank %}
+                        	<a href="{{section.settings[url_4] | remove: '/es' }}">
+                        {% endif %}
+                  		{{ section.settings[menu_item_block_left_4]  }}
+                              {% if section.settings[url_4] != blank %}
+                        	</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  
+                </div>
+               
+              </div> 
+              {% endif %} 
+              {% if section.settings[proportions_right] != '0' %}
+              <div class="menu-static-blocks ulmenu-block ulmenu-block-right col-sm-{{ section.settings[proportions_right] }}">
+               
+                <h5> {{ section.settings[block_right] }}</h5>
+               
+                <ul>
+                  {% if section.settings[url_last_1] or section.settings[text_last_1] != blank %}
+                   <li>
+                     <a href="{{ section.settings[url_last_1]  | remove: '/es' }}">
+                        {% if section.settings[svg_last_1] != blank %}
+                        {{ section.settings[svg_last_1] }}
+                        {%else section.settings[image_last_1] != blank %}
+                        <img src="{{ section.settings[image_last_1] | img_url : '100x' }}"> 
+                        {% endif %}
+                        {{ section.settings[text_last_1] }}
+                     </a>
+					</li>
+                   {% endif %} 
+                  
+                  {% if section.settings[url_last_2] or section.settings[text_last_2] != blank %}
+                   <li>
+                     <a href="{{ section.settings[url_last_2]  | remove: '/es' }}">
+                        {% if section.settings[svg_last_2] != blank %}
+                        {{ section.settings[svg_last_2] }}
+                        {%else section.settings[image_last_2] != blank %}
+                        <img src="{{ section.settings[image_last_2] | img_url : '100x' }}"> 
+                        {% endif %}
+                        {{ section.settings[text_last_2] }}
+                     </a>
+					</li>
+                   {% endif %} 
+                  
+                  {% if section.settings[url_last_3] or section.settings[text_last_3] != blank %}
+                   <li>
+                     <a href="{{ section.settings[url_last_3]  | remove: '/es' }}">
+                        {% if section.settings[svg_last_3] != blank %}
+                        {{ section.settings[svg_last_3] }}
+                        {%else section.settings[image_last_3] != blank %}
+                        <img src="{{ section.settings[image_last_3] | img_url : '100x' }}"> 
+                        {% endif %}
+                        {{ section.settings[text_last_3] }}
+                     </a>
+					</li>
+                   {% endif %} 
+                  
+                  
+                  {% if section.settings[url_last_4] or section.settings[text_last_4] != blank %}
+                   <li>
+                     <a href="{{ section.settings[url_last_4]  | remove: '/es' }}">
+                        {% if section.settings[svg_last_4] != blank %}
+                        {{ section.settings[svg_last_4] }}
+                        {%else section.settings[image_last_4] != blank %}
+                        <img src="{{ section.settings[image_last_4] | img_url : '100x' }}"> 
+                        {% endif %}
+                        {{ section.settings[text_last_4] }}
+                     </a>
+					</li>
+                   {% endif %} 
+                  
+                  
+                </ul>
+                
+                
+                {% if section.settings[last_url] != blank %}
+               		<a href="{{section.settings[last_url] | remove: '/es' }}">View All</a>
+				{% endif %}
+                
+              </div> 
+              {% endif %}
+            </div>
+            {% if section.settings[banner_bottom_enable] or section.settings[block_bottom] != blank %}
+            <div class="ulmenu-block ulmenu-block-bottom grid-full std">
+              {% if section.settings[banner_bottom_enable] %}
+              {{ banner_bottom | asset_url | img_tag: 'banner-bottom' }}
+              {% endif %} 
+              {% if section.settings.language_enable %}
+              <div class="lang1">{{ section.settings[block_bottom] | split: '[lang2]' | first }}</div>
+              <div class="lang2">{{ section.settings[block_bottom] | split: '[lang2]' | last }}</div>
+              {% else %}
+              {{ section.settings[block_bottom] | split: '|' | first }}
+              {% endif %} 
+            </div>
+            {% endif %} 
+                       {% endif %}         
+                              </div>
+                            </div>
+                          </details>
+                        {%- else -%}
+                          <a href="{{ link.url  | remove: '/es' }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
+                            {{ link.title | escape }}
+                          </a>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  
+                    {%- for link in section.settings.menu_right.links -%}
+                      <li>
+                        {%- if link.links != blank -%}
+                          <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+                            <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                              {{ link.title | escape }}
+                              {% render 'icon-arrow' %}
+                              {% render 'icon-caret' %}
+                            </summary>
+                            <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                              <div class="menu-drawer__inner-submenu">
+                                <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                  {% render 'icon-arrow' %}
+                                  {{ link.title | escape }}
+                                </button>
+                                <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                  {%- for childlink in link.links -%}
+                                    <li>
+                                      {%- if childlink.links == blank -%}
+                                        <a href="{{ childlink.url  | remove: '/es' }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                          {{ childlink.title | escape }}
+                                        </a>
+                                      {%- else -%}
+                                        <details id="Details-menu-drawer-submenu-{{ forloop.index }}">
+                                          <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                            {{ childlink.title | escape }}
+                                            {% render 'icon-arrow' %}
+                                            {% render 'icon-caret' %}
+                                          </summary>
+                                          <div id="childlink-{{ childlink.title | escape }}" class="menu-drawer__submenu motion-reduce">
+                                            <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                              {% render 'icon-arrow' %}
+                                              {{ childlink.title | escape }}
+                                            </button>
+                                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                              {%- for grandchildlink in childlink.links -%}
+                                                <li>
+                                                  <a href="{{ grandchildlink.url  | remove: '/es' }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                                    {{ grandchildlink.title | escape }}
+                                                  </a>
+                                                </li>
+                                              {%- endfor -%}
+                                            </ul>
+                                          </div>
+                                        </details>
+                                      {%- endif -%}
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              </div>
+                            </div>
+                          </details>
+                        {%- else -%}
+                          <a href="{{ link.url  | remove: '/es' }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
+                            {{ link.title | escape }}
+                          </a>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+               
+                    
+                </nav>
+                <div class="menu-drawer__utility-links">
+                  {%- if shop.customer_accounts_enabled -%}
+                    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link focus-inset h5">
+                      {% render 'icon-account' %}
+                      {%- liquid
+                        if customer
+                          echo 'customer.account_fallback' | t
+                        else
+                          echo 'customer.log_in' | t
+                        endif
+                      -%}
+                    </a>
+                  {%- endif -%}
+                  <ul class="list list-social list-unstyled" role="list">
+                    {%- if settings.social_twitter_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_twitter_link }}" class="list-social__link link">
+                          {%- render 'icon-twitter' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_facebook_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_facebook_link }}" class="list-social__link link">
+                          {%- render 'icon-facebook' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_pinterest_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_pinterest_link }}" class="list-social__link link">
+                          {%- render 'icon-pinterest' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_instagram_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_instagram_link }}" class="list-social__link link">
+                          {%- render 'icon-instagram' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_tiktok_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_tiktok_link }}" class="list-social__link link">
+                          {%- render 'icon-tiktok' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_tumblr_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_tumblr_link }}" class="list-social__link link">
+                          {%- render 'icon-tumblr' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_snapchat_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_snapchat_link }}" class="list-social__link link">
+                          {%- render 'icon-snapchat' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_youtube_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_youtube_link }}" class="list-social__link link">
+                          {%- render 'icon-youtube' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_vimeo_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_vimeo_link }}" class="list-social__link link">
+                          {%- render 'icon-vimeo' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </header-drawer>
+    {%- endif -%}
+
+    {%- if section.settings.logo_position == 'top-center' or section.settings.menu == blank -%}
+      <details-modal class="header__search">
+        <details>
+          <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+            <span>
+              <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-search">
+              </svg>
+              <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-close">
+              </svg>
+            </span>
+          </summary>
+          <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+            <div class="modal-overlay"></div>
+            <div class="search-modal__content" tabindex="-1">
+              {%- if settings.predictive_search_enabled -%}
+                <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+              {%- endif -%}
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                  <div class="field">
+                    <input class="search__input field__input" 
+                      id="Search-In-Modal-1"
+                      type="search"
+                      name="q"
+                      value=""
+                      placeholder="{{ 'general.search.search' | t }}"
+                      {%- if settings.predictive_search_enabled -%}
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="predictive-search-results-list"
+                        aria-controls="predictive-search-results-list"
+                        aria-haspopup="listbox"
+                        aria-autocomplete="list"
+                        autocorrect="off"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false" 
+                      {%- endif -%}
+                    >
+                    <label class="field__label" for="Search-In-Modal-1">{{ 'general.search.search' | t }}</label>
+                    <input name="type" type="hidden" value="product">
+                    <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                      <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                        <use href="#icon-search">
+                      </svg>
+                    </button> 
+                  </div>
+                  
+                  {%- if settings.predictive_search_enabled -%}
+                    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                      <div class="predictive-search__loading-state">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                  {%- endif -%}
+                </form>
+              {%- if settings.predictive_search_enabled -%}
+                </predictive-search>
+              {%- endif -%} 
+              <button type="button" class="modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+                <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                  <use href="#icon-close">
+                </svg>
+              </button>
+            </div>
+          </div>
+        </details>
+      </details-modal>
+    {%- endif -%}
+
+        
+    {%- if section.settings.menu != blank -%}
+      <nav class="header__inline-menu"> 
+       
+        <div class="navigation-wrapper">
+  <div class="main-navigation"> 
+    <!-- begin site-nav -->
+ 
+      <ul class="top-navigation list-menu list-menu--inline"> 
+      {% for link in linklists[section.settings.menu].links %}   
+      {% capture menu_type %}menu_item_type_{{ forloop.index }}{% endcapture %}  
+      {% capture menu_bottom %}menu_bottom_{{ forloop.index }}{% endcapture %}
+      {% capture menu_column %}menu_item_column_{{ forloop.index }}{% endcapture %}      
+      {% capture block_left %}menu_item_block_left_{{ forloop.index }}{% endcapture %}
+        {% capture heading_top %}heading_2_{{ forloop.index }}{% endcapture %}
+         {% capture heading_middle %}heading_1_{{ forloop.index }}{% endcapture %}
+        
+        {% capture menu_item_block_left_1 %}menu_item_block_left_1_{{ forloop.index }}{% endcapture %}
+         {% capture image_1 %}image_1_{{ forloop.index }}{% endcapture %}
+         {% capture url_1 %}url_1_{{ forloop.index }}{% endcapture %}
+        
+        {% capture menu_item_block_left_2 %}menu_item_block_left_2_{{ forloop.index }}{% endcapture %}
+         {% capture image_2 %}image_2_{{ forloop.index }}{% endcapture %}
+         {% capture url_2 %}url_2_{{ forloop.index }}{% endcapture %}
+        
+        
+        {% capture menu_item_block_left_3 %}menu_item_block_left_3_{{ forloop.index }}{% endcapture %}
+         {% capture image_3 %}image_3_{{ forloop.index }}{% endcapture %}
+         {% capture url_3 %}url_3_{{ forloop.index }}{% endcapture %}
+        
+        {% capture menu_item_block_left_4 %}menu_item_block_left_4_{{ forloop.index }}{% endcapture %}
+         {% capture image_4 %}image_4_{{ forloop.index }}{% endcapture %}
+         {% capture url_4 %}url_4_{{ forloop.index }}{% endcapture %}
+        
+        
+        {% capture url_last_1 %}url_last_1_{{ forloop.index }}{% endcapture %}
+        {% capture text_last_1 %}text_last_1_{{ forloop.index }}{% endcapture %}
+        {% capture image_last_1 %}image_last_1_{{ forloop.index }}{% endcapture %}
+        {% capture svg_last_1 %}svg_last_1_{{ forloop.index }}{% endcapture %}
+        
+        {% capture url_last_2 %}url_last_2_{{ forloop.index }}{% endcapture %}
+        {% capture text_last_2 %}text_last_2_{{ forloop.index }}{% endcapture %}
+        {% capture image_last_2 %}image_last_2_{{ forloop.index }}{% endcapture %}
+        {% capture svg_last_2 %}svg_last_2_{{ forloop.index }}{% endcapture %}
+        
+        {% capture url_last_3 %}url_last_3_{{ forloop.index }}{% endcapture %}
+        {% capture text_last_3 %}text_last_3_{{ forloop.index }}{% endcapture %}
+        {% capture image_last_3 %}image_last_3_{{ forloop.index }}{% endcapture %}
+        {% capture svg_last_3 %}svg_last_3_{{ forloop.index }}{% endcapture %}
+        
+        {% capture url_last_4 %}url_last_4_{{ forloop.index }}{% endcapture %}
+        {% capture text_last_4 %}text_last_4_{{ forloop.index }}{% endcapture %}
+        {% capture image_last_4 %}image_last_4_{{ forloop.index }}{% endcapture %}
+        {% capture svg_last_4 %}svg_last_4_{{ forloop.index }}{% endcapture %}
+        
+        
+         {% capture last_url %}last_url_{{ forloop.index }}{% endcapture %}
+        
+      {% capture proportions_left %}menu_proportions_left_{{ forloop.index }}{% endcapture %}
+      {% capture banner_right_enable %}banner_right_enable_{{ forloop.index }}{% endcapture %}
+      {% capture banner_right %}banner_right_{{ forloop.index }}.png{% endcapture %}
+      {% capture block_right %}menu_item_block_right_{{ forloop.index }}{% endcapture %}
+      {% capture proportions_right %}menu_proportions_right_{{ forloop.index }}{% endcapture %}
+      
+      {% capture menu_i %}{{ forloop.index }}{% endcapture %}
+      {% assign pro_left = section.settings[proportions_left] %}
+      {% assign pro_right = section.settings[proportions_right] %}
+      {% assign groups = pro_left | plus:pro_right %}
+      {% assign grid = 12 | minus: groups %} 
+      {% assign child_list_handle = link.title | handleize %}   
+      {% if linklists[child_list_handle].links != blank %}
+      <li class="level0 level-top parent {% if section.settings[menu_type] %} {%else %}static {% endif %} {% if link.active %}active{% endif %}">
+        <a href='{{ link.url | remove: "/es"}}' class="level-top link header__menu-item ssds">
+          {% if section.settings[menu_icon_image_use] != blank %}
+          <img class="category-icon" src="{{ menu_icon_image | asset_url }}" alt="icon">
+          {% else %} 
+            {% if section.settings[menu_font_icon] %}
+            <i class="category-icon {{section.settings[menu_font_icon]}}"></i>
+            {% endif %} 
+          {% endif %}
+          <span {% if link.current %} class="header__active-menu-item"{% endif %}> 
+            {% if section.settings.language_enable %}
+            <span class="lang1">{{ link.title | split: '|' | first }}</span>
+            <span class="lang2">{{ link.title | split: '|' | last }}</span>
+            {% else %}
+            {{ link.title | split: '|' | first }}
+            {% endif %}
+            {% if section.settings[menu_label] !='' and section.settings[menu_label] == '1' %}
+            <span class="cat-label cat-label-label1 pin-bottom"> 
+              {% if section.settings.language_enable %}
+              <span class="lang1">{{ section.settings[menu_label_text1] | split: '|' | first }}</span>
+              <span class="lang2">{{ section.settings[menu_label_text1] | split: '|' | last }}</span>
+              {% else %}
+              {{ section.settings[menu_label_text1] | split: '|' | first }}
+              {% endif %}
+            </span>
+            {% endif %}
+            {% if section.settings[menu_label] !='' and section.settings[menu_label] == '2' %}
+            <span class="cat-label cat-label-label2 pin-bottom"> 
+              {% if section.settings.language_enable %}
+              <span class="lang1">{{ section.settings[menu_label_text2] | split: '|' | first }}</span>
+              <span class="lang2">{{ section.settings[menu_label_text2] | split: '|' | last }}</span>
+              {% else %}
+              {{ section.settings[menu_label_text2] | split: '|' | first }}
+              {% endif %}
+            </span>
+            {% endif %}
+          </span>
+         <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          	<path d="M0 4.08984H11.64" stroke="#0A0A0A" stroke-miterlimit="10"/>
+          	<path d="M8.32062 8.18L7.64062 7.45L11.2506 4.09L7.64062 0.73L8.32062 0L12.7206 4.09L8.32062 8.18Z" fill="#0A0A0A"/>
+         </svg>
+
+        </a>   
+        <div class="level0 menu-wrap-sub {% if section.settings[menu_type] %} {%else %}dropdown {% endif %}"> 
+          <div class="page-width">
+            {% if section.settings.smenu != blank %}
+
+              <ul class="parent">
+              {% for link in linklists[section.settings.smenu].links %}
+                {% assign btn = link.title | handle %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a>
+              {% if link.links != blank %}
+                <ul class="child">
+                  {% for child_link in link.links %}  
+                  <li class="{% if btn contains 'button-menu' %}full-btn{% endif %}"><a class="{% if btn contains 'button-menu' %}button button--primary{% endif %}" href= "{{ child_link.url }}">{{ child_link.title }}</a>
+                  {% if child_link.links != blank %}
+                    <ul class="grandchild">
+                    {% for grandchild_link in child_link.links %}  
+                      <li><a href= "{{ grandchild_link.url }}">{{ grandchild_link.title }}</a></li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}   
+                  </li>
+                  {% endfor %}
+                </ul> 
+              {% endif %} 
+              </li>
+              {% endfor %}
+              </ul>
+
+            {% else %}
+            {% if section.settings[banner_top_enable] or section.settings[block_top] != blank %}
+            <div class="ulmenu-block ulmenu-block-top grid-full std">
+              {% if section.settings[banner_top_enable] %}
+              {{ banner_top | asset_url | img_tag: 'banner-top' }} 
+              {% endif %} 
+              {% if section.settings.language_enable %}
+              <div class="lang1">{{ section.settings[block_top] | split: '[lang2]' | first }}</div>
+              <div class="lang2">{{ section.settings[block_top] | split: '[lang2]' | last }}</div>
+              {% else %}
+              {{ section.settings[block_top] | split: '|' | first }}
+              {% endif %} 
+            </div> 
+            {% endif %} 
+            <div class="mega-columns row">
+              
+              <div class="ulmenu-block ulmenu-block-center menu-items col-sm-{{ grid }} itemgrid itemgrid-{{ section.settings[menu_column] }}col">
+                <div class="row">
+                  <h5>{{ section.settings[heading_top] }}</h5>
+                  <ul class="level0">  
+                    {% for childlink in linklists[child_list_handle].links %}  
+                    {% capture banner_sub_top_enable %}banner_sub_{{menu_i}}_top_enable_{{ forloop.index }}{% endcapture %}
+                    {% capture banner_sub_top %}banner_sub_{{menu_i}}_top_column_{{ forloop.index }}.png{% endcapture %}
+                    {% assign grand_child_list_handle = childlink.title | handle %} 
+                    {% if linklists[grand_child_list_handle].links != blank %} 
+                    <li class="level1 {% if childlink.active %}active{% endif %} {% if section.settings[menu_type] != 'classic' %} groups {%endif%} item {% if section.settings[menu_type] =='classic' %} parent {% endif %}"> 
+                      {% if section.settings[banner_sub_top_enable] != blank %}
+                      <div class="banner-sub-top">{{ banner_sub_top | asset_url | img_tag: 'banner-sub-top' }}</div>
+                      {% endif %}
+                      <a href="{{ childlink.url  | remove: '/es' }}" class="title-level1"> 
+                        {% if section.settings.language_enable %}
+                        <span class="lang1">{{ childlink.title | escape | split: '|' | first }}</span>
+                        <span class="lang2">{{ childlink.title | escape | split: '|' | last }}</span>
+                        {% else %}
+                        {{ childlink.title | escape | split: '|' | first }}
+                        {% endif %} 
+                      </a> 
+                      <div class="{% if section.settings[menu_type] != 'classic' %} menu-wrapper {% else %} menu-wrap-sub {% endif %}">
+                        <ul class="level1">
+                          {% for grand_child_link in linklists[grand_child_list_handle].links %}
+                          <li class="level2 {% if grand_child_link.active %}active{% endif %}">
+                            <a href="{{ grand_child_link.url  | remove: '/es' }}" class="site-nav__link"> 
+                              {% if section.settings.language_enable %}
+                              <span class="lang1">{{ grand_child_link.title | split: '|' | first }}</span>
+                              <span class="lang2">{{ grand_child_link.title | split: '|' | last }}</span>
+                              {% else %}
+                              {{ grand_child_link.title | split: '|' | first }}
+                              {% endif %} 
+                            </a>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </li>
+                    {% else %}
+                    <li class="level1 item {% if childlink.active %}active{% endif %}">
+                      {% if section.settings[banner_sub_top_enable] != blank %}
+                      <div class="banner-sub-top">
+                        {{ banner_sub_top | asset_url | img_tag: 'banner-sub-top' }}  
+                      </div>
+                      {% endif %}
+                      <a href="{{ childlink.url  | remove: '/es' }}"> 
+                        {% if section.settings.language_enable %}
+                        <span class="lang1">{{ childlink.title | split: '|' | first }}</span>
+                        <span class="lang2">{{ childlink.title | split: '|' | last }}</span>
+                        {% else %}
+                        {{ childlink.title | split: '|' | first }}
+                        {% endif %} 
+                      </a>
+                    </li>
+                    {% endif %}
+                    
+                    
+                    {% endfor %}
+                    {% if section.settings[menu_bottom] != blank %}
+                    <li class="menu-text">{{section.settings[menu_bottom]}}</li>
+                     {% endif %} 
+                  </ul>
+                </div>
+              </div> 
+              {% if section.settings[proportions_left] != '0' %}
+              <div class="menu-static-blocks ulmenu-block ulmenu-block-left pull-left col-sm-{{ section.settings[proportions_left] }}">
+              
+                <h5>{{ section.settings[heading_middle] }}</h5>
+                <div class="list-menu">
+                  <div class="list-inner">
+                    {% if section.settings[image_1] != blank %}
+                    	{% if section.settings[url_1] != blank %}
+                        	<a href="{{section.settings[url_1] | remove: '/es' }}">
+                        {% endif %}
+                    	<img src="{{ section.settings[image_1] | img_url : '100x' }}">
+                    {% if section.settings[url_1] != blank %}
+                        	</a>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if section.settings[menu_item_block_left_1] != blank %}
+                     <div class="text-flex">
+                       {% if section.settings[url_1] != blank %}
+                        	<a href="{{section.settings[url_1] | remove: '/es' }}">
+                        {% endif %}
+                  		{{ section.settings[menu_item_block_left_1]  }}
+                               {% if section.settings[url_1] != blank %}
+                        	</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="list-inner">
+                    {% if section.settings[image_2] != blank %}
+                    	{% if section.settings[url_2] != blank %}
+                        	<a href="{{section.settings[url_2] | remove: '/es' }}">
+                        {% endif %}
+                    	<img src="{{ section.settings[image_2] | img_url : '100x' }}">
+                    {% if section.settings[url_2] != blank %}
+                        	</a>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if section.settings[menu_item_block_left_2] != blank %}
+                     <div class="text-flex">
+                       {% if section.settings[url_2] != blank %}
+                        	<a href="{{section.settings[url_2] | remove: '/es' }}">
+                        {% endif %}
+                  		{{ section.settings[menu_item_block_left_2]  }}
+                               {% if section.settings[url_2] != blank %}
+                        	</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="list-inner">
+                    {% if section.settings[image_3] != blank %}
+                    	{% if section.settings[url_3] != blank %}
+                        	<a href="{{section.settings[url_3] | remove: '/es' }}">
+                        {% endif %}
+                    	<img src="{{ section.settings[image_3] | img_url : '100x' }}">
+                    {% if section.settings[url_3] != blank %}
+                        	</a>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if section.settings[menu_item_block_left_3] != blank %}
+                     <div class="text-flex">
+                       {% if section.settings[url_3] != blank %}
+                        	<a href="{{section.settings[url_3] | remove: '/es' }}">
+                        {% endif %}
+                  		{{ section.settings[menu_item_block_left_3]  }}
+                              {% if section.settings[url_3] != blank %}
+                        	</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="list-inner">
+                    {% if section.settings[image_4] != blank %}
+                    	{% if section.settings[url_4] != blank %}
+                        	<a href="{{section.settings[url_4] | remove: '/es' }}">
+                        {% endif %}
+                    	<img src="{{ section.settings[image_4] | img_url : '100x' }}">
+                    {% if section.settings[url_4] != blank %}
+                        	</a>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if section.settings[menu_item_block_left_4] != blank %}
+                    <div class="text-flex">
+                    {% if section.settings[url_4] != blank %}
+                        	<a href="{{section.settings[url_4] | remove: '/es' }}">
+                        {% endif %}
+                  		{{ section.settings[menu_item_block_left_4]  }}
+                              {% if section.settings[url_4] != blank %}
+                        	</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  
+                </div>
+               
+              </div> 
+              {% endif %} 
+              {% if section.settings[proportions_right] != '0' %}
+              <div class="menu-static-blocks ulmenu-block ulmenu-block-right col-sm-{{ section.settings[proportions_right] }}">
+               
+                <h5> {{ section.settings[block_right] }}</h5>
+               
+                <ul>
+                  {% if section.settings[url_last_1] or section.settings[text_last_1] != blank %}
+                   <li>
+                     <a href="{{ section.settings[url_last_1]  | remove: '/es' }}">
+                        {% if section.settings[svg_last_1] != blank %}
+                        {{ section.settings[svg_last_1] }}
+                        {%else section.settings[image_last_1] != blank %}
+                        <img src="{{ section.settings[image_last_1] | img_url : '100x' }}"> 
+                        {% endif %}
+                        {{ section.settings[text_last_1] }}
+                     </a>
+					</li>
+                   {% endif %} 
+                  
+                  {% if section.settings[url_last_2] or section.settings[text_last_2] != blank %}
+                   <li>
+                     <a href="{{ section.settings[url_last_2] | remove: '/es'  }}">
+                        {% if section.settings[svg_last_2] != blank %}
+                        {{ section.settings[svg_last_2] }}
+                        {%else section.settings[image_last_2] != blank %}
+                        <img src="{{ section.settings[image_last_2] | img_url : '100x' }}"> 
+                        {% endif %}
+                        {{ section.settings[text_last_2] }}
+                     </a>
+					</li>
+                   {% endif %} 
+                  
+                  {% if section.settings[url_last_3] or section.settings[text_last_3] != blank %}
+                   <li>
+                     <a href="{{ section.settings[url_last_3]  | remove: '/es' }}">
+                        {% if section.settings[svg_last_3] != blank %}
+                        {{ section.settings[svg_last_3] }}
+                        {%else section.settings[image_last_3] != blank %}
+                        <img src="{{ section.settings[image_last_3] | img_url : '100x' }}"> 
+                        {% endif %}
+                        {{ section.settings[text_last_3] }}
+                     </a>
+					</li>
+                   {% endif %} 
+                  
+                  
+                  {% if section.settings[url_last_4] or section.settings[text_last_4] != blank %}
+                   <li>
+                     <a href="{{ section.settings[url_last_4] | remove: '/es'  }}">
+                        {% if section.settings[svg_last_4] != blank %}
+                        {{ section.settings[svg_last_4] }}
+                        {%else section.settings[image_last_4] != blank %}
+                        <img src="{{ section.settings[image_last_4] | img_url : '100x' }}"> 
+                        {% endif %}
+                        {{ section.settings[text_last_4] }}
+                     </a>
+					</li>
+                   {% endif %} 
+                </ul>
+                {% if section.settings[last_url] != blank %}
+               		<a href="{{section.settings[last_url] | remove: '/es' }}">View All</a>
+				{% endif %}
+                
+              </div> 
+              {% endif %}
+            </div>
+            {% if section.settings[banner_bottom_enable] or section.settings[block_bottom] != blank %}
+            <div class="ulmenu-block ulmenu-block-bottom grid-full std">
+              {% if section.settings[banner_bottom_enable] %}
+              {{ banner_bottom | asset_url | img_tag: 'banner-bottom' }}
+              {% endif %} 
+              {% if section.settings.language_enable %}
+              <div class="lang1">{{ section.settings[block_bottom] | split: '[lang2]' | first }}</div>
+              <div class="lang2">{{ section.settings[block_bottom] | split: '[lang2]' | last }}</div>
+              {% else %}
+              {{ section.settings[block_bottom] | split: '|' | first }}
+              {% endif %} 
+            </div>
+            {% endif %} 
+              
+               {% endif %} 
+          </div>
+        </div>
+      </li>
+      {% else %}
+      <li class="level0 level-top {% if link.active %}active{% endif %}"> 
+        <a href='{{ link.url | remove: "/es"}}' class="level-top link header__menu-item">
+          {% if section.settings[menu_icon_image_use] != blank %}
+          <img class="category-icon" src="{{ menu_icon_image | asset_url }}" alt="icon">
+          {% else %} 
+            {% if section.settings[menu_font_icon] %}
+            <i class="category-icon {{section.settings[menu_font_icon]}}"></i>
+            {% endif %} 
+          {% endif %}
+          <span {% if link.current %} class="header__active-menu-item"{% endif %}> 
+            {% if section.settings.language_enable %}
+            <span class="lang1">{{ link.title | split: '|' | first }}</span>
+            <span class="lang2">{{ link.title | split: '|' | last }}</span>
+            {% else %}
+            {{ link.title | split: '|' | first }}
+            {% endif %} 
+            {% if section.settings[menu_label] !='' and section.settings[menu_label] == '1' %}
+            <span class="cat-label cat-label-label1 pin-bottom"> 
+              {% if section.settings.language_enable %}
+              <span class="lang1">{{ section.settings[menu_label_text1] | split: '|' | first }}</span>
+              <span class="lang2">{{ section.settings[menu_label_text1] | split: '|' | last }}</span>
+              {% else %}
+              {{ section.settings[menu_label_text1] | split: '|' | first }}
+              {% endif %}
+            </span>
+            {% endif %}
+            {% if section.settings[menu_label] !='' and section.settings[menu_label] == '2' %}
+            <span class="cat-label cat-label-label2 pin-bottom"> 
+              {% if section.settings.language_enable %}
+              <span class="lang1">{{ section.settings[menu_label_text2] | split: '|' | first }}</span>
+              <span class="lang2">{{ section.settings[menu_label_text2] | split: '|' | last }}</span>
+              {% else %}
+              {{ section.settings[menu_label_text2] | split: '|' | first }}
+              {% endif %}
+            </span>
+            {% endif %}
+          </span>
+        </a>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  <!-- //site-nav -->
+  </div> 
+</div>
+        
+        
+        
+      </nav>
+    {%- endif -%}
+              
+              
+    {%- if request.page_type == 'index' -%}
+      <h1 class="header__heading">
+    {%- endif -%}              
+        
+        <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+{%- if request.page_type == 'index' -%}
+ {%- if section.settings.logo_h != blank -%}
+            {%- assign image_size = section.settings.logo_width | append: 'x' -%}
+            <img srcset="{{ section.settings.logo_h | img_url: image_size }} 1x, {{ section.settings.logo_h | img_url: image_size, scale: 2 }} 2x"
+              src="{{ section.settings.logo_h | img_url: image_size }}"
+              loading="lazy"
+              class="header__heading-logo log-ind"
+              width="{{ section.settings.logo_h.width }}"
+              height="{{ section.settings.logo_h.height }}"
+              alt="{{ section.settings.logo_h.alt | default: shop.name | escape }}"
+            >
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
+  {%- if section.settings.logo != blank -%}
+            {%- assign image_size = section.settings.logo_width | append: 'x' -%}
+            <img srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+              src="{{ section.settings.logo | img_url: image_size }}"
+              loading="lazy"
+              class="header__heading-logo"
+              width="{{ section.settings.logo.width }}"
+              height="{{ section.settings.logo.height }}"
+              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            >
+          {%- endif -%}
+          {% else %}
+          {%- if section.settings.logo != blank -%}
+            {%- assign image_size = section.settings.logo_width | append: 'x' -%}
+            <img srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+              src="{{ section.settings.logo | img_url: image_size }}"
+              loading="lazy"
+              class="header__heading-logo"
+              width="{{ section.settings.logo.width }}"
+              height="{{ section.settings.logo.height }}"
+              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            >
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
+{% endif %}
+
+          
+        </a>
+    {%- if request.page_type == 'index' -%}
+      </h1>
+    {%- endif -%}
+    
+    <div class="header__icons">          
+         {%- if section.settings.menu_right != blank -%}
+      <nav class="header__inline-menu-rigth">
+        <ul class="list-menu list-menu--inline" role="list">
+          
+            {% for link in linklists[section.settings.menu_right].links %}   
+           <li>
+              {%- if link.links != blank -%}
+                <details-disclosure>
+                  <details>
+                    <summary class="header__menu-item list-menu__item link focus-inset">
+                      <span {% if link.child_active %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+                      {% render 'icon-caret' %}
+                    </summary>
+                    <ul class="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="list" tabindex="-1">
+                      {%- for childlink in link.links -%}
+                        <li>
+                          {%- if childlink.links == blank -%}
+                            <a href='{{ childlink.url | remove: "/es" }}' class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                              {{ childlink.title | escape }}
+                            </a>
+                          {%- else -%}
+                            <details>
+                              <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large">
+                                {{ childlink.title | escape }}
+                                {% render 'icon-caret' %}
+                              </summary>
+                              <ul class="header__submenu list-menu motion-reduce">
+                                {%- for grandchildlink in childlink.links -%}
+                                  <li>
+                                    <a href="{{ grandchildlink.url  | remove: '/es' }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                      {{ grandchildlink.title | escape }}
+                                    </a>
+                                  </li>
+                                {%- endfor -%}
+                              </ul>
+                            </details>
+                          {%- endif -%}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </details>
+                </details-disclosure>
+              {%- else -%}
+                <a href='{{ link.url  | remove: "/es" }}' class="header__menu-item header__menu-item list-menu__item link link--text focus-inset"{% if link.current %} aria-current="page"{% endif %}>
+                  <span {% if link.current %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+                </a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+        <div class="t_icon">
+          {% if template contains 'product.five-products' or template contains 'index' %}
+              <span class="ly-custom-1000"></span>
+              {% endif %}
+      <details-modal class="header__search">
+        <details>
+          <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+            <span>
+              <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                <path d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13Z" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M14.5008 14.5008L11.2383 11.2383" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-close">
+              </svg>
+            </span>
+          </summary>
+          <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+            <div class="modal-overlay"></div>
+            <div class="search-modal__content" tabindex="-1">
+              {%- if settings.predictive_search_enabled -%}
+                <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+              {%- endif -%} 
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                  <div class="field">
+                    <input class="search__input field__input" 
+                      id="Search-In-Modal"
+                      type="search"
+                      name="q"
+                      value=""
+                      placeholder="{{ 'general.search.search' | t }}"
+                      {%- if settings.predictive_search_enabled -%}
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="predictive-search-results-list"
+                        aria-controls="predictive-search-results-list"
+                        aria-haspopup="listbox"
+                        aria-autocomplete="list"
+                        autocorrect="off"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false" 
+                      {%- endif -%}
+                    >
+                    <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
+                    <input type="hidden" name="type" value="product">
+                    <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                      <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                        <use href="#icon-search">
+                      </svg>
+                    </button> 
+                  </div>
+                  
+                  {%- if settings.predictive_search_enabled -%}
+                    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                      <div class="predictive-search__loading-state">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                  {%- endif -%}
+                </form>
+              {%- if settings.predictive_search_enabled -%}
+                </predictive-search>
+              {%- endif -%}
+              <button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+                <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                  <use href="#icon-close">
+                </svg>
+              </button>
+            </div>
+          </div>
+        </details>
+      </details-modal>
+              
+               {% if template contains 'cart' %}        
+                  <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+        {%- liquid
+          if cart == empty
+            render 'icon-cart-empty'
+          else
+            render 'icon-cart'
+          endif
+        -%}
+        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        {%- if cart != empty -%}
+          <div class="cart-count-bubble">
+            {%- if cart.item_count < 100 -%}
+              <span aria-hidden="true">{{ cart.item_count }}</span>
+            {%- endif -%}
+            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+          </div>
+        {%- endif -%}
+      </a>
+              {%else%}
+<!--cart-->
+            <div class="header__cart">
+
+                <a class="js-ajax-cart-drawer-trigger header__icon header__icon--cart link focus-inset" href="/cart">
+                    {% include 'icon-cart' %}
+                    <span class="js-ajax-cart-counter cart-count-bubble">{{ cart.item_count }}</span>
+                </a>
+
+            </div>
+            <!--end cart-->
+              {% endif %}
+              
+      {%- if shop.customer_accounts_enabled -%}
+        <a href='{%- if customer -%}{{ routes.account_url  | remove: "/es" }}{%- else -%}{{ routes.account_login_url  | remove: "/es" }}{%- endif -%}' class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
+          {% render 'icon-account' %}
+          <span class="visually-hidden">
+            {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+          </span>
+        </a>
+      {%- endif -%}
+              
+            </div>
+      
+    </div>
+  </header>
+</{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
+
+{%- render 'cart-notification', color_scheme: section.settings.color_scheme -%}
+
+{% javascript %}
+  class StickyHeader extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.header = document.getElementById('shopify-section-header');
+      this.headerBounds = {};
+      this.currentScrollTop = 0;
+      this.preventReveal = false;
+
+      this.onScrollHandler = this.onScroll.bind(this);
+      this.hideHeaderOnScrollUp = () => this.preventReveal = true;
+
+      this.addEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
+      window.addEventListener('scroll', this.onScrollHandler, false);
+
+      this.createObserver();
+    }
+
+    disconnectedCallback() {
+      this.removeEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
+      window.removeEventListener('scroll', this.onScrollHandler);
+    }
+
+    createObserver() {
+      let observer = new IntersectionObserver((entries, observer) => {
+        this.headerBounds = entries[0].intersectionRect;
+        observer.disconnect();
+      });
+
+      observer.observe(this.header);
+    }
+
+    onScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+        requestAnimationFrame(this.hide.bind(this));
+      } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+        if (!this.preventReveal) {
+          requestAnimationFrame(this.reveal.bind(this));
+        } else {
+          window.clearTimeout(this.isScrolling);
+
+          this.isScrolling = setTimeout(() => {
+            this.preventReveal = false;
+          }, 66);
+
+          requestAnimationFrame(this.hide.bind(this));
+        }
+      } else if (scrollTop <= this.headerBounds.top) {
+        requestAnimationFrame(this.reset.bind(this));
+      }
+
+
+      this.currentScrollTop = scrollTop;
+    }
+
+    hide() {
+      this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
+      this.closeMenuDisclosure();
+      this.closeSearchModal();
+    }
+
+    reveal() {
+      this.header.classList.add('shopify-section-header-sticky', 'animate');
+      this.header.classList.remove('shopify-section-header-hidden');
+    }
+
+    reset() {
+      this.header.classList.remove('shopify-section-header-hidden', 'shopify-section-header-sticky', 'animate');
+    }
+
+    closeMenuDisclosure() {
+      this.disclosures = this.disclosures || this.header.querySelectorAll('details-disclosure');
+      this.disclosures.forEach(disclosure => disclosure.close());
+    }
+
+    closeSearchModal() {
+      this.searchModal = this.searchModal || this.header.querySelector('details-modal');
+      this.searchModal.close(false);
+    }
+  }
+
+  customElements.define('sticky-header', StickyHeader);
+{% endjavascript %}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append: 'x' %}
+      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ shop.url | append: page.url | json }}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+        
+        
+        
+<script type="text/javascript">//<![CDATA[
+
+
+$(document).ready(function(){
+  
+$("nav.header__inline-menu .top-navigation>li.parent").mouseover(function(){        
+    $(this).closest(".header-wrapper").addClass("hover");
+});
+
+$("nav.header__inline-menu .top-navigation>li.parent").mouseout(function(){
+     $(this).closest(".header-wrapper").removeClass("hover");
+});
+
+
+});
+
+
+
+
+  //]]></script>
+        
+        
+        
+        
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.header.settings.color_scheme.options__1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.header.settings.color_scheme.options__2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.header.settings.color_scheme.options__3.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.header.settings.color_scheme.options__4.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.header.settings.color_scheme.options__5.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.header.settings.color_scheme.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.header.settings.logo.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_h",
+      "label": "Logo Homepage"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 150,
+      "step": 1,
+      "default": 100,
+      "unit": "t:sections.header.settings.logo_width.unit",
+      "label": "t:sections.header.settings.logo_width.label"
+    },
+   
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    },
+        {
+      "type": "link_list",
+      "id": "menu_right",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu_right.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_line_separator",
+      "default": true,
+      "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_header",
+      "default": true,
+      "label": "t:sections.header.settings.enable_sticky_header.label",
+      "info": "t:sections.header.settings.enable_sticky_header.info"
+    },
+
+      {
+        "type": "header",
+        "content": "Main Menu"
+      },
+    {
+      "type": "link_list",
+      "id": "smenu",
+      "label": "Single Menu"
+    },
+      {
+        "type": "header",
+        "content": "Menu Item 1"
+      },        
+      {
+        "type": "text",
+        "id": "heading_2_1",
+        "label": "Heading First"
+      },
+      {
+        "type": "richtext",
+        "id": "menu_bottom_1",
+        "label": "First Menu Bottom Text"
+      },
+        
+      {
+        "type": "checkbox",
+        "id": "menu_item_type_1",
+        "label": "Menu Type",
+        "info": "Show submenu by. This field is applicable only for top-level menu."
+      },
+      {
+        "type": "select",
+        "id": "menu_item_column_1",
+        "label": "Menu Column",
+        "info": "This field is applicable only for top-level menu.",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          }
+        ],
+        "default": "3"
+      }, 
+      {
+        "type": "text",
+        "id": "heading_1_1",
+        "label": "Heading Middle"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_1_1",
+        "label": "Block left 1"
+      },
+      {
+        "type": "richtext",
+        "id": "menu_item_block_left_1_1",
+        "label": "Block Text Left 1"
+      },       
+      {
+        "type": "url",
+        "id": "url_1_1",
+        "label": "Block URL left 1"
+      },        
+      {
+        "type": "image_picker",
+        "id": "image_2_1",
+        "label": "Block left 2"
+      },
+      {
+        "type": "richtext",
+        "id": "menu_item_block_left_2_1",
+        "label": "Block Text Left 2"
+      },       
+      {
+        "type": "url",
+        "id": "url_2_1",
+        "label": "Block URL left 2"
+      },        
+      {
+        "type": "image_picker",
+        "id": "image_3_1",
+        "label": "Block left 3"
+      },
+      {
+        "type": "richtext",
+        "id": "menu_item_block_left_3_1",
+        "label": "Block Text Left 3"
+      },       
+      {
+        "type": "url",
+        "id": "url_3_1",
+        "label": "Block URL left 3"
+      },        
+      {
+        "type": "image_picker",
+        "id": "image_4_1",
+        "label": "Block left 4"
+      },
+      {
+        "type": "richtext",
+        "id": "menu_item_block_left_4_1",
+        "label": "Block Text Left 4"
+      },       
+      {
+        "type": "url",
+        "id": "url_4_1",
+        "label": "Block URL left4"
+      },
+      {
+        "type": "select",
+        "id": "menu_proportions_left_1",
+        "label": "Proportions: Block Left",
+        "options": [
+          {
+            "value": "0",
+            "label": ""
+          },
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          }
+        ],
+        "default": "0",
+        "info": "This field is applicable only for top-level menu."
+      },
+      {
+        "type": "text",
+        "id": "menu_item_block_right_1",
+        "label": "Block right Heading"
+      },  
+		{
+          "type": "url",
+          "id": "url_last_1_1",
+          "label": "Select URL 1"
+        },
+        {
+          "type": "text",
+          "id": "text_last_1_1",
+          "label": "Label 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_last_1_1",
+          "label": "Icon 1"
+        },
+        {
+          "type": "html",
+          "id": "svg_last_1_1",
+          "label": "Insert SVG Code 1"
+        },  
+		{
+          "type": "url",
+          "id": "url_last_2_1",
+          "label": "Select URL 2"
+        },
+        {
+          "type": "text",
+          "id": "text_last_2_1",
+          "label": "Label 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_last_2_1",
+          "label": "Icon 2"
+        },
+        {
+          "type": "html",
+          "id": "svg_last_2_1",
+          "label": "Insert SVG Code 2"
+        },  
+		{
+          "type": "url",
+          "id": "url_last_3_1",
+          "label": "Select URL 3"
+        },
+        {
+          "type": "text",
+          "id": "text_last_3_1",
+          "label": "Label 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_last_3_1",
+          "label": "Icon 3"
+        },
+        {
+          "type": "html",
+          "id": "svg_last_3_1",
+          "label": "Insert SVG Code 3"
+        },  
+		{
+          "type": "url",
+          "id": "url_last_4_1",
+          "label": "Select URL 4"
+        },
+        {
+          "type": "text",
+          "id": "text_last_4_1",
+          "label": "Label 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_last_4_1",
+          "label": "Icon 4"
+        },
+        {
+          "type": "html",
+          "id": "svg_last_4_1",
+          "label": "Insert SVG Code 4"
+        },
+      {
+        "type": "url",
+        "id": "last_url_1",
+        "label": "View All URL"
+      },
+      {
+        "type": "select",
+        "id": "menu_proportions_right_1",
+        "label": "Proportions: Block Right",
+        "options": [
+          {
+            "value": "0",
+            "label": ""
+          },
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          }
+        ],
+        "default": "0",
+        "info": "This field is applicable only for top-level menu."
+      }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/header.liquid_Section-->

@@ -1,0 +1,105 @@
+<!--AZEXO_sections/bundle.liquid_Section--><link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+{% unless section.settings.check and page.content == blank %}
+<style>
+  section#shopify-section-{{section.id}}{
+display:none;
+  }
+  section#shopify-section-{{section.id}} + .spaced-section {
+    margin-top: 0;
+}
+  </style>
+  {% endunless %}
+{% if section.settings.check %}
+
+<div class="page_bg_top">
+  <h1 class="main-page-title page-title text-center" style="color: {{section.settings.image }}">
+    {{ page.title | escape }}
+  </h1>
+</div>
+{% endif %}
+
+<div class="page-width page-width--narrow">
+  <div class="rte">
+    {{ page.content }}
+  </div>
+</div>
+
+
+<style>
+  {% if section.settings.image != blank %}
+  .page_bg_top{
+    background-image: url({{section.settings.image | img_url : '1900x'}});
+  
+  }
+  {% endif %}
+.title-wrapper-with-link>.rte p,
+.banner__text p,
+.image-with-text__text.rte p{
+    font-family: "BWMODELICA-MEDIUM";
+}
+.title-wrapper-with-link h1 {
+    text-align: center;
+}
+.text-btn .banner__box.color-icon__box {
+    text-align: left;
+}
+.text-btn  .banner__box>.banner__buttons {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+      .title-wrapper-with-link .title {
+      width: 100%;
+      }
+@media only screen and (min-width: 991px) {
+body .multicolumn:not(.background-none) .multicolumn-card {
+    max-width: calc(100% - 60px);
+}
+  }
+  @media only screen and (max-width: 767px) {
+body #Banner-template--16512109707485__1664356612dc796ade::after {
+    opacity: 0.4;
+    background: #fff;
+}
+section#shopify-section-template--16512109707485__1664356612dc796ade .banner__box.color-icon__box {
+    text-align: center;
+}
+section#shopify-section-template--16512109707485__1664356612dc796ade .banner__box>.banner__buttons {
+    justify-content: center;
+}
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "spaced-section page-top",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "check",
+ 	  "default": true,
+      "label": "Show Title"
+    },
+	{
+      "type": "color",
+      "id": "t_color",
+      "label": "Title Color"
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Title BG Image"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/bundle.liquid_Section-->

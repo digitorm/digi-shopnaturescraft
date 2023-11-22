@@ -1,0 +1,571 @@
+<!--AZEXO_sections/main-article.liquid_Section-->{% if article.url contains "/blogs/ingredients" %}
+<style>
+  .blogs-news+section {
+    display: block !important;
+}
+</style>
+{% endif %}
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+
+
+{% if article.url contains "/blogs/ingredients" %}
+<article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
+   <div class="page-width">
+  <div class="inner-page">
+    
+    <div class="image_banner">
+   {%- if article.image -%}
+           
+              <img src="{{ article.image | img_url: '1100x' }}"
+                loading="lazys"
+                alt="{{ article.image.alt | escape }}">
+           
+        {%- endif -%}
+    </div>
+
+        <div class="cont-sec">
+{% if article.metafields.custom_fields["top_text"] != blank %}  
+    <div class="top_heading">
+      {{ article.metafields.custom_fields["top_text"] }}
+    </div>
+ {% endif %}
+    
+         
+            <h1 class="article-template__title" itemprop="headline">{{ article.title | escape }}</h1>
+          
+          
+      
+          <div class="article-template__content rte" itemprop="articleBody" {{ block.shopify_attributes }}>
+              {{ article.content }}
+          </div>
+
+    </div>
+    
+    
+    
+    </div>
+
+  
+  </div>
+   
+ 
+  
+
+{% if section.settings.bottom_section_image != blank %}
+   
+<div class="blog-banner-bottom">
+
+    <img src="{{section.settings.bottom_section_image | img_url: '1990x'}}">
+   
+  <div class="over-sec">
+   
+    {% if section.settings.bottom_section_title != blank %}
+  
+    <h1>
+      {{ section.settings.bottom_section_title }}
+    </h1>
+{% endif %}
+    {% if section.settings.bottom_section_decription != blank %}
+   
+    <h5>
+      {{ section.settings.bottom_section_decription }}
+    </h5>
+{% endif %}
+    </div>
+  </div>
+{% endif %}
+  
+  
+</article>
+
+
+{% else %}
+  <div class="image_banner_full">
+    
+   {%- if article.image -%}
+           
+              <img src="{{ article.image | img_url: '1900x' }}"
+                loading="lazys"
+                alt="{{ article.image.alt | escape }}">
+           
+    {%- elsif section.settings.image -%}
+    
+    <img src="{{ section.settings.image | img_url: '1900x' }}"
+                loading="lazys"
+                alt="{{ section.settings.image.alt | escape }}">
+    
+    {% else %}
+        {%- endif -%}
+   <div class="page-width">
+     {% if article.metafields.my_fields.sub_heading != blank %}<h4>{{article.metafields.my_fields.sub_heading}}</h4> {% endif %}
+    <h1 class="article-template__title" itemprop="headline">{{ article.title | escape }}</h1>
+    </div>
+</div>
+<article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
+  
+   <div class="page-width">
+  <div class="inner-page-news">
+    
+  
+
+        <div class="cont-full">
+{% if article.metafields.custom_fields["top_text"] != blank %}  
+    <div class="top_heading">
+      {{ article.metafields.custom_fields["top_text"] }}
+    </div>
+ {% endif %}
+    
+         
+            
+          
+          
+      
+          <div class="article-template__content rte" itemprop="articleBody" {{ block.shopify_attributes }}>
+              {{ article.content }}
+          </div>
+
+    <!-- /snippets/social-sharing.liquid -->
+<ul class="social-sharing">
+{% assign share_permalink = article.url %}
+ {% assign share_title = article.title %}
+  <li>Share</li>
+    <li>
+      <a target="_blank" href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}" class=" btn--small btn--share share-facebook">
+       <svg width="11" height="22" viewBox="0 0 11 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.14599 22V11.9811H10.4038L10.8881 8.05836H7.14599V5.55975C7.14599 4.42779 7.44998 3.65278 9.01585 3.65278H11V0.155454C10.0346 0.0481145 9.06422 -0.00371372 8.0933 0.000206791C5.21369 0.000206791 3.23661 1.82405 3.23661 5.17224V8.05103H0V11.9738H3.24368V22H7.14599Z" fill="#388E3C"/>
+</svg>
+
+      </a>
+    </li>
+
+    <li>
+      <a target="_blank" href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}" class=" btn--small btn--share share-twitter">
+        <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.539 19.4999C16.596 19.4999 21.5505 11.9954 21.5505 5.49894C21.5505 5.28894 21.5505 5.07594 21.5415 4.86594C22.5061 4.16767 23.3386 3.30317 24 2.31294C23.099 2.71022 22.1441 2.97205 21.1665 3.08994C22.1963 2.4744 22.9676 1.50589 23.337 0.364441C22.3695 0.937627 21.3105 1.34 20.2065 1.55394C19.4643 0.763477 18.4821 0.239818 17.4121 0.0640773C16.3421 -0.111663 15.2441 0.0703233 14.288 0.581847C13.3319 1.09337 12.5712 1.90588 12.1237 2.89353C11.6761 3.88118 11.5668 4.98884 11.8125 6.04494C9.85461 5.94677 7.93922 5.43814 6.19056 4.55206C4.4419 3.66597 2.89903 2.42221 1.662 0.901441C1.03401 1.98607 0.842361 3.26904 1.12597 4.48984C1.40958 5.71064 2.14718 6.77774 3.189 7.47444C2.40831 7.44792 1.64478 7.23828 0.96 6.86244V6.92994C0.961346 8.06616 1.35496 9.16707 2.07431 10.0466C2.79366 10.9261 3.79462 11.5303 4.908 11.7569C4.48539 11.8734 4.04884 11.9314 3.6105 11.9294C3.30148 11.9304 2.99307 11.9017 2.6895 11.8439C3.00418 12.822 3.61691 13.6772 4.44187 14.2897C5.26683 14.9021 6.2627 15.2412 7.29 15.2594C5.54483 16.6301 3.3891 17.3736 1.17 17.3699C0.778981 17.3716 0.388235 17.349 0 17.3024C2.25227 18.7383 4.86795 19.5008 7.539 19.4999Z" fill="#388E3C"/>
+</svg>
+
+      </a>
+    </li>
+
+    <li>
+      <a href='mailto:?subject={{ share_title | url_param_escape }}&amp;body={{ shop.url | append: share_permalink }}' class=" btn--small btn--share share-pinterest">
+        <svg width="24" height="19" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.6 19H2.4C1.76348 19 1.15303 18.7498 0.702944 18.3044C0.252856 17.859 0 17.2549 0 16.625V2.27169C0.0269192 1.65988 0.291611 1.082 0.738814 0.658707C1.18602 0.235413 1.78116 -0.000578596 2.4 1.06533e-06H21.6C22.2365 1.06533e-06 22.847 0.250223 23.2971 0.695622C23.7471 1.14102 24 1.74511 24 2.375V16.625C24 17.2549 23.7471 17.859 23.2971 18.3044C22.847 18.7498 22.2365 19 21.6 19ZM2.4 4.59325V16.625H21.6V4.59325L12 10.925L2.4 4.59325ZM3.36 2.375L12 8.075L20.64 2.375H3.36Z" fill="#388E3C"/>
+</svg>
+
+      </a>
+    </li>
+
+</ul>
+
+    </div>
+    
+    
+   
+    </div>
+  
+  
+  </div>
+   <div class="page-width text-center b_title">
+     <h1>Learn More</h1>
+  </div>
+ <div class="learn_more">
+   
+   <div class="page-width">
+   
+ 
+     
+     
+    
+   <div id="product-grids" class="ingredients-articles ">
+  
+      {% assign page_t = article.url %}
+                
+                                                                                
+      {% for article in blogs.news.articles limit:4 %}
+ {% unless page_t contains article.url %}
+
+<div class="blog-articles__article article">
+     
+
+
+
+
+<article class="article-card{% if article.image == blank or show_image == false %} article-card--no-image{% endif %}" aria-labelledby="Article-{{ article.id }}">
+  <div class="article-content motion-reduce">
+    {%- if show_image == true and article.image -%}
+      <a href="{{ article.url }}">
+        <div class="article-card__image-wrapper">
+        <div class="article-card__image media article-card__image--small" >
+          <img
+            srcset="{%- if article.image.src.width >= 165 -%}{{ article.image.src | img_url: '165x' }} 165w,{%- endif -%}
+              {%- if article.image.src.width >= 360 -%}{{ article.image.src | img_url: '360x' }} 360w,{%- endif -%}
+              {%- if article.image.src.width >= 533 -%}{{ article.image.src | img_url: '533x' }} 533w,{%- endif -%}
+              {%- if article.image.src.width >= 720 -%}{{ article.image.src | img_url: '720x' }} 720w,{%- endif -%}
+              {%- if article.image.src.width >= 1000 -%}{{ article.image.src | img_url: '1000x' }} 1000w,{%- endif -%}
+              {%- if article.image.src.width >= 1500 -%}{{ article.image.src | img_url: '1500x' }} 1500w,{%- endif -%}
+              {{ article.image.src | img_url: 'master' }} {{ article.image.src.width }}w"
+            src="{{ article.image.src | img_url: '533x' }}"
+            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+            alt="{{ article.image.src.alt | escape }}"
+            width="{{ article.image.width }}"
+            height="{{ article.image.height }}"
+            loading="lazy"
+            class="motion-reduce"
+          
+          
+        </div>
+      </div>
+    </a>
+        </div>
+    
+    
+    {%- endif -%}
+
+    <div class="article-card__info">
+      <header class="article-card__header sds text-center">
+         
+        <h2 class="article-card__title" id="Article-{{ article.id }}">
+          <a href="{{ article.url }}"> {{ article.title | escape }}</a>
+        </h2>
+       
+        
+          
+        
+        <a href="{{ article.url }}" class="btn">Read Article</a>
+        
+      </header>
+     
+     
+    </div>
+  </div>
+</article>
+
+      
+      
+      </div>
+
+{% endunless %}
+{% endfor %}
+    </div>
+   </div>
+  
+  
+</article>
+ 
+  
+  
+  
+  
+<style>
+.container{
+    position:relative;
+    width:100vw;
+}
+.learn_more {
+    position: relative;
+}
+.b_title h1 {
+    margin-bottom: 3rem;
+}
+.learn_more:before {
+    background: linear-gradient(360deg, rgba(53, 126, 56, 0.5) 0%, rgba(250, 250, 250, 0) 100%, rgba(250, 250, 250, 0.335806) 100%);
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 80%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+.learn_more h3{
+    text-align:center;
+    font-size:60px;
+}
+a.btn {
+    padding: 18px 22px;
+    background: #F26B27;
+    text-decoration: none;
+    font-size: 16px;
+    color: #FFF;
+    border-radius: 5px;
+    margin-top: 1rem;
+    display: inline-block;
+}
+ a.btn:hover { 
+  background: #4CAF50;
+ }
+.article-card__title a {
+    font-size: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.3;
+}
+.article-template__content.rte {
+    border-bottom: 0px solid #000000;
+}
+.article-template header {
+    margin-bottom: 0;
+}
+.article-template__content ul *, .article-template__content a, .article-template__content {
+    color: #0a0a0a;
+    font-family: 'BWMODELICA-MEDIUM';
+}
+.article-template__content.rte strong {
+    font-family: 'BWMODELICA BOLD';
+}
+  .article-template__content.rte > br {
+    display: none;
+}
+  .article-template__content.rte ul >li {
+    margin-bottom: 15px;
+}
+  .article-template__content.rte h1, 
+  .article-template__content.rte h2, 
+  .article-template__content.rte h3, 
+  .article-template__content.rte h4, 
+  .article-template__content.rte h5, 
+  .article-template__content.rte h6 {
+    font-family: 'BWMODELICA BOLD';
+    line-height: 1.3;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+ul.social-sharing {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border-top: 4px solid #388E3C;
+    padding-top: 10px;
+}
+ul.social-sharing > li:first-child {
+    color: #388E3C;
+    font-size: 16px;
+    font-family: 'BWMODELICA-MEDIUM';
+    position: relative;
+    top: -5px;
+}
+ul.social-sharing> li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+ul.social-sharing svg {
+}
+  .rte ul {
+    margin-top: 0;
+}
+  .article-template__content>p {
+    margin-top: 0;
+}
+  .half-width > p:first-child {
+    margin-top: 0;
+}
+  .full-width {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.half-width {
+    width: 49%;
+}
+
+.half-width img {
+    width: 100%;
+}
+  @media screen and (max-width: 767px) {
+.half-width {
+    width: 100%;
+}
+.image_banner_full h4 {
+    font-size: 14px;
+}
+.article-template__content>p, .article-template__content ul {
+    font-size: 16px;
+    line-height: 1.5;
+}
+ .page-width.text-center.b_title {
+    margin-top: 5rem;
+}   
+a.btn {
+    padding: 12px 12px;
+    font-size: 13px;
+}
+.image_banner_full>.page-width {
+    bottom: 30px;
+}
+    
+    
+  }
+</style>
+
+{% endif %}
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "articleBody": {{ article.content | strip_html | json }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ shop.url | append: page.url | json }}
+    },
+    "headline": {{ article.title | json }},
+    {% if article.excerpt != blank %}
+      "description": {{ article.excerpt | strip_html | json }},
+    {% endif %}
+    {% if article.image %}
+      {% assign image_size = article.image.width | append: 'x' %}
+      "image": [
+        {{ article | img_url: image_size | prepend: "https:" | json }}
+      ],
+    {% endif %}
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {{ article.author | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      {% if settings.share_image %}
+        {% assign image_size = settings.share_image.width | append: 'x' %}
+        "logo": {
+          "@type": "ImageObject",
+          "height": {{ settings.share_image.height | json }},
+          "url": {{ settings.share_image | img_url: image_size | prepend: "https:" | json }},
+          "width": {{ settings.share_image.width | json }}
+        },
+      {% endif %}
+      "name": {{ shop.name | json }}
+    }
+  }
+  </script>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-article.name",
+  "tag": "section",
+"class": "blogs-news",
+"settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Blog Top Banner"
+        },
+  		{
+        "type": "header",
+        "content": "Bottom Image with text Section"
+      },
+  		{
+          "type": "image_picker",
+          "id": "bottom_section_image",
+          "label": "Bottom Image"
+        },
+  		{
+          "type": "text",
+          "id": "bottom_section_title",
+          "label": "Bottom Section Title"
+        },
+  		{
+          "type": "richtext",
+          "id": "bottom_section_decription",
+          "label": "Bottom Section Description"
+        }
+],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "featured_image",
+      "name": "t:sections.main-article.blocks.featured_image.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "image_height",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__1.label"
+            },
+            {
+              "value": "small",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__2.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__3.label"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__4.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.main-article.blocks.featured_image.settings.image_height.label",
+          "info": "t:sections.main-article.blocks.featured_image.settings.image_height.info"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main-article.blocks.title.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "blog_show_date",
+          "default": true,
+          "label": "t:sections.main-article.blocks.title.settings.blog_show_date.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_author",
+          "default": false,
+          "label": "t:sections.main-article.blocks.title.settings.blog_show_author.label"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "t:sections.main-article.blocks.content.name",
+      "limit": 1
+    },
+    {
+      "type": "share",
+      "name": "t:sections.main-article.blocks.share.name",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "share_label",
+          "label": "t:sections.main-article.blocks.share.settings.text.label",
+          "default": "Share"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.share.settings.featured_image_info.content"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.share.settings.title_info.content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/main-article.liquid_Section-->

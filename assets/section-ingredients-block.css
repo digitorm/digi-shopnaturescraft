@@ -1,0 +1,71 @@
+.main__box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -20px;
+}
+.ingredients__block {
+    padding: 9rem 0  9rem;
+}
+.ingredients__block .text-center.title-wrapper-with-link.title-wrapper--self-padded-mobile {
+    margin-top: 0;
+}
+.ingredient__main_container {
+    text-align: center;
+    width: calc(25% - 20px);
+    margin: 0 0 11.1rem 20px;
+}
+.ingred__sub_button::after {
+    content: '>';
+}
+.ingred__button{
+    text-align: center;
+    padding: 0 0 50px 0;
+}
+.ingred__button a {
+    background: #f26b27;
+    padding: 0 21px;
+    border-radius: 10px;
+    border: 1px solid #f26b27;
+    color: #fff;
+    text-decoration: none;
+    height: 82px;
+    display: inline-block;
+    line-height: 82px;
+    font-family: 'BWMODELICA BOLD';
+    text-transform: capitalize;
+}
+.ingred__button.page-width a:hover {
+    background: #000;
+    border: 1px solid #000;
+}
+.ingred__sub_button a {
+    color: #000;
+    font-weight: normal;
+    font-family: "BWMODELICA BOLD";
+    font-size: 14px;
+    letter-spacing: 0.25px;
+}
+.ingred__sub__text > p {
+    margin-top: 0;
+}
+h2.ingred__title {
+    margin: 30px 0 16px;
+}
+.ingred__sub_button a:hover{
+  color: #f26b27; 
+  
+}
+.ingred__img img {
+    height: 100%;
+    object-fit: contain;
+    width: auto;
+}
+.ingred__img {
+    height: 180px;
+}
+@media only screen and (max-width:767px) {  
+.ingredient__main_container {
+
+  width: calc(50% - 15px);}
+}

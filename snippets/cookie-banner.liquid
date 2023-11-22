@@ -1,0 +1,182 @@
+<style>
+.popup-wrapper {
+    display: none;
+    padding: 30px;
+    position: fixed;
+    width: 100%;
+    background: #00000099;
+    z-index: 999;
+    overflow: auto;
+    height: 100vh;
+    align-items: flex-start;
+}
+.popup {
+    background: #4caf50;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 20px;
+    text-align: center;
+    color: #fff;
+    padding: 40px;
+    position: relative;
+    top: 50px;
+}
+.popup  > h2 {
+    color: #fff;
+}
+a.popup-close {
+    background: #000;
+    position: absolute;
+    right: -12px;
+    top: 3px;
+    width: 26px;
+    height: 26px;
+    line-height: 25px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    text-decoration: none;
+}
+.two-box img {
+  max-width: 70%;
+  height: 100%;
+  object-fit: contain;
+  max-height: 80px;
+}
+.two-box .second-box img {
+    max-height: 88px;
+}
+.two-box {
+    display: flex;
+    padding: 8rem 0 4rem;
+}
+.popup > p {
+    max-width: 325px;
+    margin: 0 auto;
+    line-height: 1.3;
+}
+.two-box > div {
+  width: 50%;
+  background: #c8e6c9;
+  border: 8px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+}
+.two-box > div.first-box {
+  margin-right: -5%;
+  width: 55%;
+  transform: rotate(-6deg);
+}
+.two-box > div.second-box {
+    margin-left: -5%;
+    width: 55%;
+    position: relative;
+    top: -5rem;
+    transform: rotate(5deg);
+}
+.first-box > img {
+    padding-right: 25px;
+}
+span.border-left {
+    width: 0px;
+    height: 0px;
+    border-top: 15px solid #0000005e;
+    border-left: 54px solid transparent;
+    position: absolute;
+    left: -8px;
+    bottom: -23px;
+    z-index: -1;
+    transform: skewX(11deg);
+}
+.first-box:before {
+    content: "Old Logo";
+    position: absolute;
+    background: #f26b28;
+    top: 10px;
+    left: 10px;
+    font-size: 8px;
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 3px 7px;
+}
+.second-box:before {
+    content: "New Logo";
+    position: absolute;
+    background: #f26b28;
+    top: 10px;
+    left: 10px;
+    font-size: 8px;
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 3px 7px;
+}
+  
+@media only screen and (max-width: 560px){
+.popup {
+    padding: 25px;
+}
+.two-box > div {
+    padding: 10px 0;
+}
+.two-box .second-box img {
+    max-height: 78px;
+    max-width: 60px;
+}
+span.border-left {
+    border-left: 8.7vw solid transparent;
+    transform: skewX(11deg);
+}
+}
+</style>
+
+
+<div class="popup-wrapper popup-overlay">
+  <div class="popup">
+    <a href="javascript:;" class="submit popup-close">x</a>
+      <h2>Premium Quality.<br> Premium Look.</h2>
+      <div class="two-box">
+        <div class="first-box"><img src="https://cdn.shopify.com/s/files/1/0444/6512/7578/files/Natures-Craft-High-Res-Logo-Black.png?v=1596637438"></div>
+        <div class="second-box"><img src="https://cdn.shopify.com/s/files/1/0444/6512/7578/files/logo_2x_712b4b82-2435-4fe7-8a3f-debcfdf1f144.png?v=1639542755"><span class="border-left"></span></div>
+      </div>
+      <p>At Nature's Craft we never stop innovating and always strive to take our products to the next level. That includes our design! We are proud to present the New Look of your favorite supplements. High quality inside and out.</p>
+  </div>
+</div>
+
+
+<script>
+ jQuery(document).ready(function($) {  
+  //check to see if the submited cookie is set, if not check if the popup has been closed, if not then display the popup
+  if( getCookie('popupCookie') != 'submited'){ 
+    if(getCookie('popupCookie') != 'closed' ){
+      $('.popup-overlay').css("display", "flex").hide().fadeIn();
+    }
+  }    
+  $('a.submit').click(function(){
+    $('.popup-overlay').fadeOut();
+    //sets the coookie to five minutes if the popup is submited (whole numbers = days)
+    setCookie( 'popupCookie', 'submited', 1 );
+  });
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+  function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }  
+});
+</script>

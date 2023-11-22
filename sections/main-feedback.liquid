@@ -1,0 +1,132 @@
+<!--AZEXO_sections/main-feedback.liquid_Section--><link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% if section.settings.check %}
+
+<div class="page_bg_top">
+  <h1 class="main-page-title page-title text-center" style="color: {{section.settings.image }}">
+    {{ page.title | escape }}
+  </h1>
+</div>
+{% endif %}
+
+
+
+<div class="page-width page-width--narrow">
+  <div class="rte">
+    {{ page.content }}
+  </div>
+</div>
+
+
+<style>
+  {% if section.settings.image != blank %}
+  .page_bg_top{
+    background-image: url({{section.settings.image | img_url : '1900x'}});
+  
+  }
+  {% endif %}
+  script[src^="https://embed.tawk.to"] + div, body iframe[title="chat widget"] {
+    display: none !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+body .fb_dialog .fb_dialog_content iframe {
+    position: fixed !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    right: 24px !important;
+    bottom: 20px !important;
+    z-index: 99999999999 !important;
+}
+body .fb_dialog {
+    margin-bottom: 0;
+}
+body .fb_dialog .fb_dialog_content {
+    height: auto;
+}
+
+/*   div#shopify-section-footer, .page-width.page-width--narrow {
+    position: relative;
+    z-index: 9999999999;
+} */
+script[src^="https://embed.tawk.to"] + div:before, body >div[style="display: block !important;"] {
+    content: "";
+    width: 64px !important;
+    height: 64px !important;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    z-index: 999999999999999;
+    background: #0A7CFF;
+    right: 20px;
+    bottom: 18px;
+    border-radius: 50%;
+    cursor: default;
+    pointer-events: none;
+}
+</style>
+
+<script type="text/javascript">//<![CDATA[
+
+$(window).load(function() {
+$(document).ready(function(){
+   $('body >div[style="display: block !important;"]').hide();
+  setTimeout(function() {
+        $('body >div[style="display: block !important;"]').hide();
+  }, 1000);
+  setTimeout(function() {
+        $('body >div[style="display: block !important;"]').hide();
+  }, 1500);
+  setTimeout(function() {
+        $('body >div[style="display: block !important;"]').hide();
+  }, 2000);
+  setTimeout(function() {
+        $('body >div[style="display: block !important;"]').hide();
+  }, 2500);
+  setTimeout(function() {
+        $('body >div[style="display: block !important;"]').hide();
+  }, 3000);
+  setTimeout(function() {
+        $('body >div[style="display: block !important;"]').hide();
+  }, 3500);
+  setTimeout(function() {
+        $('body >div[style="display: block !important;"]').hide();
+  }, 4000);
+});
+});
+  
+  
+
+  //]]></script>
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "spaced-section page-top",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "check",
+ 	  "default": true,
+      "label": "Show Title"
+    },
+	{
+      "type": "color",
+      "id": "t_color",
+      "label": "Title Color"
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Title BG Image"
+    }
+  ]
+}
+{% endschema %}
+<!--End_AZEXO_sections/main-feedback.liquid_Section-->

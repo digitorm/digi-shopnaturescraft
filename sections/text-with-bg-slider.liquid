@@ -1,0 +1,220 @@
+<div class="text-with-bg-main">
+<div class="text-with-bg">
+{%- for block in section.blocks -%}  
+  
+<div class="banner__contents banner-{{ block.id }} banner__content--center">
+    <div class="banner__box color-icon__box">     
+            <h2 {{ block.shopify_attributes }} style="color: {{ block.settings.text-color }}">
+              {{ block.settings.heading | escape }}
+            </h2>
+           <div class="banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_link_1 != blank and block.settings.button_label_2 != blank and block.settings.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+              {%- if block.settings.button_label_1 != blank -%}
+                <a{% if block.settings.button_link_1 != blank %} href="{{ block.settings.button_link_1 }}"{% endif %} class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label_1 | escape }}</a>
+              {%- endif -%}
+            </div>
+    </div>
+ 
+</div>
+{%- endfor -%}
+</div>
+</div>
+<style>
+{%- for block in section.blocks -%}  
+.banner-{{ block.id }} {
+  background-image: url({{block.settings.image | img_url: '1000x'}});
+}
+
+{% if block.settings.image_2 != blank %}
+  @media (max-width: 767px){
+    .banner-{{ block.id }} {
+      background-image: url({{block.settings.image_2 | img_url: '768x'}});
+    }
+  }
+{% endif %}
+{%- endfor -%}
+.text-with-bg .banner__box.color-icon__box {
+    text-align: left;
+    max-width: 240px;
+    min-height: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.text-with-bg .banner__box> .banner__buttons {
+    justify-content: flex-start;
+}
+.text-with-bg {
+    max-width: 900px;
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+.text-with-bg-main {
+    overflow: hidden;
+    padding-bottom: 30px;
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text-with-bg-main ul.slick-dots {
+    text-align: center;
+}
+.text-with-bg .slick-list {
+    overflow: visible !important;
+}
+.text-with-bg .slick-slide > div {
+    padding: 0 15px;
+}
+.text-with-bg .slick-slide > div .banner__contents {
+    padding: 30px 60px;
+    border-radius: 30px;
+    background-size: cover;
+    background-position: center;
+}
+.text-with-bg .banner__box.color-icon__box h2 {
+    margin-bottom: 70px;
+}
+.text-with-bg .banner__box.color-icon__box .banner__buttons a {
+    height: 70px;
+    font-size: 25px;
+    padding: 0 50px;
+}
+body .text-with-bg .slick-dots li button:before {
+    border: 2px solid rgba(0, 0, 0, 0.0);
+    background: rgba(0, 0, 0, 0.4);
+}
+body .text-with-bg .slick-dots li.slick-active button:before {
+    opacity: 1;
+    color: transparent;
+    border: 2px solid rgb(0 0 0 / 0%);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.8);
+}
+body .text-with-bg .slick-dots {
+    bottom: -45px;
+}
+@media (max-width: 767px){
+.text-with-bg .slick-slide > div {
+    padding: 0 7px;
+}
+.text-with-bg {
+    width: 90%;
+  max-width: 400px;
+}
+body .text-with-bg .slick-dots {
+    bottom: -35px;
+    text-align: center;
+}
+.text-with-bg .slick-slide > div .banner__contents {
+    padding: 44px 15px 0;
+}
+.text-with-bg .banner__box.color-icon__box {
+    max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+    min-height: 490px;
+    display: block;
+}
+.text-with-bg .banner__box> .banner__buttons {
+    justify-content: center;
+}
+.text-with-bg .banner__box.color-icon__box h2 {
+    margin-bottom: 30px;
+}
+.text-with-bg .banner__box.color-icon__box .banner__buttons a {
+    height: 65px;
+    padding: 0 40px;
+}
+}
+
+</style>
+<script type="text/javascript">
+$(document).on('ready', function() {
+
+
+$("#shopify-section-{{section.id}} .text-with-bg").slick({
+ dots: true,
+  autoplaySpeed: 5000,
+  autoplay: true,
+  arrows: false,
+  infinite: true,
+  adaptiveHeight: true,
+  slidesToShow: 1,
+  slidesToScroll: 1, 
+  prevArrow: '<div class="slick-prev"><svg width="11" height="16" viewBox="0 0 11 16" fill="none"><path d="M9 1.32422L3 8.05339L9 14.7826" stroke="black" stroke-width="3"/></svg></div>',
+  nextArrow: '<div class="slick-next"><svg width="11" height="16" viewBox="0 0 11 16" fill="none"><path d="M2 14.7812L8 8.05208L2 1.32292" stroke="black" stroke-width="3"/></svg></div>'
+});
+ 
+  
+ 
+});
+</script>
+{% schema %}
+{
+  "name": "Text with BG Slider",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width text-btn",
+  "settings": [
+    
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.text-with-banner-button.blocks.heading.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Image banner",
+          "label": "t:sections.text-with-banner-button.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "color",
+          "id": "text-color",
+          "default": "#0a0a0a",
+          "label": "Text Color"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.text-with-banner-button.settings.image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "t:sections.image-banner.settings.image_2.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Button label",
+          "label": "t:sections.text-with-banner-button.blocks.buttons.settings.button_label_1.label",
+          "info": "t:sections.text-with-banner-button.blocks.buttons.settings.button_label_1.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "t:sections.text-with-banner-button.blocks.buttons.settings.button_link_1.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_1",
+          "default": false,
+          "label": "t:sections.text-with-banner-button.blocks.buttons.settings.button_style_secondary_1.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text with BG Slider",
+      "blocks": [
+        {
+          "type": "heading"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
